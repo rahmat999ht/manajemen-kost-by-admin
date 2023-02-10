@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../config.dart';
-import '../../presentation/screens.dart';
-import 'bindings/controllers/controllers_bindings.dart';
-import 'routes.dart';
+import '../../domain/core/core.dart';
 
 class EnvironmentsBadge extends StatelessWidget {
   final Widget child;
@@ -34,6 +28,11 @@ class Nav {
       name: Routes.WELCOME,
       page: () => const WelcomeScreen(),
       binding: WelcomeControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.LOGIN,
+      page: () => const LoginScreen(),
+      binding: LoginControllerBinding(),
     ),
   ];
 }

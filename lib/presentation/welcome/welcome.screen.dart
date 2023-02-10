@@ -70,7 +70,6 @@ class Body extends StatelessWidget {
                         c.kelola,
                         style: const TextStyle(
                           fontSize: 14,
-                          fontStyle: FontStyle.italic,
                           color: ColorApp.gray,
                         ),
                       ),
@@ -79,24 +78,15 @@ class Body extends StatelessWidget {
                         c.anda,
                         style: const TextStyle(
                           fontSize: 14,
-                          fontStyle: FontStyle.italic,
                           color: ColorApp.gray,
                         ),
                       ),
                     ],
                   ),
                   SizeApp.h30,
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorApp.orange,
-                        fixedSize: Size(SizeApp.wFull, 50)),
-                    onPressed: () {},
-                    child: const Text(
-                      "Get Started",
-                      style: TextStyle(
-                        fontSize: 24,
-                      ),
-                    ),
+                  ButtonPrymary(
+                    text: 'Get Started',
+                    onPressed: c.tapStart,
                   ),
                 ],
               ),

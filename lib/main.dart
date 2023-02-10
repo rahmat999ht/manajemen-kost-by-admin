@@ -1,11 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'dart:developer';
 
-import 'infrastructure/navigation/navigation.dart';
-import 'infrastructure/navigation/routes.dart';
+import 'domain/core/core.dart';
 
 void main() async {
-  var initialRoute = await Routes.initialRoute;
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  bool? isviewed = prefs.getBool("isStart") ?? false;
+  log(prefs.getBool("isStart").toString());
+  String initialRoute = isviewed == true ? Routes.LOGIN : Routes.WELCOME;
   runApp(Main(initialRoute));
 }
 
