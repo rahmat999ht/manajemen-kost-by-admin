@@ -15,6 +15,8 @@ class TextForm extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool isCheck;
   final bool isTitle;
+  final bool isBorder;
+  final bool isBg;
   final int? maxLength;
   const TextForm({
     super.key,
@@ -31,6 +33,8 @@ class TextForm extends StatelessWidget {
     this.onTap,
     this.isCheck = false,
     this.isTitle = false,
+    this.isBorder = false,
+    this.isBg = false,
     this.maxLength,
   }) : isPhone = false;
 
@@ -49,10 +53,12 @@ class TextForm extends StatelessWidget {
     this.onTap,
     this.isTitle = false,
     this.isCheck = false,
+    this.isBorder = false,
+    this.isBg = false,
     this.maxLength,
   }) : isPhone = true;
 
-  const TextForm.phoneAndTitle({
+  const TextForm.border({
     super.key,
     required this.controller,
     required this.titel,
@@ -66,9 +72,11 @@ class TextForm extends StatelessWidget {
     this.inputFormatters,
     this.onTap,
     this.isCheck = false,
+    this.isTitle = false,
+    this.isPhone = false,
     this.maxLength,
-  })  : isPhone = true,
-        isTitle = true;
+  })  : isBorder = true,
+        isBg = false;
 
   @override
   Widget build(BuildContext context) {
@@ -115,13 +123,17 @@ class TextForm extends StatelessWidget {
                   ]
                 : inputFormatters,
             decoration: InputDecoration(
-              fillColor: color ?? Colors.transparent,
+              fillColor: isBg ? color : Colors.transparent,
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
+                borderSide: isBorder
+                    ? BorderSide(color: color ?? ColorApp.grayForm)
+                    : BorderSide.none,
                 borderRadius: BorderRadius.circular(8),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
+                borderSide: isBorder
+                    ? BorderSide(color: color ?? ColorApp.gray)
+                    : BorderSide.none,
                 borderRadius: BorderRadius.circular(8),
               ),
               filled: true,

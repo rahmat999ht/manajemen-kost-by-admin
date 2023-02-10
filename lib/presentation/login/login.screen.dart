@@ -33,46 +33,49 @@ class BodyLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(30.0),
-      child: Form(
-        key: c.formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            const Text(
-              'Home Stay',
-              style: TextStyle(
-                fontSize: 35,
-                color: ColorApp.brown,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: Form(
+          key: c.formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              SizeApp.h100,
+              const Text(
+                'Home Stay',
+                style: TextStyle(
+                  fontSize: 35,
+                  color: ColorApp.brown,
+                ),
               ),
-            ),
-            const Text(
-              'Sign In',
-              style: TextStyle(
-                fontSize: 74,
-                fontWeight: FontWeight.bold,
-                color: ColorApp.brown,
+              const Text(
+                'Sign In',
+                style: TextStyle(
+                  fontSize: 74,
+                  fontWeight: FontWeight.bold,
+                  color: ColorApp.brown,
+                ),
               ),
-            ),
-            SizeApp.h30,
-            TextForm.phone(
-              isTitle: true,
-              titel: "Your Phone",
-              hintText: "Nomor Ponsel",
-              controller: c.nomorPonsel,
-              isCheck: true,
-              color: ColorApp.grayForm,
-            ),
-            SizeApp.h30,
-            ButtonPrymary(
-              onPressed: () {},
-              text: 'Login',
-            ),
-            SizeApp.h100,
-          ],
+              SizeApp.h30,
+              TextForm.phone(
+                isBg: true,
+                isTitle: true,
+                titel: "Your Phone",
+                hintText: "Nomor Ponsel",
+                controller: c.nomorPonsel,
+                isCheck: true,
+                color: ColorApp.grayForm,
+              ),
+              SizeApp.h30,
+              ButtonPrymary(
+                onPressed: () {},
+                text: 'Login',
+              ),
+            ],
+          ),
         ),
       ),
     );
