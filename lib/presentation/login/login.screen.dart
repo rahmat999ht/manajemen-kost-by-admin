@@ -44,20 +44,12 @@ class BodyLogin extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               SizeApp.h100,
-              const Text(
+              const Content(
                 'Home Stay',
-                style: TextStyle(
-                  fontSize: 35,
-                  color: ColorApp.brown,
-                ),
-              ),
-              const Text(
                 'Sign In',
-                style: TextStyle(
-                  fontSize: 74,
-                  fontWeight: FontWeight.bold,
-                  color: ColorApp.brown,
-                ),
+                sizeTitle: 35,
+                sizeSubTitle: 74,
+                fontWeightSubTitle: FontWeight.bold,
               ),
               SizeApp.h30,
               TextForm.phone(
@@ -71,7 +63,7 @@ class BodyLogin extends StatelessWidget {
               ),
               SizeApp.h30,
               ButtonPrymary(
-                onPressed: () {},
+                onPressed: c.tapLogin,
                 text: 'Login',
               ),
             ],

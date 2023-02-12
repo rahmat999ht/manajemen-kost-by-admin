@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "882367747131",
+    "project_id": "manajemen-kost-a31ff",
+    "storage_bucket": "manajemen-kost-a31ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882367747131:android:db652d56ac83963d9fb81e",
+        "android_client_info": {
+          "package_name": "com.yayat.manajemen_kost_by_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882367747131-pq7bfc2o4lafg4s7a4j2e7mc7ha903co.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEqi_Z4jlEZ3C9O1ahwHPUYvHcDnETx9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882367747131-pq7bfc2o4lafg4s7a4j2e7mc7ha903co.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

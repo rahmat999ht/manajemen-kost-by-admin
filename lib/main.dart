@@ -8,6 +8,10 @@ void main() async {
   bool? isviewed = prefs.getBool("isStart") ?? false;
   log(prefs.getBool("isStart").toString());
   String initialRoute = isviewed == true ? Routes.LOGIN : Routes.WELCOME;
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(Main(initialRoute));
 }
 
@@ -21,6 +25,7 @@ class Main extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: initialRoute,
       getPages: Nav.routes,
+      theme: ThemeData(primarySwatch: Colors.orange),
     );
   }
 }

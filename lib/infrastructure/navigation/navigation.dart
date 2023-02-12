@@ -34,5 +34,10 @@ class Nav {
       page: () => const LoginScreen(),
       binding: LoginControllerBinding(),
     ),
+    GetPage(
+      name: Routes.VERIFIKASI,
+      page: () => const VerifikasiScreen(),
+      binding: VerifikasiControllerBinding(),
+    ),
   ];
 }

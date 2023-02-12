@@ -8,4 +8,8 @@ class LoginController extends GetxController {
   void isLoadingChange() {
     isLoading.value = !isLoading.value;
   }
+
+  void tapLogin() {
+    Get.toNamed(Routes.VERIFIKASI);
+  }
 }

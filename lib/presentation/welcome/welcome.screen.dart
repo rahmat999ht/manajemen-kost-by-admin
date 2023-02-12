@@ -46,44 +46,23 @@ class Body extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  const Content(
                     'Welcome to',
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontStyle: FontStyle.italic,
-                      color: ColorApp.brown,
-                    ),
-                  ),
-                  const Text(
                     'Home Stay',
-                    style: TextStyle(
-                      fontSize: 56,
-                      fontWeight: FontWeight.bold,
-                      color: ColorApp.brown,
-                    ),
+                    sizeTitle: 25,
+                    sizeSubTitle: 56,
+                    styleTitle: FontStyle.italic,
+                    fontWeightSubTitle: FontWeight.bold,
                   ),
                   SizeApp.h12,
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        c.kelola,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: ColorApp.gray,
-                        ),
-                      ),
-                      SizeApp.h20,
-                      Text(
-                        c.anda,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: ColorApp.gray,
-                        ),
-                      ),
-                    ],
+                  Content(
+                    c.kelola,
+                    c.anda,
+                    space: 30.0,
+                    colorTitle: ColorApp.gray,
+                    colorSubTitle: ColorApp.gray,
                   ),
-                  SizeApp.h30,
+                  SizeApp.h40,
                   ButtonPrymary(
                     text: 'Get Started',
                     onPressed: c.tapStart,
