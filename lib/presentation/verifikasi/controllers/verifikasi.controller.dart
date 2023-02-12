@@ -19,4 +19,8 @@ class VerifikasiController extends GetxController {
   void tapVerifikasi() {
     log("tapVerifikasi");
   }
+
+  void tapKirimUlang() {
+    log("tapKirimUlang");
+  }
 }

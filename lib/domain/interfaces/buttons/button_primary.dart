@@ -9,6 +9,7 @@ class ButtonPrymary extends StatelessWidget {
     this.width,
     this.bgColor,
     this.txSize,
+    this.textColor,
   });
 
   final void Function() onPressed;
@@ -16,6 +17,7 @@ class ButtonPrymary extends StatelessWidget {
   final double? height;
   final double? width;
   final Color? bgColor;
+  final Color? textColor;
   final double? txSize;
 
   @override
@@ -36,6 +38,7 @@ class ButtonPrymary extends StatelessWidget {
         text,
         style: TextStyle(
           fontSize: txSize ?? 24,
+          color: textColor ?? ColorApp.white,
         ),
       ),
     );
