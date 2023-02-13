@@ -10,5 +10,6 @@ class ColorApp {
   static const Color grayForm = Color(0xffF2F3F3);
   static const Color red = Color(0xffFC0F0F);
   static const Color blue = Color(0xff3842B7);
+  static const Color blueText = Color(0xff3E548D);
   static const Color green = Color(0xff06CF56);
 }

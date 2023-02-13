@@ -8,6 +8,18 @@ class DashboardController extends GetxController
   bool toogle = true;
   final isLoading = true.obs;
 
+  void toPenghuni() {
+    Get.toNamed(Routes.PENGHUNI);
+  }
+
+  void toPemasukan() {
+    Get.toNamed(Routes.PEMASUKAN);
+  }
+
+  void toPengeluaran() {
+    Get.toNamed(Routes.PENGELUARAN);
+  }
+
   @override
   void onInit() {
     if (Get.arguments != null) {

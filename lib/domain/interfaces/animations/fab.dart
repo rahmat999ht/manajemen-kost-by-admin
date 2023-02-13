@@ -67,7 +67,7 @@ class _FABState extends State<FAB> with SingleTickerProviderStateMixin {
               children: [
                 IconFAB(
                   onTap: () {
-                    controller.selectedIndex.value = 4;
+                    controller.toPemasukan();
                     if (controller.toogle = !controller.toogle) {
                       animationController.reverse();
                       alignment1 = const Alignment(0.0, 0.96);
@@ -85,7 +85,8 @@ class _FABState extends State<FAB> with SingleTickerProviderStateMixin {
                 ),
                 IconFAB(
                   onTap: () {
-                    controller.selectedIndex.value = 5;
+                    controller.toPenghuni();
+
                     if (controller.toogle = !controller.toogle) {
                       animationController.reverse();
                       alignment1 = const Alignment(0.0, 0.96);
@@ -103,7 +104,7 @@ class _FABState extends State<FAB> with SingleTickerProviderStateMixin {
                 ),
                 IconFAB(
                   onTap: () {
-                    controller.selectedIndex.value = 6;
+                    controller.toPengeluaran();
                     if (controller.toogle = !controller.toogle) {
                       animationController.reverse();
                       alignment1 = const Alignment(0.0, 0.96);
@@ -122,7 +123,7 @@ class _FABState extends State<FAB> with SingleTickerProviderStateMixin {
                 Align(
                   alignment: const Alignment(0, 1),
                   child: Transform.rotate(
-                    angle: animation.value * pi * (1 / 4),
+                    angle: animation.value * pi * (5 / 4),
                     child: AnimatedContainer(
                       decoration: BoxDecoration(
                         color: ColorApp.orange,

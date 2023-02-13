@@ -14,6 +14,8 @@ dependencies:
   mask_text_input_formatter: ^2.4.0
   firebase_core: ^2.5.0
   flutter_svg: ^2.0.0+1
+  firebase_auth: ^4.2.6
+  cloud_firestore: ^4.3.2
 
 dev_dependencies: 
   flutter_lints: 2.0.1

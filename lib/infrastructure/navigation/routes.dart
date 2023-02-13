@@ -10,7 +10,10 @@ class Routes {
   static const HOME = '/home';
   static const LIST_PENGHUNI = '/list-penghuni';
   static const LOGIN = '/login';
+  static const PEMASUKAN = '/pemasukan';
+  static const PENGELUARAN = '/pengeluaran';
+  static const PROFIL = '/profil';
   static const VERIFIKASI = '/verifikasi';
   static const WELCOME = '/welcome';
-  static const PROFIL = '/profil';
+  static const PENGHUNI = '/penghuni';
 }

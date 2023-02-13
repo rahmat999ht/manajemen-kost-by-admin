@@ -59,5 +59,20 @@ class Nav {
       page: () => const ProfilScreen(),
       binding: DashboardControllerBinding(),
     ),
+    GetPage(
+      name: Routes.PEMASUKAN,
+      page: () => const PemasukanScreen(),
+      binding: PemasukanControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.PENGELUARAN,
+      page: () => const PengeluaranScreen(),
+      binding: PengeluaranControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.PENGHUNI,
+      page: () => const PenghuniScreen(),
+      binding: PenghuniControllerBinding(),
+    ),
   ];
 }
