@@ -39,5 +39,10 @@ class Nav {
       page: () => const VerifikasiScreen(),
       binding: VerifikasiControllerBinding(),
     ),
+    GetPage(
+      name: Routes.DASHBOARD,
+      page: () => const DashboardScreen(),
+      binding: DashboardControllerBinding(),
+    ),
   ];
 }

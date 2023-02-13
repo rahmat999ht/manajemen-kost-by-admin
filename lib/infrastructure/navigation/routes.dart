@@ -7,6 +7,7 @@ class Routes {
 
   static const HOME = '/home';
   static const LOGIN = '/login';
-  static const WELCOME = '/welcome';
   static const VERIFIKASI = '/verifikasi';
+  static const WELCOME = '/welcome';
+  static const DASHBOARD = '/dashboard';
 }
