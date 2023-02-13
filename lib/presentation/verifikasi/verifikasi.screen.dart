@@ -74,8 +74,21 @@ class BodyVerifikasi extends StatelessWidget {
               ),
             ),
             SizeApp.h20,
-            ContentKirimUlangKode(
-              onTap: c.tapKirimUlang,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Tidak menerima kode? ",
+                  style: TextStyle(
+                    color: ColorApp.gray,
+                    fontSize: 12,
+                  ),
+                ),
+                ButtonText(
+                  "Kirim Ulang",
+                  onTap: c.tapKirimUlang,
+                ),
+              ],
             ),
             SizeApp.h36,
             ButtonPrymary(
@@ -85,45 +98,6 @@ class BodyVerifikasi extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class ContentKirimUlangKode extends StatelessWidget {
-  const ContentKirimUlangKode({
-    super.key,
-    required this.onTap,
-  });
-
-  final void Function()? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Tidak menerima kode? ",
-              style: TextStyle(
-                color: ColorApp.gray,
-                fontSize: 12,
-              ),
-            ),
-            GestureDetector(
-              onTap: onTap,
-              child: const Text(
-                "Kirim Ulang",
-                style: TextStyle(
-                  color: ColorApp.orange,
-                  fontSize: 12,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

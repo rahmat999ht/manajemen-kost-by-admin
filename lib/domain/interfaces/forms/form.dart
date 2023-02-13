@@ -81,7 +81,7 @@ class TextForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width ?? MediaQuery.of(context).size.width,
+      width: width ?? SizeApp.wFull,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -137,7 +137,7 @@ class TextForm extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               filled: true,
-              labelText: isTitle ? "" : titel,
+              labelText: isTitle ? null : titel,
               hintText: hintText,
               alignLabelWithHint: true,
               contentPadding:

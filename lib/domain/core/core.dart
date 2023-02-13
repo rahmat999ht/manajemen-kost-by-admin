@@ -7,6 +7,7 @@ export 'package:manajemen_kost_by_admin/domain/core/utils.dart';
 export 'package:manajemen_kost_by_admin/domain/interfaces/assets.dart';
 export 'package:manajemen_kost_by_admin/domain/interfaces/buttons/button_outline.dart';
 export 'package:manajemen_kost_by_admin/domain/interfaces/buttons/button_primary.dart';
+export 'package:manajemen_kost_by_admin/domain/interfaces/buttons/button_text.dart';
 export 'package:manajemen_kost_by_admin/domain/interfaces/contents/content.dart';
 export 'package:manajemen_kost_by_admin/domain/interfaces/forms/otp_form.dart';
 export 'package:manajemen_kost_by_admin/domain/interfaces/size.dart';
