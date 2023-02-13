@@ -20,11 +20,6 @@ class EnvironmentsBadge extends StatelessWidget {
 class Nav {
   static List<GetPage> routes = [
     GetPage(
-      name: Routes.HOME,
-      page: () => const HomeScreen(),
-      binding: HomeControllerBinding(),
-    ),
-    GetPage(
       name: Routes.WELCOME,
       page: () => const WelcomeScreen(),
       binding: WelcomeControllerBinding(),
@@ -43,6 +38,41 @@ class Nav {
       name: Routes.DASHBOARD,
       page: () => const DashboardScreen(),
       binding: DashboardControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.HOME,
+      page: () => const HomeScreen(),
+      binding: DashboardControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.CALENDER,
+      page: () => const CalenderScreen(),
+      binding: DashboardControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.LIST_PENGHUNI,
+      page: () => const ListPenghuniScreen(),
+      binding: DashboardControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.PROFIL,
+      page: () => const ProfilScreen(),
+      binding: DashboardControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.PEMASUKAN,
+      page: () => const PemasukanScreen(),
+      binding: PemasukanControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.PENGELUARAN,
+      page: () => const PengeluaranScreen(),
+      binding: PengeluaranControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.PENGHUNI,
+      page: () => const PenghuniScreen(),
+      binding: PenghuniControllerBinding(),
     ),
   ];
 }
