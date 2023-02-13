@@ -18,6 +18,7 @@ class VerifikasiController extends GetxController {
 
   void tapVerifikasi() {
     log("tapVerifikasi");
+    Get.offAllNamed(Routes.DASHBOARD);
   }
 
   void tapKirimUlang() {
