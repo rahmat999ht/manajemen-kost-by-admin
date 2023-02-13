@@ -1,12 +1,23 @@
-import 'package:get/get.dart';
-
-import '../../../../presentation/dashboard/controllers/dashboard.controller.dart';
+import '../../../../domain/core/core.dart';
 
 class DashboardControllerBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<DashboardController>(
-      () => DashboardController(),
+    Get.put<DashboardController>(
+      DashboardController(),
+      permanent: true,
+    );
+    Get.lazyPut<HomeController>(
+      () => HomeController(),
+    );
+    Get.lazyPut<CalenderController>(
+      () => CalenderController(),
+    );
+    Get.lazyPut<ListPenghuniController>(
+      () => ListPenghuniController(),
+    );
+    Get.lazyPut<ProfilController>(
+      () => ProfilController(),
     );
   }
 }

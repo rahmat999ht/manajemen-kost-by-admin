@@ -1,6 +1,4 @@
-import 'package:get/get.dart';
-
-import '../../../../presentation/verifikasi/controllers/verifikasi.controller.dart';
+import '../../../../domain/core/core.dart';
 
 class VerifikasiControllerBinding extends Bindings {
   @override

@@ -1,6 +1,4 @@
-import 'package:get/get.dart';
-
-import '../../../../presentation/welcome/controllers/welcome.controller.dart';
+import '../../../../domain/core/core.dart';
 
 class WelcomeControllerBinding extends Bindings {
   @override
