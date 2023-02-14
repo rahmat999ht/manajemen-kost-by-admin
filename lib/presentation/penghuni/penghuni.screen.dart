@@ -1,5 +1,3 @@
-import 'package:manajemen_kost_by_admin/domain/interfaces/forms/form.dart';
-
 import '../../domain/core/core.dart';
 
 class PenghuniScreen extends GetView<PenghuniController> {
@@ -13,16 +11,48 @@ class PenghuniScreen extends GetView<PenghuniController> {
         title: const Text('Kamar'),
         // automaticallyImplyLeading: false,
         actions: [
-          TextForm.border(
-            controller: controller.cGedung,
-            width: 100,
-            titel: 'Gedung ??',
-            color: Colors.transparent,
+          ActionsGedung(
+            c: controller,
           ),
+          SizeApp.w46,
         ],
       ),
       body: const PageGedung(
         gedung: 'Gedung B',
+      ),
+    );
+  }
+}
+
+class ActionsGedung extends StatelessWidget {
+  const ActionsGedung({
+    super.key,
+    required this.c,
+  });
+
+  final PenghuniController c;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: c.valueField,
+      child: Row(
+        children: [
+          Obx(
+            () => Text(
+              c.cGedung!.value,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: ColorApp.blueText,
+              ),
+            ),
+          ),
+          const Icon(
+            Icons.arrow_drop_down,
+            color: ColorApp.blueText,
+          ),
+        ],
       ),
     );
   }
