@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import '../../core/core.dart';
+import '../../../domain/core/core.dart';
 
 class FAB extends StatefulWidget {
   // final bool toogle;
@@ -80,7 +80,7 @@ class _FABState extends State<FAB> with SingleTickerProviderStateMixin {
                   alignment: alignment1,
                   size: size1,
                   toogle: controller.toogle,
-                  icon: 'assets/icons/pemasukan.svg',
+                  icon: Assets.pemasukan,
                   title: "Pemasukan",
                 ),
                 IconFAB(
@@ -99,7 +99,7 @@ class _FABState extends State<FAB> with SingleTickerProviderStateMixin {
                   alignment: alignment2,
                   size: size2,
                   toogle: controller.toogle,
-                  icon: 'assets/icons/kamar.svg',
+                  icon: Assets.kamar,
                   title: "Penghuni",
                 ),
                 IconFAB(
@@ -116,7 +116,7 @@ class _FABState extends State<FAB> with SingleTickerProviderStateMixin {
                   alignment: alignment3,
                   size: size3,
                   toogle: controller.toogle,
-                  icon: 'assets/icons/pengeluaran.svg',
+                  icon: Assets.pengeluaran,
                   title: "Pengeluaran",
                   color: ColorApp.red,
                 ),
@@ -142,7 +142,7 @@ class _FABState extends State<FAB> with SingleTickerProviderStateMixin {
                           child: Padding(
                             padding: const EdgeInsets.all(12.0),
                             child: SvgPicture.asset(
-                              'assets/icons/elementplus.svg',
+                              Assets.elementplus,
                               // height: 30,
                             ),
                           ),

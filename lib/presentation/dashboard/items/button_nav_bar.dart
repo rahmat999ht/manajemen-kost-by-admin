@@ -1,4 +1,4 @@
-import '../../core/core.dart';
+import '../../../domain/core/core.dart';
 
 class ButtonNavBar extends GetView<DashboardController> {
   final int index;
