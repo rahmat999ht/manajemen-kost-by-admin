@@ -84,29 +84,35 @@ class StreamKamar extends StatelessWidget {
                       ),
                       SizeApp.h20,
                       SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            ItemLantai(
-                              "Lantai 1",
-                              data: data!.lantai1!,
-                            ),
-                            SizeApp.h18,
-                            ItemLantai(
-                              "Lantai 2",
-                              data: data!.lantai2!,
-                            ),
-                            SizeApp.h18,
-                            ItemLantai(
-                              "Lantai 3",
-                              data: data!.lantai3!,
-                            ),
-                            SizeApp.h18,
-                            ItemLantai(
-                              "Lantai 4",
-                              data: data!.lantai4!,
-                            ),
-                          ],
-                        ),
+                        child: isStream
+                            ? Column(
+                                children: [
+                                  ItemLantai(
+                                    "Lantai 1",
+                                    data: data!.lantai1!,
+                                  ),
+                                  SizeApp.h18,
+                                  ItemLantai(
+                                    "Lantai 2",
+                                    data: data!.lantai2!,
+                                  ),
+                                  SizeApp.h18,
+                                  ItemLantai(
+                                    "Lantai 3",
+                                    data: data!.lantai3!,
+                                  ),
+                                  SizeApp.h18,
+                                  ItemLantai(
+                                    "Lantai 4",
+                                    data: data!.lantai4!,
+                                  ),
+                                ],
+                              )
+                            : SizedBox(
+                                height: SizeApp.hFull - 290,
+                                width: SizeApp.wFull,
+                                child: const LaodingState(),
+                              ),
                       ),
                     ],
                   ),
@@ -140,42 +146,54 @@ class StreamKamar extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           "Kamar Terisi",
                           style: TextStyle(
                             fontSize: 14,
                             color: ColorApp.blueText,
                           ),
                         ),
-                        Text(
-                          "18",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: ColorApp.orange,
-                          ),
-                        ),
+                        isStream
+                            ? const Text(
+                                "18",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: ColorApp.orange,
+                                ),
+                              )
+                            : const SizedBox(
+                                height: 10,
+                                width: 10,
+                                child: LaodingState(),
+                              ),
                       ],
                     ),
                     SizeApp.h20,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           "Kamar Kosong",
                           style: TextStyle(
                             fontSize: 14,
                             color: ColorApp.blueText,
                           ),
                         ),
-                        Text(
-                          "2",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: ColorApp.red,
-                          ),
-                        ),
+                        isStream
+                            ? const Text(
+                                "2",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: ColorApp.red,
+                                ),
+                              )
+                            : const SizedBox(
+                                height: 10,
+                                width: 10,
+                                child: LaodingState(),
+                              ),
                       ],
                     ),
                   ],

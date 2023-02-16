@@ -17,7 +17,7 @@ class PageGedung extends StatelessWidget {
           return StreamKamar(data: data);
         }
         return const Center(
-          child: CircularProgressIndicator(),
+          child: StreamKamar.nullValue(),
         );
       },
     );

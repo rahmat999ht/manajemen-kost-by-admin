@@ -14,6 +14,7 @@ export 'package:manajemen_kost_by_admin/domain/interfaces/buttons/button_text.da
 export 'package:manajemen_kost_by_admin/domain/interfaces/contents/content.dart';
 export 'package:manajemen_kost_by_admin/domain/interfaces/forms/otp_form.dart';
 export 'package:manajemen_kost_by_admin/domain/interfaces/size.dart';
+export 'package:manajemen_kost_by_admin/domain/interfaces/state/loading.dart';
 export 'package:manajemen_kost_by_admin/domain/models/no_kamar.dart';
 export 'package:manajemen_kost_by_admin/domain/validators/null_validation.dart';
 export 'package:manajemen_kost_by_admin/firebase_options.dart';
