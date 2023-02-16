@@ -1,9 +1,16 @@
-import 'package:manajemen_kost_by_admin/domain/core/core.dart';
+import '../../../domain/core/core.dart';
 
 class PenghuniController extends GetxController {
   final RxString? cGedung = ''.obs;
 
   final listGedung = ["Gedung A", "Gedung B"];
+  PageController pageController = PageController();
+  final selectionTab = 0.obs;
+
+  void changeSelectionTab(int value) {
+    selectionTab.value = value;
+    pageController.jumpToPage(value);
+  }
 
   Future valueField() {
     return Get.dialog(

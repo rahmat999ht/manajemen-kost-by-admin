@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '882367747131',
     projectId: 'manajemen-kost-a31ff',
     storageBucket: 'manajemen-kost-a31ff.appspot.com',
-    iosClientId: '882367747131-ude713qq2qmjmpl9tpmubak9gllnksrk.apps.googleusercontent.com',
+    iosClientId:
+        '882367747131-ude713qq2qmjmpl9tpmubak9gllnksrk.apps.googleusercontent.com',
     iosBundleId: 'com.yayat.manajemenKostByAdmin',
   );
 }
