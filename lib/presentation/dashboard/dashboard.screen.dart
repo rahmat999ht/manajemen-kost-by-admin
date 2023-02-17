@@ -5,10 +5,13 @@ class DashboardScreen extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(
-        () => controller.widgetOptions.elementAt(
-          controller.selectedIndex.value,
+      body: controller.obx(
+        (state) => Obx(
+          () => controller.widgetOptions.elementAt(
+            controller.selectedIndex.value,
+          ),
         ),
+        onLoading: const LaodingState(),
       ),
       bottomNavigationBar: Obx(
         () => BottomAppBar(
