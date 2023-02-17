@@ -22,24 +22,7 @@ class CardProfile extends StatelessWidget {
         children: [
           Row(
             children: [
-              Card(
-                elevation: 5,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                color: ColorApp.grayForm,
-                child: SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: Center(
-                    child: SvgPicture.asset(
-                      icon,
-                    ),
-                  ),
-                ),
-              ),
+              CardIcon(icon: icon),
               SizeApp.w20,
               Text(
                 title,

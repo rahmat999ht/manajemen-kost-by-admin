@@ -8,9 +8,9 @@ class ProfilController extends GetxController {
     Assets.pemasukan2,
     Assets.pengeluaran2,
   ];
-  void tapPersonalDetails() {
-    Get.offAllNamed(Routes.PROFILE_UPDATE);
-  }
+
+  // final AdminModel? admin = null;
+  void tapPersonalDetails() {}
 
   void tapPemasukan() {
     Get.offAllNamed(Routes.LIST_PEMASUKAN);

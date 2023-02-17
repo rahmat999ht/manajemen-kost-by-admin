@@ -20,7 +20,7 @@ class HeaderProfile extends StatelessWidget {
         AvatarWidget(
           imageHash: foto,
         ),
-        SizeApp.h20,
+        SizeApp.h10,
         Text(
           nama!,
           style: const TextStyle(
@@ -29,7 +29,7 @@ class HeaderProfile extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizeApp.h20,
+        SizeApp.h10,
         Text(
           status!,
           style: const TextStyle(

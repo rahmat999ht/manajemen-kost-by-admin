@@ -141,7 +141,7 @@ class TextForm extends StatelessWidget {
               hintText: hintText,
               alignLabelWithHint: true,
               contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 14, vertical: 20),
+                  const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
               isDense: true,
               suffixIcon: Icon(icon),
             ),

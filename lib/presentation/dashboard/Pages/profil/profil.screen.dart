@@ -76,7 +76,13 @@ class StreamProfile extends StatelessWidget {
                 itemCount: c.listItem.length,
                 itemBuilder: (context, index) {
                   var listTapItem = [
-                    c.tapPersonalDetails,
+                    () {
+                      Get.offAllNamed(
+                        Routes.PROFILE_UPDATE,
+                        arguments: admin,
+                      );
+                    },
+                    // c.tapPersonalDetails,
                     c.tapPemasukan,
                     c.tapPengeluaran,
                   ];

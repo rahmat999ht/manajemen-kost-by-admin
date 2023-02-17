@@ -34,7 +34,7 @@ class AvatarWidget extends StatelessWidget {
           )
         : Icon(
             CupertinoIcons.person_circle,
-            size: size,
+            size: size! + 20,
             color: ColorApp.orange,
           );
   }
