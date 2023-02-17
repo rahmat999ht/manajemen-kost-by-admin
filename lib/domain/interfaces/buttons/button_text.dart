@@ -6,6 +6,7 @@ class ButtonText extends StatelessWidget {
     super.key,
     required this.onTap,
     this.titleColor,
+    this.fontSize,
   })  : isIcon = false,
         icon = null,
         iconColor = null;
@@ -17,6 +18,7 @@ class ButtonText extends StatelessWidget {
     required this.icon,
     this.iconColor,
     this.titleColor,
+    this.fontSize,
   }) : isIcon = true;
 
   final String title;
@@ -25,6 +27,7 @@ class ButtonText extends StatelessWidget {
   final Color? iconColor;
   final Color? titleColor;
   final bool isIcon;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class ButtonText extends StatelessWidget {
             title,
             style: TextStyle(
               color: titleColor ?? ColorApp.orange,
-              fontSize: 12,
+              fontSize: fontSize ?? 12,
             ),
           ),
         ),

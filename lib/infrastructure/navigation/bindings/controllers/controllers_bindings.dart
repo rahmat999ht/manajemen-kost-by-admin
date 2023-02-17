@@ -1,7 +1,11 @@
 export 'package:manajemen_kost_by_admin/infrastructure/navigation/bindings/controllers/dashboard.controller.binding.dart';
+export 'package:manajemen_kost_by_admin/infrastructure/navigation/bindings/controllers/list_pemasukan.controller.binding.dart'; 
+export 'package:manajemen_kost_by_admin/infrastructure/navigation/bindings/controllers/list_pengeluaran.controller.binding.dart'; 
 export 'package:manajemen_kost_by_admin/infrastructure/navigation/bindings/controllers/login.controller.binding.dart';
 export 'package:manajemen_kost_by_admin/infrastructure/navigation/bindings/controllers/pemasukan.controller.binding.dart'; 
 export 'package:manajemen_kost_by_admin/infrastructure/navigation/bindings/controllers/pengeluaran.controller.binding.dart'; 
 export 'package:manajemen_kost_by_admin/infrastructure/navigation/bindings/controllers/penghuni.controller.binding.dart'; 
+export 'package:manajemen_kost_by_admin/infrastructure/navigation/bindings/controllers/profile_update.controller.binding.dart'; 
+export 'package:manajemen_kost_by_admin/infrastructure/navigation/bindings/controllers/tentang_app.controller.binding.dart'; 
 export 'package:manajemen_kost_by_admin/infrastructure/navigation/bindings/controllers/verifikasi.controller.binding.dart';
 export 'package:manajemen_kost_by_admin/infrastructure/navigation/bindings/controllers/welcome.controller.binding.dart';

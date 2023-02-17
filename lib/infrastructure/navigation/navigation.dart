@@ -74,5 +74,25 @@ class Nav {
       page: () => const PenghuniScreen(),
       binding: PenghuniControllerBinding(),
     ),
+    GetPage(
+      name: Routes.LIST_PEMASUKAN,
+      page: () => const ListPemasukanScreen(),
+      binding: ListPemasukanControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.LIST_PENGELUARAN,
+      page: () => const ListPengeluaranScreen(),
+      binding: ListPengeluaranControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.PROFILE_UPDATE,
+      page: () => const ProfileUpdateScreen(),
+      binding: ProfileUpdateControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.TENTANG_APP,
+      page: () => const TentangAppScreen(),
+      binding: TentangAppControllerBinding(),
+    ),
   ];
 }

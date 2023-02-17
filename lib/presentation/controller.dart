@@ -2,9 +2,12 @@ export 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/calender/co
 export 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/home/controllers/home.controller.dart';
 export 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/list_penghuni/controllers/list_penghuni.controller.dart';
 export 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/profil/controllers/profil.controller.dart';
+export 'package:manajemen_kost_by_admin/presentation/list_pengeluaran/controllers/list_pengeluaran.controller.dart';
 export 'package:manajemen_kost_by_admin/presentation/login/controllers/login.controller.dart';
 export 'package:manajemen_kost_by_admin/presentation/pemasukan/controllers/pemasukan.controller.dart';
 export 'package:manajemen_kost_by_admin/presentation/pengeluaran/controllers/pengeluaran.controller.dart';
 export 'package:manajemen_kost_by_admin/presentation/penghuni/controllers/penghuni.controller.dart';
+export 'package:manajemen_kost_by_admin/presentation/profile_update/controllers/profile_update.controller.dart';
+export 'package:manajemen_kost_by_admin/presentation/tentang_app/controllers/tentang_app.controller.dart';
 export 'package:manajemen_kost_by_admin/presentation/verifikasi/controllers/verifikasi.controller.dart';
 export 'package:manajemen_kost_by_admin/presentation/welcome/controllers/welcome.controller.dart';

@@ -12,9 +12,14 @@ class ProfilScreen extends GetView<ProfilController> {
         builder: (context, s) {
           if (s.hasData) {
             final data = s.data?.data();
-            return StreamProfile(admin: data);
+            return StreamProfile(
+              admin: data,
+              c: controller,
+            );
           }
-          return const StreamProfile.nullValue();
+          return StreamProfile.nullValue(
+            c: controller,
+          );
         },
       ),
     );
@@ -25,15 +30,18 @@ class StreamProfile extends StatelessWidget {
   const StreamProfile({
     super.key,
     required this.admin,
+    required this.c,
   }) : isStream = true;
 
   const StreamProfile.nullValue({
     super.key,
+    required this.c,
   })  : isStream = false,
         admin = null;
 
   final AdminModel? admin;
   final bool isStream;
+  final ProfilController c;
 
   @override
   Widget build(BuildContext context) {
@@ -62,25 +70,30 @@ class StreamProfile extends StatelessWidget {
                 height: 10,
                 thickness: 1.5,
               ),
-              SizeApp.h30,
-              CardProfile(
-                onTap: () {},
-                title: 'Personal details',
-                icon: Assets.person,
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const ScrollPhysics(),
+                itemCount: c.listItem.length,
+                itemBuilder: (context, index) {
+                  var listTapItem = [
+                    c.tapPersonalDetails,
+                    c.tapPemasukan,
+                    c.tapPengeluaran,
+                  ];
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CardProfile(
+                        onTap: listTapItem[index],
+                        title: c.listItem[index],
+                        icon: c.listAssetsItem[index],
+                      ),
+                      SizeApp.h20,
+                    ],
+                  );
+                },
               ),
-              SizeApp.h20,
-              CardProfile(
-                onTap: () {},
-                title: 'Pemasukan',
-                icon: Assets.pemasukan2,
-              ),
-              SizeApp.h20,
-              CardProfile(
-                onTap: () {},
-                title: 'Pengeluaran',
-                icon: Assets.pengeluaran2,
-              ),
-              SizeApp.h30,
+              SizeApp.h10,
               const Divider(
                 height: 10,
                 thickness: 1.5,
@@ -90,13 +103,13 @@ class StreamProfile extends StatelessWidget {
           Column(
             children: [
               CardProfile(
-                onTap: () {},
+                onTap: c.tapTentang,
                 title: 'Tentang',
                 icon: Assets.tentang,
               ),
               SizeApp.h20,
               ButtonPrymary(
-                onPressed: () {},
+                onPressed: c.tapLogOut,
                 text: 'Log-out',
               ),
               SizeApp.h16,

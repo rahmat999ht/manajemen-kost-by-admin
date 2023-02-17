@@ -3,9 +3,13 @@ export 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/home/home.s
 export 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/list_penghuni/list_penghuni.screen.dart';
 export 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/profil/profil.screen.dart';
 export 'package:manajemen_kost_by_admin/presentation/dashboard/dashboard.screen.dart';
+export 'package:manajemen_kost_by_admin/presentation/list_pemasukan/list_pemasukan.screen.dart';
+export 'package:manajemen_kost_by_admin/presentation/list_pengeluaran/list_pengeluaran.screen.dart';
 export 'package:manajemen_kost_by_admin/presentation/login/login.screen.dart';
 export 'package:manajemen_kost_by_admin/presentation/pemasukan/pemasukan.screen.dart';
 export 'package:manajemen_kost_by_admin/presentation/pengeluaran/pengeluaran.screen.dart';
 export 'package:manajemen_kost_by_admin/presentation/penghuni/penghuni.screen.dart';
+export 'package:manajemen_kost_by_admin/presentation/profile_update/profile_update.screen.dart';
+export 'package:manajemen_kost_by_admin/presentation/tentang_app/tentang_app.screen.dart';
 export 'package:manajemen_kost_by_admin/presentation/verifikasi/verifikasi.screen.dart';
 export 'package:manajemen_kost_by_admin/presentation/welcome/welcome.screen.dart';
