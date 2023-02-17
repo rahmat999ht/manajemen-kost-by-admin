@@ -4,6 +4,7 @@ class UtilsApp {
   static final firebaseFirestore = FirebaseFirestore.instance;
   static final auth = FirebaseAuth.instance;
   static const noKamarCollection = "no_kamar";
+  static const adminCollection = "admin";
 
   static DocumentReference<NoKamarModel> noKamar(String id) {
     return UtilsApp.firebaseFirestore

@@ -6,8 +6,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   bool? isviewed = prefs.getBool("isStart") ?? false;
+  String? isId = prefs.getString("user_id") ?? '';
   log(prefs.getBool("isStart").toString());
-  String initialRoute = isviewed == true ? Routes.LOGIN : Routes.WELCOME;
+  log(isId);
+  String isLogin = isId == '' ? Routes.LOGIN : Routes.DASHBOARD;
+  String initialRoute = isviewed == true ? isLogin : Routes.WELCOME;
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

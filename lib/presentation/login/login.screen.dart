@@ -1,5 +1,3 @@
-import 'package:manajemen_kost_by_admin/domain/interfaces/forms/form.dart';
-
 import '../../domain/core/core.dart';
 
 class LoginScreen extends GetView<LoginController> {
@@ -63,8 +61,8 @@ class BodyLogin extends StatelessWidget {
               ),
               SizeApp.h30,
               ButtonPrymary(
-                onPressed: c.tapLogin,
-                text: 'Login',
+                onPressed: c.tapSelanjutnya,
+                text: 'Selanjutnya',
               ),
             ],
           ),
