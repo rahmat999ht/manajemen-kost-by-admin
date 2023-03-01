@@ -42,6 +42,7 @@ export 'package:manajemen_kost_by_admin/presentation/penghuni/items/lantai.dart'
 export 'package:manajemen_kost_by_admin/presentation/penghuni/items/page_gedung.dart';
 export 'package:manajemen_kost_by_admin/presentation/penghuni/items/stream.dart';
 export 'package:manajemen_kost_by_admin/presentation/penghuni/items/tab_button.dart';
+export 'package:manajemen_kost_by_admin/presentation/penghuni/items/tap_kamar.dart';
 export 'package:manajemen_kost_by_admin/presentation/screens.dart';
 export 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 export 'package:octo_image/octo_image.dart';

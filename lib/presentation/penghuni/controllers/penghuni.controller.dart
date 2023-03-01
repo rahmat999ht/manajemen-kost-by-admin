@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:manajemen_kost_by_admin/domain/models/kamar.dart';
+
 import '../../../domain/core/core.dart';
 
 class PenghuniController extends GetxController {
@@ -6,44 +10,31 @@ class PenghuniController extends GetxController {
   final listGedung = ["Gedung A", "Gedung B"];
   PageController pageController = PageController();
   final selectionTab = 0.obs;
+  final loading = false.obs;
 
   void changeSelectionTab(int value) {
     selectionTab.value = value;
     pageController.jumpToPage(value);
   }
 
-  Future valueField() {
-    return Get.dialog(
-      AlertDialog(
-        title: const Text(
-          'Pilih Gedung',
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: listGedung
-              .map(
-                (e) => InkWell(
-                  onTap: () {
-                    cGedung?.value = e;
-                    Get.back();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(e),
-                  ),
-                ),
-              )
-              .toList(),
-        ),
-      ),
-    );
-  }
-
-  @override
-  void onInit() {
-    if (cGedung?.value == null) {
-      cGedung?.value ?? "Gedung A";
+  Future kamar(String noKamar) async {
+    loading.value = !loading.value;
+    final dataKamar = await UtilsApp.firebaseFirestore
+        .collection(UtilsApp.kamarCollection)
+        .where(
+          "no_kamar",
+          isEqualTo: noKamar,
+        )
+        .get();
+    if (dataKamar.size == 0) {
+      log("data 0");
+      UtilsApp.firebaseFirestore.collection(UtilsApp.kamarCollection).add(
+            KamarModel.add(noKamar).toRegis(),
+          );
+      Get.toNamed(Routes.CALENDER);
+    } else {
+      Get.toNamed(Routes.CALENDER);
     }
-    super.onInit();
+    loading.value = !loading.value;
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:manajemen_kost_by_admin/domain/core/core.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
@@ -52,8 +50,6 @@ class NoKamarModel {
             ),
     );
   }
-
-  String toDocumentSnapshot() => json.encode(toMap());
 
   factory NoKamarModel.fromDocumentSnapshot(
       DocumentSnapshot<Map<String, dynamic>> data) {

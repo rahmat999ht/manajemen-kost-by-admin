@@ -15,11 +15,11 @@ class DashboardController extends GetxController with StateMixin<AdminModel> {
   }
 
   void toPemasukan() {
-    Get.toNamed(Routes.PEMASUKAN);
+    Get.toNamed(Routes.FORM_PEMASUKAN);
   }
 
   void toPengeluaran() {
-    Get.toNamed(Routes.PENGELUARAN);
+    Get.toNamed(Routes.FORM_PENGELUARAN);
   }
 
   @override

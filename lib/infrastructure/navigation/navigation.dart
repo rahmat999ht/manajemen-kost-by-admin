@@ -60,16 +60,6 @@ class Nav {
       binding: DashboardControllerBinding(),
     ),
     GetPage(
-      name: Routes.PEMASUKAN,
-      page: () => const PemasukanScreen(),
-      binding: PemasukanControllerBinding(),
-    ),
-    GetPage(
-      name: Routes.PENGELUARAN,
-      page: () => const PengeluaranScreen(),
-      binding: PengeluaranControllerBinding(),
-    ),
-    GetPage(
       name: Routes.PENGHUNI,
       page: () => const PenghuniScreen(),
       binding: PenghuniControllerBinding(),
@@ -93,6 +83,21 @@ class Nav {
       name: Routes.TENTANG_APP,
       page: () => const TentangAppScreen(),
       binding: TentangAppControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.FORM_KAMAR,
+      page: () => const FormKamarScreen(),
+      binding: FormKamarControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.FORM_PEMASUKAN,
+      page: () => const FormPemasukanScreen(),
+      binding: FormPemasukanControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.FORM_PENGELUARAN,
+      page: () => const FormPengeluaranScreen(),
+      binding: FormPengeluaranControllerBinding(),
     ),
   ];
 }

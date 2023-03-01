@@ -1,6 +1,6 @@
 import '../../../domain/core/core.dart';
 
-class ItemLantai extends StatelessWidget {
+class ItemLantai extends GetView<PenghuniController> {
   const ItemLantai(
     this.title, {
     super.key,
@@ -37,26 +37,9 @@ class ItemLantai extends StatelessWidget {
             mainAxisSpacing: 16,
           ),
           itemBuilder: (context, index) {
-            return Card(
-              elevation: 5,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(
-                    10,
-                  ),
-                ),
-              ),
-              color: ColorApp.orange,
-              child: Center(
-                child: Text(
-                  data[index],
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: ColorApp.blueText,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+            return CardTapKamar(
+              onTap: () {},
+              data: data[index],
             );
           },
         ),

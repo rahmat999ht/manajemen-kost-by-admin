@@ -24,5 +24,5 @@ class ProfilController extends GetxController {
     Get.offNamed(Routes.TENTANG_APP);
   }
 
-  void tapLogOut() {}
+  void tapLogOut() {  }
 }

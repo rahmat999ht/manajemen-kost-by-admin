@@ -72,7 +72,7 @@ class StreamKamar extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "Terisi",
+                                "Kosong",
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: ColorApp.blueText,

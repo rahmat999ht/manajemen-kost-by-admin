@@ -5,6 +5,7 @@ class UtilsApp {
   static final auth = FirebaseAuth.instance;
   static const noKamarCollection = "no_kamar";
   static const adminCollection = "admin";
+  static const kamarCollection = "kamar";
   static final idLogin = Get.find<DashboardController>().adminModel!.id!;
 
   static DocumentReference<NoKamarModel> noKamar(String id) {
