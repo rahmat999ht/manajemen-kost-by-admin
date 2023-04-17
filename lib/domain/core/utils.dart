@@ -5,6 +5,7 @@ class UtilsApp {
   static final auth = FirebaseAuth.instance;
   static const noKamarCollection = "no_kamar";
   static const adminCollection = "admin";
+  static const penghuniCollection = "penghuni";
   static const kamarCollection = "kamar";
   static final idLogin = Get.find<DashboardController>().adminModel!.id!;
 
@@ -28,5 +29,15 @@ class UtilsApp {
               AdminModel.fromDocumentSnapshot(snapshot),
           toFirestore: (value, options) => value.toMap(),
         );
+  }
+
+  static DocumentReference<PenghuniModel> penghuni(String idUser) {
+    return UtilsApp.firebaseFirestore
+        .collection(UtilsApp.penghuniCollection)
+        .doc(idUser)
+        .withConverter(
+            fromFirestore: (snapshot, options) =>
+                PenghuniModel.fromDocumentSnapshot(snapshot),
+            toFirestore: (value, options) => value.toMap());
   }
 }

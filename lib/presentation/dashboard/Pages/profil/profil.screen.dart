@@ -63,7 +63,7 @@ class StreamProfile extends StatelessWidget {
                   : const SizedBox(
                       height: 167,
                       width: 167,
-                      child: LaodingState(),
+                      child: LoadingState(),
                     ),
               SizeApp.h30,
               const Divider(

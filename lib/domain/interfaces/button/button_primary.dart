@@ -6,6 +6,7 @@ class ButtonPrymary extends StatelessWidget {
     required this.onPressed,
     required this.text,
     this.textColor,
+    this.isLoading = false,
   }) : isBlack = false;
 
   const ButtonPrymary.isBlack({
@@ -13,12 +14,14 @@ class ButtonPrymary extends StatelessWidget {
     required this.onPressed,
     required this.text,
     this.textColor,
+    this.isLoading = false,
   }) : isBlack = true;
 
   final void Function() onPressed;
   final String text;
   final Color? textColor;
   final bool isBlack;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +35,21 @@ class ButtonPrymary extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: onPressed,
-      child: Text(
-        // "Get Started",
-        text,
-        style: TextStyle(
-          fontSize: isBlack ? 16 : 24,
-          color: textColor ?? ColorApp.white,
-        ),
-      ),
+      onPressed: isLoading == true ? null : onPressed,
+      child: isLoading == true
+          ? const SizedBox(
+              height: 30,
+              width: 30,
+              child: LoadingState(),
+            )
+          : Text(
+              // "Get Started",
+              text,
+              style: TextStyle(
+                fontSize: isBlack ? 16 : 24,
+                color: textColor ?? ColorApp.white,
+              ),
+            ),
     );
   }
 }

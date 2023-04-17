@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LaodingState extends StatelessWidget {
-  const LaodingState({
+class LoadingState extends StatelessWidget {
+  const LoadingState({
     Key? key,
   }) : super(key: key);
 

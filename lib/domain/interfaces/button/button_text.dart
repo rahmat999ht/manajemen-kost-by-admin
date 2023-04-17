@@ -8,6 +8,7 @@ class ButtonText extends StatelessWidget {
     this.titleColor,
     this.fontSize,
   })  : isIcon = false,
+        rigtIcon = false,
         icon = null,
         iconColor = null;
 
@@ -16,6 +17,7 @@ class ButtonText extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.icon,
+    this.rigtIcon = false,
     this.iconColor,
     this.titleColor,
     this.fontSize,
@@ -27,13 +29,14 @@ class ButtonText extends StatelessWidget {
   final Color? iconColor;
   final Color? titleColor;
   final bool isIcon;
+  final bool? rigtIcon;
   final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (isIcon == true)
+        if (isIcon == true && rigtIcon == false)
           Icon(
             icon,
             color: iconColor ?? ColorApp.orange,
@@ -48,6 +51,11 @@ class ButtonText extends StatelessWidget {
             ),
           ),
         ),
+        if (isIcon == true && rigtIcon == true)
+          Icon(
+            icon,
+            color: iconColor ?? ColorApp.orange,
+          ),
       ],
     );
   }

@@ -5,15 +5,34 @@ class ListPenghuniScreen extends GetView<ListPenghuniController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorApp.white,
       appBar: AppBar(
-        title: const Text('ListPenghuniScreen'),
-        centerTitle: true,
+        backgroundColor: ColorApp.white,
+        elevation: 0,
+        toolbarHeight: 65,
+        flexibleSpace: const FormSearch(),
       ),
-      body: const Center(
-        child: Text(
-          'ListPenghuniScreen is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: controller.obx(
+        (state) {
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: state!.length,
+            itemBuilder: (
+              context,
+              index,
+            ) {
+              return Penghuni(
+                // imageHash: items[index].avatarImage!,
+                name: state[index].nama,
+                status: state[index].status,
+                position: state[index].status,
+                onTap: () {},
+              );
+            },
+          );
+        },
+        onEmpty: const Center(child: Text("Masih Kosong")),
+        onLoading: const LoadingState(),
       ),
     );
   }

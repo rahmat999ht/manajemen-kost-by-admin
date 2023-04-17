@@ -5,10 +5,12 @@ class ItemLantai extends GetView<PenghuniController> {
     this.title, {
     super.key,
     required this.data,
+    required this.gedung,
   });
 
   final String title;
   final List<String> data;
+  final String gedung;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +39,18 @@ class ItemLantai extends GetView<PenghuniController> {
             mainAxisSpacing: 16,
           ),
           itemBuilder: (context, index) {
-            return CardTapKamar(
-              onTap: () {},
-              data: data[index],
+            return Obx(
+              () => CardTapKamar(
+                isLoading: controller.loading.value,
+                onTap: () {
+                  controller.addKamar(
+                    data[index],
+                    title,
+                    gedung,
+                  );
+                },
+                data: data[index],
+              ),
             );
           },
         ),

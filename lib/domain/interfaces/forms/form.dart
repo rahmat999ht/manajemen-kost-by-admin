@@ -7,10 +7,13 @@ class TextForm extends StatelessWidget {
   final String? hintText;
   final String? info;
   final Color? color;
-  final IconData? icon;
+  final Widget? icon;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final String? Function(String?)? validator;
   final bool isPhone;
   final void Function()? onTap;
+  final void Function(String)? onChanged;
   final TextInputType? textInputType;
   final List<TextInputFormatter>? inputFormatters;
   final bool isCheck;
@@ -18,6 +21,7 @@ class TextForm extends StatelessWidget {
   final bool isBorder;
   final bool isBg;
   final int? maxLength;
+  final double? radius;
   const TextForm({
     super.key,
     required this.controller,
@@ -36,6 +40,10 @@ class TextForm extends StatelessWidget {
     this.isBorder = false,
     this.isBg = false,
     this.maxLength,
+    this.radius,
+    this.suffixIcon,
+    this.prefixIcon,
+    this.onChanged,
   }) : isPhone = false;
 
   const TextForm.phone({
@@ -56,6 +64,10 @@ class TextForm extends StatelessWidget {
     this.isBorder = false,
     this.isBg = false,
     this.maxLength,
+    this.radius,
+    this.suffixIcon,
+    this.prefixIcon,
+    this.onChanged,
   }) : isPhone = true;
 
   const TextForm.border({
@@ -75,6 +87,10 @@ class TextForm extends StatelessWidget {
     this.isTitle = false,
     this.isPhone = false,
     this.maxLength,
+    this.radius,
+    this.suffixIcon,
+    this.prefixIcon,
+    this.onChanged,
   })  : isBorder = true,
         isBg = false;
 
@@ -95,8 +111,9 @@ class TextForm extends StatelessWidget {
                 color: ColorApp.gray,
               ),
             ),
-          SizeApp.h10,
+          if (isTitle) SizeApp.h10,
           TextFormField(
+            onChanged: onChanged,
             maxLength: maxLength,
             maxLines: null,
             minLines: 1,
@@ -128,13 +145,13 @@ class TextForm extends StatelessWidget {
                 borderSide: isBorder
                     ? BorderSide(color: color ?? ColorApp.grayForm)
                     : BorderSide.none,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(radius ?? 8),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: isBorder
                     ? BorderSide(color: color ?? ColorApp.gray)
                     : BorderSide.none,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(radius ?? 8),
               ),
               filled: true,
               labelText: isTitle ? null : titel,
@@ -143,7 +160,9 @@ class TextForm extends StatelessWidget {
               contentPadding:
                   const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
               isDense: true,
-              suffixIcon: Icon(icon),
+              suffixIcon: suffixIcon,
+              icon: icon,
+              prefixIcon: prefixIcon,
             ),
           ),
           Visibility(

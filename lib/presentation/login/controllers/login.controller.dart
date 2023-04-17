@@ -78,7 +78,7 @@ class LoginController extends GetxController {
     }
   }
 
-  void tapReg() async {
+  void tapRegAdmin() async {
     try {
       isLoadingChange();
       log("loading");

@@ -5,15 +5,17 @@ class CardTapKamar extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.data,
+    required this.isLoading,
   });
 
   final String data;
   final void Function()? onTap;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: isLoading == true ? null : onTap,
       child: Card(
         elevation: 5,
         shape: const RoundedRectangleBorder(
@@ -25,14 +27,20 @@ class CardTapKamar extends StatelessWidget {
         ),
         color: ColorApp.orange,
         child: Center(
-          child: Text(
-            data,
-            style: const TextStyle(
-              fontSize: 16,
-              color: ColorApp.blueText,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          child: isLoading == true
+              ? const SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: LoadingState(),
+                )
+              : Text(
+                  data,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: ColorApp.blueText,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
         ),
       ),
     );

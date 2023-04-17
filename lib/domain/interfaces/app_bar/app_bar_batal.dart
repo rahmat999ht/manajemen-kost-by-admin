@@ -18,10 +18,7 @@ PreferredSizeWidget appBar(String title, bool isBack) {
         fontSize: 16,
         titleColor: ColorApp.gray,
         onTap: () {
-          if (isBack == true) {
-            Get.back();
-          }
-          Get.offAllNamed(Routes.DASHBOARD);
+          isBack == true ? Get.back() : Get.offAllNamed(Routes.DASHBOARD);
         },
       ),
       SizeApp.w20,

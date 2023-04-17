@@ -1,0 +1,16 @@
+export './dashboard/Pages/calender/calender.screen.dart';
+export './dashboard/Pages/home/home.screen.dart';
+export './dashboard/Pages/list_penghuni/list_penghuni.screen.dart';
+export './dashboard/Pages/profil/profil.screen.dart';
+export './dashboard/dashboard.screen.dart';
+export './form_kamar/form_kamar.screen.dart';
+export './form_pemasukan/form_pemasukan.screen.dart';
+export './form_pengeluaran/form_pengeluaran.screen.dart';
+export './list_pemasukan/list_pemasukan.screen.dart';
+export './list_pengeluaran/list_pengeluaran.screen.dart';
+export './login/login.screen.dart';
+export './penghuni/penghuni.screen.dart';
+export './profile_update/profile_update.screen.dart';
+export './tentang_app/tentang_app.screen.dart';
+export './verifikasi/verifikasi.screen.dart';
+export './welcome/welcome.screen.dart';

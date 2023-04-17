@@ -5,7 +5,7 @@ import 'package:manajemen_kost_by_admin/domain/models/kamar.dart';
 import '../../../domain/core/core.dart';
 
 class PenghuniController extends GetxController {
-  final RxString? cGedung = ''.obs;
+  // final RxString? cGedung = ''.obs;
 
   final listGedung = ["Gedung A", "Gedung B"];
   PageController pageController = PageController();
@@ -17,7 +17,7 @@ class PenghuniController extends GetxController {
     pageController.jumpToPage(value);
   }
 
-  Future kamar(String noKamar) async {
+  Future addKamar(String noKamar, String lantai, String gedung) async {
     loading.value = !loading.value;
     final dataKamar = await UtilsApp.firebaseFirestore
         .collection(UtilsApp.kamarCollection)
@@ -28,13 +28,25 @@ class PenghuniController extends GetxController {
         .get();
     if (dataKamar.size == 0) {
       log("data 0");
-      UtilsApp.firebaseFirestore.collection(UtilsApp.kamarCollection).add(
-            KamarModel.add(noKamar).toRegis(),
+      UtilsApp.firebaseFirestore
+          .collection(UtilsApp.kamarCollection)
+          .doc(noKamar)
+          .set(
+            KamarModel.add(
+              noKamar,
+              lantai,
+              gedung,
+            ).toMap(),
           );
-      Get.toNamed(Routes.CALENDER);
-    } else {
-      Get.toNamed(Routes.CALENDER);
     }
-    loading.value = !loading.value;
+    Future.delayed(const Duration(seconds: 5)).then(
+      (value) {
+        Get.toNamed(
+          Routes.FORM_KAMAR,
+          arguments: noKamar,
+        );
+        loading.value = !loading.value;
+      },
+    );
   }
 }

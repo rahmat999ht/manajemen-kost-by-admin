@@ -5,14 +5,33 @@ class FormKamarScreen extends GetView<FormKamarController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('FormKamarScreen'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'FormKamarScreen is working',
-          style: TextStyle(fontSize: 20),
+      appBar: appBar('Kamar ${controller.noKamar}', true),
+      body: Container(
+        color: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Form(
+          key: controller.formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const InformasiPenyewa(),
+                SizeApp.h20,
+                const InformasiKamar(),
+                SizeApp.h20,
+                const InformasiHarga(),
+                SizeApp.h20,
+                Obx(
+                  () => ButtonPrymary.isBlack(
+                    isLoading: controller.isLoading.value,
+                    onPressed: controller.updateKamar,
+                    text: 'Simpan',
+                  ),
+                ),
+                SizeApp.h20,
+              ],
+            ),
+          ),
         ),
       ),
     );
