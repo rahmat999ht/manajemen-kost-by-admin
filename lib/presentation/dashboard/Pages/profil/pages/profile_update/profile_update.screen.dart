@@ -1,5 +1,3 @@
-import 'package:manajemen_kost_by_admin/domain/interfaces/state/image.dart';
-
 import '../../../../../../domain/core/core.dart';
 
 class ProfileUpdateScreen extends GetView<ProfileUpdateController> {
@@ -45,6 +43,7 @@ class ProfileUpdateScreen extends GetView<ProfileUpdateController> {
                       ),
                       SizeApp.h12,
                       TextForm.border(
+                        onTap: controller.alertJK,
                         controller: controller.jkC,
                         titel: 'Jenis kelamin',
                         color: ColorApp.gray,
@@ -62,7 +61,7 @@ class ProfileUpdateScreen extends GetView<ProfileUpdateController> {
                   SizeApp.h100,
                   SizeApp.h30,
                   ButtonPrymary.isBlack(
-                    onPressed: () {},
+                    onPressed: controller.updateProfil,
                     text: 'Simpan',
                   )
                 ],
@@ -75,7 +74,7 @@ class ProfileUpdateScreen extends GetView<ProfileUpdateController> {
   }
 }
 
-class WrapperImageUpdateProfil extends GetView<ProfileUpdateController>
+class WrapperImageUpdateProfil extends GetView<ImageUpdateController>
     with ImageState {
   const WrapperImageUpdateProfil({Key? key}) : super(key: key);
 

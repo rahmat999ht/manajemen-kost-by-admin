@@ -1,11 +1,9 @@
-import '../../../../domain/core/core.dart';
+import '../../../../../../../domain/core/core.dart';
 
-Future alertValue({
-  String? title,
-  List? listValue,
-  RxList<List<TextEditingController>>? listController,
-  int? index,
-  int? item,
+Future alertValueProfil({
+  final String? title,
+  final List? listValue,
+  final TextEditingController? textC,
 }) {
   return alertContent(
     title: title!,
@@ -14,9 +12,7 @@ Future alertValue({
           .map(
             (e) => InkWell(
               onTap: () {
-                final data = listController![index!];
-                final fixData = data[item!];
-                fixData.text = e;
+                textC!.text = e;
                 Get.back();
               },
               child: Card(

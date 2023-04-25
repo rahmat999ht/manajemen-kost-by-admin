@@ -1,7 +1,11 @@
 import '../../../../../domain/core/core.dart';
 
 class ProfilController extends GetxController {
-  final listItem = <String>['Personal details', 'Pemasukan', 'Pengeluaran'];
+  final listItem = <String>[
+    'Personal details',
+    'Pemasukan',
+    'Pengeluaran',
+  ];
 
   var listAssetsItem = [
     Assets.person,
@@ -9,8 +13,12 @@ class ProfilController extends GetxController {
     Assets.pengeluaran2,
   ];
 
-  // final AdminModel? admin = null;
-  void tapPersonalDetails() {}
+  void tapPersonalDetails(AdminModel admin) {
+    Get.offAllNamed(
+      Routes.PROFILE_UPDATE,
+      arguments: admin,
+    );
+  }
 
   void tapPemasukan() {
     Get.offAllNamed(Routes.LIST_PEMASUKAN);
@@ -24,5 +32,5 @@ class ProfilController extends GetxController {
     Get.offNamed(Routes.TENTANG_APP);
   }
 
-  void tapLogOut() {  }
+  void tapLogOut() {}
 }

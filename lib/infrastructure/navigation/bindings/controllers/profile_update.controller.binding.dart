@@ -1,12 +1,13 @@
-import 'package:get/get.dart';
-
-import '../../../../presentation/dashboard/Pages/profil/pages/profile_update/controllers/profile_update.controller.dart';
+import '../../../../domain/core/core.dart';
 
 class ProfileUpdateControllerBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<ProfileUpdateController>(
       () => ProfileUpdateController(),
+    );
+    Get.lazyPut<ImageUpdateController>(
+      () => ImageUpdateController(),
     );
   }
 }

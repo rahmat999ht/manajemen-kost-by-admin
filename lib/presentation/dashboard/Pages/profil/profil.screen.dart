@@ -1,5 +1,3 @@
-
-
 import '../../../../domain/core/core.dart';
 
 class ProfilScreen extends GetView<ProfilController> {
@@ -75,14 +73,10 @@ class StreamProfile extends StatelessWidget {
                 physics: const ScrollPhysics(),
                 itemCount: c.listItem.length,
                 itemBuilder: (context, index) {
-                  var listTapItem = [
+                  List<void Function()> listTapItem = [
                     () {
-                      Get.offAllNamed(
-                        Routes.PROFILE_UPDATE,
-                        arguments: admin,
-                      );
+                      c.tapPersonalDetails(admin!);
                     },
-                    // c.tapPersonalDetails,
                     c.tapPemasukan,
                     c.tapPengeluaran,
                   ];

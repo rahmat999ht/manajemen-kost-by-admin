@@ -1,6 +1,10 @@
 import '../../core/core.dart';
 
-alertActions(String title, String middleText, List<Widget>? actions) {
+alertActions(
+  String title,
+  String middleText,
+  List<Widget>? actions,
+) {
   Get.defaultDialog(
     title: title,
     middleText: middleText,

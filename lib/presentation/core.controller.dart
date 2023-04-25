@@ -5,6 +5,7 @@ export 'dashboard/Pages/home/controllers/home.controller.dart';
 export 'dashboard/Pages/list_penghuni/controllers/list_penghuni.controller.dart';
 export 'dashboard/Pages/profil/controllers/profil.controller.dart';
 export 'dashboard/Pages/profil/pages/list_pengeluaran/controllers/list_pengeluaran.controller.dart';
+export 'dashboard/Pages/profil/pages/profile_update/controllers/image_update.contoller.dart';
 export 'dashboard/Pages/profil/pages/profile_update/controllers/profile_update.controller.dart';
 export 'dashboard/Pages/profil/pages/tentang_app/controllers/tentang_app.controller.dart';
 export 'forms/form_kamar/controllers/form_kamar.controller.dart';
