@@ -4,8 +4,8 @@ Future alertValueProfil({
   final String? title,
   final List? listValue,
   final TextEditingController? textC,
-}) {
-  return alertContent(
+}) async {
+  return await alertContent(
     title: title!,
     content: Column(
       children: listValue!

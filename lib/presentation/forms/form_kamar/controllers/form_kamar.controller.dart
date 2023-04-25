@@ -50,14 +50,7 @@ class FormKamarController extends GetxController {
   }
 
   Future deleteTSbyID(String idPenghuni) async {
-    DocumentReference<PenghuniModel> user = UtilsApp.firebaseFirestore
-        .collection(UtilsApp.penghuniCollection)
-        .doc(idPenghuni)
-        .withConverter<PenghuniModel>(
-          fromFirestore: (snapshot, options) =>
-              PenghuniModel.fromMapId(snapshot.data()!, snapshot.id),
-          toFirestore: (value, options) => value.toMap(),
-        );
+    DocumentReference<PenghuniModel> user = UtilsApp.penghuni(idPenghuni);
     final penghuni = await user.get();
     if (penghuni.exists) {
       updateById.updateKamarById(
@@ -85,7 +78,7 @@ class FormKamarController extends GetxController {
   }
 
   Future alertJkl(int index) async {
-    await alertValue(
+    await alertValueFormKamar(
       title: "Jenis Kelamin",
       listValue: listJkl,
       index: index,
@@ -95,7 +88,7 @@ class FormKamarController extends GetxController {
   }
 
   Future alertStatus(int index) async {
-    await alertValue(
+    await alertValueFormKamar(
       title: "Status",
       listValue: listStatus,
       index: index,
@@ -174,14 +167,9 @@ class FormKamarController extends GetxController {
             );
             // continue;
           }
-          DocumentReference<PenghuniModel> user = UtilsApp.firebaseFirestore
-              .collection(UtilsApp.penghuniCollection)
-              .doc(dataPenghuni.id)
-              .withConverter<PenghuniModel>(
-                fromFirestore: (snapshot, options) =>
-                    PenghuniModel.fromMapId(snapshot.data()!, snapshot.id),
-                toFirestore: (value, options) => value.toMap(),
-              );
+          DocumentReference<PenghuniModel> user =
+              UtilsApp.penghuni(dataPenghuni.id);
+
           log("data $user", name: "Penghuni");
 //kode di bawah ini akan mengupdate penghuni yg sudah ada di tabel kamar berdasarkan id kamar.
           updateById.updateKamarById(
@@ -208,14 +196,8 @@ class FormKamarController extends GetxController {
             );
           }
 
-          DocumentReference<KamarModel> kamarDoc = UtilsApp.firebaseFirestore
-              .collection(UtilsApp.naiveBayesCollection)
-              .doc(noKamar)
-              .withConverter<KamarModel>(
-                fromFirestore: (snapshot, options) =>
-                    KamarModel.fromMap(snapshot.data()!, snapshot.id),
-                toFirestore: (value, options) => value.toMap(),
-              );
+          DocumentReference<KamarModel> kamarDoc = UtilsApp.kamar(noKamar);
+
           log("kamarDoc $kamarDoc", name: "Penghuni");
           final dataNaiveBayes = await UtilsApp.firebaseFirestore
               .collection(UtilsApp.penghuniCollection)
@@ -262,15 +244,7 @@ class FormKamarController extends GetxController {
   void onInit() async {
     // listPenghuni = penghuniController.items;
     // log(listPenghuni.toString(), name: "list penghuni");
-    final data = await UtilsApp.firebaseFirestore
-        .collection(UtilsApp.kamarCollection)
-        .doc(noKamar)
-        .withConverter(
-          fromFirestore: (snapshot, options) =>
-              KamarModel.fromDocumentSnapshot(snapshot),
-          toFirestore: (value, options) => value.toMap(),
-        )
-        .get();
+    final data = await UtilsApp.kamar(noKamar).get();
     log(data.data().toString(), name: 'kamar');
     dataKamar = data.data()!;
     initForm(

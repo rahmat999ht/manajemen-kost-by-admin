@@ -1,13 +1,13 @@
 import '../../../../domain/core/core.dart';
 
-Future alertValue({
+Future alertValueFormKamar({
   String? title,
   List? listValue,
   RxList<List<TextEditingController>>? listController,
   int? index,
   int? item,
-}) {
-  return alertContent(
+}) async {
+  return await alertContent(
     title: title!,
     content: Column(
       children: listValue!
