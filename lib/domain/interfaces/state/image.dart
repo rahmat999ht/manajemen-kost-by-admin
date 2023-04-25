@@ -34,7 +34,8 @@ mixin ImageState {
           width: 180,
           child: AvatarWidget(
             imageHash: imageHash,
-            size: 180,
+            height: 180,
+            width: 180,
           ),
         ),
         InkWell(

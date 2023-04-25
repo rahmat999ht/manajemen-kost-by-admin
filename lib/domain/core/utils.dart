@@ -7,6 +7,7 @@ class UtilsApp {
   static const adminCollection = "admin";
   static const penghuniCollection = "penghuni";
   static const kamarCollection = "kamar";
+  static const naiveBayesCollection = "naiveBayes";
   static final idLogin = Get.find<DashboardController>().adminModel!.id!;
 
   static DocumentReference<NoKamarModel> noKamar(String id) {
@@ -38,6 +39,16 @@ class UtilsApp {
         .withConverter(
             fromFirestore: (snapshot, options) =>
                 PenghuniModel.fromDocumentSnapshot(snapshot),
+            toFirestore: (value, options) => value.toMap());
+  }
+
+  static DocumentReference<KamarModel> kamar(String idKamar) {
+    return UtilsApp.firebaseFirestore
+        .collection(UtilsApp.penghuniCollection)
+        .doc(idKamar)
+        .withConverter(
+            fromFirestore: (snapshot, options) =>
+                KamarModel.fromDocumentSnapshot(snapshot),
             toFirestore: (value, options) => value.toMap());
   }
 }

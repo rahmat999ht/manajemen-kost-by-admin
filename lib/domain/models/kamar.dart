@@ -3,6 +3,7 @@ import '../core/core.dart';
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class KamarModel {
   final String? id;
+  final Timestamp? tglSewa;
   final String? noKamar;
   final String? lantai;
   final String? gedung;
@@ -12,6 +13,7 @@ class KamarModel {
   final List<DocumentReference<PenghuniModel>>? penghuni;
   KamarModel({
     this.id,
+    this.tglSewa,
     this.noKamar,
     this.lantai,
     this.gedung,
@@ -36,22 +38,25 @@ class KamarModel {
       penghuni: [],
     );
   }
-  factory KamarModel.update(
-    List<String>? fasilitas,
-    int? sewaBulanan,
-    int? sewaTahunan,
-    List<DocumentReference<PenghuniModel>>? penghuni,
-  ) {
-    return KamarModel(
-      fasilitas: fasilitas,
-      sewaBulanan: sewaBulanan,
-      sewaTahunan: sewaTahunan,
-      penghuni: penghuni,
-    );
-  }
+  // factory KamarModel.update(
+  //   List<String>? fasilitas,
+  //   int? sewaBulanan,
+  //   int? sewaTahunan,
+  //   List<DocumentReference<PenghuniModel>>? penghuni,
+  //   Timestamp? tglSewa,
+  // ) {
+  //   return KamarModel(
+  //     fasilitas: fasilitas,
+  //     sewaBulanan: sewaBulanan,
+  //     sewaTahunan: sewaTahunan,
+  //     penghuni: penghuni,
+  //     tglSewa: tglSewa,
+  //   );
+  // }
 
   factory KamarModel.fromDocumentSnapshot(
-      DocumentSnapshot<Map<String, dynamic>> json) {
+    DocumentSnapshot<Map<String, dynamic>> json,
+  ) {
     final Map<String, dynamic> data = json.data()!;
     return KamarModel.fromMap(data, json.id);
   }
@@ -65,16 +70,11 @@ class KamarModel {
       'sewa_bulanan': sewaBulanan,
       'sewa_tahunan': sewaTahunan,
       'penghuni': penghuni!,
+      'tglSewa': tglSewa,
     };
   }
 
   factory KamarModel.fromMap(Map<String, dynamic> map, String id) {
-    // final dataPenghuni = map['penghuni'] as DocumentReference;
-    // DocumentReference<PenghuniModel> penghuni = dataPenghuni.withConverter(
-    //   fromFirestore: (snapshot, options) =>
-    //       PenghuniModel.fromMapId(snapshot.data()!, snapshot.id),
-    //   toFirestore: (value, options) => value.toMap(),
-    // );
     return KamarModel(
       id: id,
       noKamar: map['noKamar'] != null ? map['noKamar'] as String : null,
@@ -101,14 +101,7 @@ class KamarModel {
               }).toList(),
             )
           : null,
-      // penghuni: map['penghuni'] != null
-      //     ? List<DocumentReference<PenghuniModel>>.from(
-      //         (map['penghuni'] as List<dynamic>).map((x) {
-      //           final ref = x as DocumentReference;
-      //           return FirebaseFirestore.instance.doc(ref.path);
-      //         }).toList(),
-      //       )
-      //     : null,
+      tglSewa: map['tglSewa'] != null ? map['tglSewa'] as Timestamp : null,
     );
   }
 }

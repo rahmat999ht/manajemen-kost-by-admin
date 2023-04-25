@@ -15,7 +15,7 @@ dependencies:
   firebase_core: ^2.5.0
   flutter_svg: ^2.0.0+1
   firebase_auth: ^4.2.6
-  cloud_firestore: ^4.3.2
+  cloud_firestore: ^4.5.1
   octo_image: ^1.0.2
   cached_network_image: ^3.2.3
   get_cli: ^0.2.30

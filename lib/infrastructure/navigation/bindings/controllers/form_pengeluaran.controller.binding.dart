@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../../../presentation/form_pengeluaran/controllers/form_pengeluaran.controller.dart';
+import '../../../../presentation/forms/form_pengeluaran/controllers/form_pengeluaran.controller.dart';
 
 class FormPengeluaranControllerBinding extends Bindings {
   @override

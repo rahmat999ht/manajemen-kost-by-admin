@@ -1,29 +1,20 @@
 import '../../../../../domain/core/core.dart';
 
 class Penghuni extends StatelessWidget {
-  // final ImageHash? imageHash;
-  final String name;
-  final String status;
-  final String position;
+  final PenghuniModel? penghuni;
   final bool data;
   final void Function()? onTap;
   const Penghuni({
     Key? key,
-    // required this.imageHash,
-    required this.name,
-    required this.status,
-    required this.position,
+    required this.penghuni,
     required this.onTap,
   })  : data = true,
         super(key: key);
   const Penghuni.nullValue({
     Key? key,
   })  : data = false,
-        // imageHash = null,
+        penghuni = null,
         onTap = null,
-        name = ' - ',
-        status = ' - ',
-        position = ' - ',
         super(key: key);
 
   @override
@@ -31,27 +22,21 @@ class Penghuni extends StatelessWidget {
     return InkWell(
       onTap: data ? onTap : null,
       child: ListTile(
-        // leading: imageHash != null
-        //     ? AvatarWidget(
-        //         imageHash: imageHash!,
-        //         size: 37,
-        //       )
-        //     : const CircleAvatar(
-        //         child: Icon(
-        //           CupertinoIcons.person_circle,
-        //           size: 37,
-        //           color: Colors.white60,
-        //         ),
-        //       ),
-        leading: const CircleAvatar(
-          child: Icon(
-            Icons.person_pin,
-            size: 37,
-            color: Colors.white60,
-          ),
-        ),
+        leading: penghuni!.image != null
+            ? AvatarWidget(
+                imageHash: penghuni!.image!,
+                height: 37,
+                width: 37,
+              )
+            : const CircleAvatar(
+                child: Icon(
+                  Icons.person_pin,
+                  size: 37,
+                  color: Colors.white60,
+                ),
+              ),
         title: Text(
-          data ? name : ' - ',
+          data ? penghuni!.nama : ' - ',
           style: const TextStyle(
             fontSize: 16,
             fontFamily: 'Geomanist',
@@ -59,14 +44,14 @@ class Penghuni extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          data ? status : ' - ',
+          data ? penghuni!.status : ' - ',
           style: const TextStyle(
             fontSize: 14,
             fontFamily: 'Geomanist',
           ),
         ),
         trailing: Text(
-          data ? position : ' - ',
+          data ? penghuni?.peran ?? 'kosong' : ' - ',
           style: const TextStyle(
             fontSize: 12,
             fontFamily: 'Geomanist',

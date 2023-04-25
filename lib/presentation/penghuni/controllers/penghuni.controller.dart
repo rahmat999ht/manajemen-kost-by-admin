@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-import 'package:manajemen_kost_by_admin/domain/models/kamar.dart';
-
 import '../../../domain/core/core.dart';
 
 class PenghuniController extends GetxController {
@@ -40,8 +38,8 @@ class PenghuniController extends GetxController {
           );
     }
     Future.delayed(const Duration(seconds: 5)).then(
-      (value) {
-        Get.toNamed(
+      (_) {
+        Get.offAllNamed(
           Routes.FORM_KAMAR,
           arguments: noKamar,
         );

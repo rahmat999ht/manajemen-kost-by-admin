@@ -39,7 +39,7 @@ class ListPenghuniController extends GetxController
           final data = event.docs[index];
           return PenghuniModel.fromDocumentSnapshot(data);
         });
-        log("$items");
+        log("${items.length}");
         change(items, status: RxStatus.success());
       }
     });

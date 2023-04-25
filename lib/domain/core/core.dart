@@ -19,4 +19,5 @@ export '/infrastructure/navigation/bindings/controllers/controllers_bindings.dar
 export '/infrastructure/navigation/navigation.dart';
 export '/infrastructure/navigation/routes.dart';
 export '/infrastructure/theme/colors.dart';
-export '/presentation/core.presentation.dart';
+export '/presentation/core.controller.dart';
+export '/presentation/core.screens.dart';

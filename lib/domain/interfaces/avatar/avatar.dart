@@ -1,24 +1,26 @@
-import 'package:flutter/cupertino.dart';
-
 import '../../core/core.dart';
 
 class AvatarWidget extends StatelessWidget {
   const AvatarWidget({
     super.key,
     required this.imageHash,
-    this.size = 80,
+    this.width = 80,
+    this.height = 80,
+    this.radius = 70,
   });
   final ImageHash? imageHash;
-  final double? size;
+  final double? height;
+  final double? width;
+  final double? radius;
 
   @override
   Widget build(BuildContext context) {
     return imageHash != null
         ? SizedBox(
-            height: size,
-            width: size,
+            height: height,
+            width: width,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(70),
+              borderRadius: BorderRadius.circular(radius!),
               child: OctoImage(
                 image: CachedNetworkImageProvider(
                   imageHash!.imageUrl,
@@ -33,8 +35,8 @@ class AvatarWidget extends StatelessWidget {
             ),
           )
         : Icon(
-            CupertinoIcons.person_circle,
-            size: size! + 20,
+            Icons.person_pin,
+            size: height! + 20,
             color: ColorApp.orange,
           );
   }

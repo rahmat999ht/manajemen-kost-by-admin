@@ -22,10 +22,7 @@ class ListPenghuniScreen extends GetView<ListPenghuniController> {
               index,
             ) {
               return Penghuni(
-                // imageHash: items[index].avatarImage!,
-                name: state[index].nama,
-                status: state[index].status,
-                position: state[index].status,
+                penghuni: state[index],
                 onTap: () {},
               );
             },

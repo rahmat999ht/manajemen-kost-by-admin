@@ -1,6 +1,6 @@
 import 'package:manajemen_kost_by_admin/domain/core/core.dart';
 
-PreferredSizeWidget appBar(String title, bool isBack) {
+PreferredSizeWidget appBar(String title, void Function()? onTap) {
   return AppBar(
     elevation: 0,
     backgroundColor: ColorApp.white,
@@ -17,9 +17,7 @@ PreferredSizeWidget appBar(String title, bool isBack) {
         'Batal',
         fontSize: 16,
         titleColor: ColorApp.gray,
-        onTap: () {
-          isBack == true ? Get.back() : Get.offAllNamed(Routes.DASHBOARD);
-        },
+        onTap: onTap,
       ),
       SizeApp.w20,
     ],

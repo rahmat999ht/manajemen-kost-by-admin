@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../../../presentation/form_kamar/controllers/form_kamar.controller.dart';
+import '../../../../presentation/forms/form_kamar/controllers/form_kamar.controller.dart';
 
 class FormKamarControllerBinding extends Bindings {
   @override
