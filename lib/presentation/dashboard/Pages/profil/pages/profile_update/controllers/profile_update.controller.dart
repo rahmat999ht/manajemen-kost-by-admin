@@ -29,6 +29,8 @@ class ProfileUpdateController extends GetxController {
             status: statusC.text,
           ).toMap(),
         );
+
+    Get.offAllNamed(Routes.PROFIL);
   }
 
   Future alertJK() async {
