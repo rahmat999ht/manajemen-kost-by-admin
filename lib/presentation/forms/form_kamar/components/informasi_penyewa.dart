@@ -37,10 +37,7 @@ class InformasiPenyewa extends GetView<FormKamarController> {
                               titleColor: Colors.black,
                               iconColor: Colors.black,
                               onTap: () {
-                                controller.deleteTemanSekamar(e);
-                                if (e[1].text != '') {
-                                  controller.deleteTSbyID(e[1].text);
-                                }
+                                controller.deleteTSbyID(e);
                               },
                             ),
                           ],

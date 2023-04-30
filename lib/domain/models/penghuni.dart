@@ -8,6 +8,7 @@ class PenghuniModel {
   final String jkl;
   final String status;
   final String? peran;
+  final bool? isAktif;
   PenghuniModel({
     this.id,
     this.image,
@@ -16,6 +17,7 @@ class PenghuniModel {
     required this.jkl,
     required this.status,
     this.peran,
+    this.isAktif,
   });
 
   Map<String, dynamic> toMap() {
@@ -26,6 +28,7 @@ class PenghuniModel {
       'jkl': jkl,
       'status': status,
       'peran': peran,
+      'isAktif': isAktif,
     };
   }
 
@@ -37,6 +40,7 @@ class PenghuniModel {
       jkl: map['jkl'] as String,
       status: map['status'] as String,
       peran: map['peran'] != null ? map['peran'] as String : "Kosong",
+      isAktif: map['isAktif'] != null ? map['isAktif'] as bool : false,
     );
   }
   factory PenghuniModel.fromMapId(Map<String, dynamic> map, String id) {
@@ -48,6 +52,7 @@ class PenghuniModel {
       jkl: map['jkl'] as String,
       status: map['status'] as String,
       peran: map['peran'] != null ? map['peran'] as String : "Kosong",
+      isAktif: map['isAktif'] != null ? map['isAktif'] as bool : false,
     );
   }
   factory PenghuniModel.fromDocumentSnapshot(

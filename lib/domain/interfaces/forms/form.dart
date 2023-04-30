@@ -153,6 +153,18 @@ class TextForm extends StatelessWidget {
                     : BorderSide.none,
                 borderRadius: BorderRadius.circular(radius ?? 8),
               ),
+              errorBorder: OutlineInputBorder(
+                borderSide: isBorder
+                    ? BorderSide(color: color ?? ColorApp.red)
+                    : BorderSide.none,
+                borderRadius: BorderRadius.circular(radius ?? 8),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: isBorder
+                    ? BorderSide(color: color ?? ColorApp.red)
+                    : BorderSide.none,
+                borderRadius: BorderRadius.circular(radius ?? 8),
+              ),
               filled: true,
               labelText: isTitle ? null : titel,
               hintText: hintText,

@@ -19,7 +19,7 @@ export 'dashboard/components/fab_empty.dart';
 export 'dashboard/components/icon_fab.dart';
 export 'dashboard/controllers/dashboard.controller.dart';
 export 'dashboard/dashboard.screen.dart';
-export 'forms/form_kamar/components/alert_value.dart';
+export 'forms/form_kamar/components/alert_value_form_kamar.dart';
 export 'forms/form_kamar/components/informasi_fasilitas.dart';
 export 'forms/form_kamar/components/informasi_harga.dart';
 export 'forms/form_kamar/components/informasi_penyewa.dart';

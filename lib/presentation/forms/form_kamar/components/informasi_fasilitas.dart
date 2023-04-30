@@ -19,6 +19,7 @@ class InformasiFasilitas extends GetView<FormKamarController> {
                 TextForm.border(
                   controller: e,
                   titel: "Fasilitas",
+                  isCheck: true,
                   suffixIcon: controller.listFasilitas.length > 2
                       ? InkWell(
                           onTap: () {

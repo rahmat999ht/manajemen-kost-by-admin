@@ -4,7 +4,7 @@ import '../../../../domain/core/core.dart';
 
 class FormKamarController extends GetxController {
   // final penghuniController = Get.find<KamarController>();
-  late KamarModel dataKamar;
+  KamarModel? dataKamar;
   // List<PenghuniModel> listPenghuni = [];
   final isLoading = false.obs;
 
@@ -45,20 +45,60 @@ class FormKamarController extends GetxController {
     );
   }
 
-  void deleteTemanSekamar(e) {
-    listPenyewa.remove(e);
-  }
+  // void deleteTemanSekamar(List<TextEditingController> e) {
+  //   listPenyewa.remove(e);
+  // }
 
-  Future deleteTSbyID(String idPenghuni) async {
+  Future deleteTSbyID(List<TextEditingController> e) async {
+    final idPenghuni = e[1].text;
     DocumentReference<PenghuniModel> user = UtilsApp.penghuni(idPenghuni);
     final penghuni = await user.get();
     if (penghuni.exists) {
-      updateById.updateKamarById(
-        noKamar: noKamar,
-        data: {
-          'penghuni': FieldValue.arrayRemove([user]),
-        },
+      alertActions(
+        'Peringatan',
+        'dengan menghapus form ini\nmaka akan menghapus data yang sudah ada sebelumnya.',
+        [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ButtonOutline(
+                width: 50,
+                onPressed: () {
+                  Get.back();
+                },
+                text: 'No',
+              ),
+              SizeApp.w10,
+              ButtonOutline(
+                width: 50,
+                onPressed: () {
+                  updateById.updateKamarById(
+                    noKamar: noKamar,
+                    data: {
+                      'penghuni': FieldValue.arrayRemove([user]),
+                    },
+                  );
+                  updateById.updatePenghuniById(
+                    idPenghuni: idPenghuni,
+                    data: {
+                      'isAktif': false,
+                    },
+                  );
+                  listPenyewa.remove(e);
+                  Get.back();
+                  Get.snackbar(
+                    "Info",
+                    'berhasil menghapus Teman sekamar',
+                  );
+                },
+                text: 'Yes',
+              ),
+            ],
+          )
+        ],
       );
+    } else {
+      listPenyewa.remove(e);
     }
   }
 
@@ -107,7 +147,7 @@ class FormKamarController extends GetxController {
     return fixData.text = value;
   }
 
-  String? getValue(int index, int item) {
+  String getValue(int index, int item) {
     final value = listPenyewa.map(
       (element) {
         final data = element;
@@ -129,7 +169,7 @@ class FormKamarController extends GetxController {
           log(listPenyewa.length.toString());
           final dataPenghuni = await UtilsApp.firebaseFirestore
               .collection(UtilsApp.penghuniCollection)
-              .doc(getValue(i, 1) ?? '')
+              .doc(getValue(i, 1))
               .get();
 
 //ketika id penghuni tidak di temukan.
@@ -140,11 +180,12 @@ class FormKamarController extends GetxController {
             updateById.setPenghuniById(
               idPenghuni: dataPenghuni.id,
               data: PenghuniModel(
-                nama: getValue(i, 0) ?? '',
-                noHp: getValue(i, 1) ?? '',
-                jkl: getValue(i, 2) ?? '',
-                status: getValue(i, 3) ?? '',
+                nama: getValue(i, 0),
+                noHp: getValue(i, 1),
+                jkl: getValue(i, 2),
+                status: getValue(i, 3),
                 peran: i == 0 ? "PJ" : "TS",
+                isAktif: true,
               ).toMap(),
             );
             // continue;
@@ -158,11 +199,12 @@ class FormKamarController extends GetxController {
             updateById.updatePenghuniById(
               idPenghuni: dataPenghuni.id,
               data: PenghuniModel(
-                nama: getValue(i, 0) ?? '',
-                noHp: getValue(i, 1) ?? '',
-                jkl: getValue(i, 2) ?? '',
-                status: getValue(i, 3) ?? '',
+                nama: getValue(i, 0),
+                noHp: getValue(i, 1),
+                jkl: getValue(i, 2),
+                status: getValue(i, 3),
                 peran: i == 0 ? "PJ" : "TS",
+                isAktif: true,
               ).toMap(),
             );
             // continue;
@@ -172,18 +214,19 @@ class FormKamarController extends GetxController {
 
           log("data $user", name: "Penghuni");
 //kode di bawah ini akan mengupdate penghuni yg sudah ada di tabel kamar berdasarkan id kamar.
-          updateById.updateKamarById(
-            noKamar: noKamar,
-            data: {
-              'fasilitas': listFasilitas.map((e) => e.text).toList(),
-              'sewa_bulanan': int.tryParse(hargaSebulan.text),
-              'sewa_tahunan': int.tryParse(hargaSetahun.text),
-              'penghuni': FieldValue.arrayUnion([user]),
-            },
-          );
-
-          //kode di bawah ini akan mengupdate penghuni yg sudah ada di tabel kamar berdasarkan id kamar.
-          if (dataKamar.penghuni != []) {
+          if (dataKamar!.penghuni!.isNotEmpty) {
+            updateById.updateKamarById(
+              noKamar: noKamar,
+              data: {
+                'fasilitas': listFasilitas.map((e) => e.text).toList(),
+                'sewa_bulanan': int.tryParse(hargaSebulan.text),
+                'sewa_tahunan': int.tryParse(hargaSetahun.text),
+                'penghuni': FieldValue.arrayUnion([user]),
+              },
+            );
+          } else {
+// kode di bawah ini akan mengupdate penghuni yg sudah ada di tabel kamar berdasarkan id kamar.
+// dan sekaligus mengupdate tanggal sewa jika list penghuninya masih kosong,
             updateById.updateKamarById(
               noKamar: noKamar,
               data: {
@@ -200,22 +243,30 @@ class FormKamarController extends GetxController {
 
           log("kamarDoc $kamarDoc", name: "Penghuni");
           final dataNaiveBayes = await UtilsApp.firebaseFirestore
-              .collection(UtilsApp.penghuniCollection)
+              .collection(UtilsApp.naiveBayesCollection)
               .where("idKamar", isEqualTo: kamarDoc)
               .get();
 
           log("NaiveBayes ${dataNaiveBayes.size}", name: "Penghuni");
-          if (dataNaiveBayes.size != 0) {
+          if (dataNaiveBayes.size == 0) {
+            Timestamp currentTimestamp = Timestamp.now();
+            // Mendapatkan tanggal saat ini
+            DateTime currentDate = currentTimestamp.toDate();
+            // Menambahkan satu bulan ke tanggal saat ini
+            DateTime newDate = currentDate.add(const Duration(days: 30));
+            // Mengonversi kembali ke Timestamp
+            Timestamp timeNowPlusSebulan = Timestamp.fromDate(newDate);
             updateById.addNaiveBayesById(
               data: {
                 'idKamar': kamarDoc,
-                'tglJatuhTempo': Timestamp.now(),
+                'tglJatuhTempo': timeNowPlusSebulan,
                 'statusKamar': true,
                 'riwayatPembayaran': [],
               },
             );
+            log('Timestamp setelah ditambah satu bulan: $timeNowPlusSebulan',
+                name: "tanggal");
           }
-
           if (i + 1 == listPenyewa.length) {
             log('maximal 3');
             initLoadingState();
@@ -246,12 +297,12 @@ class FormKamarController extends GetxController {
     // log(listPenghuni.toString(), name: "list penghuni");
     final data = await UtilsApp.kamar(noKamar).get();
     log(data.data().toString(), name: 'kamar');
-    dataKamar = data.data()!;
+    dataKamar = data.data();
     initForm(
-      penyewa: dataKamar.penghuni,
-      sewaBulanan: dataKamar.sewaBulanan.toString(),
-      sewaTahunan: dataKamar.sewaTahunan.toString(),
-      fasilitas: dataKamar.fasilitas as List<String>,
+      penyewa: dataKamar?.penghuni,
+      sewaBulanan: dataKamar?.sewaBulanan.toString(),
+      sewaTahunan: dataKamar?.sewaTahunan.toString(),
+      fasilitas: dataKamar?.fasilitas,
     );
 
     super.onInit();

@@ -19,12 +19,9 @@ class PenghuniController extends GetxController {
     loading.value = !loading.value;
     final dataKamar = await UtilsApp.firebaseFirestore
         .collection(UtilsApp.kamarCollection)
-        .where(
-          "no_kamar",
-          isEqualTo: noKamar,
-        )
+        .doc(noKamar)
         .get();
-    if (dataKamar.size == 0) {
+    if (!dataKamar.exists) {
       log("data 0");
       UtilsApp.firebaseFirestore
           .collection(UtilsApp.kamarCollection)

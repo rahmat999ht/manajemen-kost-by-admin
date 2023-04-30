@@ -37,7 +37,7 @@ class UpdateByID {
     Map<String, dynamic>? data,
   }) {
     UtilsApp.firebaseFirestore
-        .collection(UtilsApp.penghuniCollection)
+        .collection(UtilsApp.naiveBayesCollection)
         .add(data!);
   }
 
@@ -46,7 +46,7 @@ class UpdateByID {
     Map<String, dynamic>? data,
   }) {
     UtilsApp.firebaseFirestore
-        .collection(UtilsApp.penghuniCollection)
+        .collection(UtilsApp.naiveBayesCollection)
         .doc(idNaiveBayes)
         .update(data!);
   }

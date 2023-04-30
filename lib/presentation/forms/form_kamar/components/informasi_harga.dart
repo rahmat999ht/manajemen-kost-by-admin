@@ -17,6 +17,7 @@ class InformasiHarga extends GetView<FormKamarController> {
             const Text("Harga Sebulan"),
             SizeApp.h14,
             TextForm.border(
+              isCheck: true,
               width: SizeApp.wFull * 0.42,
               controller: controller.hargaSebulan,
               titel: "Status",
@@ -30,6 +31,7 @@ class InformasiHarga extends GetView<FormKamarController> {
             const Text("Harga Setahun"),
             SizeApp.h14,
             TextForm.border(
+              isCheck: true,
               width: SizeApp.wFull * 0.42,
               controller: controller.hargaSetahun,
               titel: "Status",

@@ -7,7 +7,7 @@ class UtilsApp {
   static const adminCollection = "admin";
   static const penghuniCollection = "penghuni";
   static const kamarCollection = "kamar";
-  static const naiveBayesCollection = "naiveBayes";
+  static const naiveBayesCollection = "naive_bayes";
   static final idLogin = Get.find<DashboardController>().adminModel!.id!;
 
   static DocumentReference<NoKamarModel> noKamar(String id) {
@@ -44,7 +44,7 @@ class UtilsApp {
 
   static DocumentReference<KamarModel> kamar(String idKamar) {
     return UtilsApp.firebaseFirestore
-        .collection(UtilsApp.penghuniCollection)
+        .collection(UtilsApp.kamarCollection)
         .doc(idKamar)
         .withConverter(
             fromFirestore: (snapshot, options) =>
