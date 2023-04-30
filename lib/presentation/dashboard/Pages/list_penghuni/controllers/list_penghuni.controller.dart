@@ -10,11 +10,15 @@ class ListPenghuniController extends GetxController
 
   void onChange(String value) {
     value.isEmpty ? isSearch.value = false : isSearch.value = true;
-
+    final itemsTrue = items
+        .where(
+          (e) => e.isAktif == true,
+        )
+        .toList();
     change(
       value.isEmpty
-          ? items
-          : items
+          ? itemsTrue
+          : itemsTrue
               .where((element) => element.nama.toLowerCase().contains(
                     value.toLowerCase(),
                   ))
@@ -40,7 +44,12 @@ class ListPenghuniController extends GetxController
           return PenghuniModel.fromDocumentSnapshot(data);
         });
         log("${items.length}");
-        change(items, status: RxStatus.success());
+        final itemsTrue = items
+            .where(
+              (e) => e.isAktif == true,
+            )
+            .toList();
+        change(itemsTrue, status: RxStatus.success());
       }
     });
     items.sort((a, b) => a.nama.compareTo(b.nama));
