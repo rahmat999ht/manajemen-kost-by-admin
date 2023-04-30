@@ -18,9 +18,9 @@ class ProfileUpdateController extends GetxController {
   final isLoading = false.obs;
 
   void updateProfil() {
-    UtilsApp.firebaseFirestore
-        .collection(UtilsApp.adminCollection)
-        .doc(UtilsApp.idLogin)
+    ConstansApp.firebaseFirestore
+        .collection(ConstansApp.adminCollection)
+        .doc(ConstansApp.idLogin)
         .update(
           AdminModel(
             nama: namaC.text,

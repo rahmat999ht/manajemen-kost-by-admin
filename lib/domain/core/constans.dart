@@ -1,6 +1,6 @@
 import 'core.dart';
 
-class UtilsApp {
+class ConstansApp {
   static final firebaseFirestore = FirebaseFirestore.instance;
   static final auth = FirebaseAuth.instance;
   static const noKamarCollection = "no_kamar";
@@ -11,8 +11,8 @@ class UtilsApp {
   static final idLogin = Get.find<DashboardController>().adminModel!.id!;
 
   static DocumentReference<NoKamarModel> noKamar(String id) {
-    return UtilsApp.firebaseFirestore
-        .collection(UtilsApp.noKamarCollection)
+    return ConstansApp.firebaseFirestore
+        .collection(ConstansApp.noKamarCollection)
         .doc(id)
         .withConverter(
           fromFirestore: (snapshot, options) =>
@@ -22,8 +22,8 @@ class UtilsApp {
   }
 
   static DocumentReference<AdminModel> admin(String id) {
-    return UtilsApp.firebaseFirestore
-        .collection(UtilsApp.adminCollection)
+    return ConstansApp.firebaseFirestore
+        .collection(ConstansApp.adminCollection)
         .doc(id)
         .withConverter(
           fromFirestore: (snapshot, options) =>
@@ -33,8 +33,8 @@ class UtilsApp {
   }
 
   static DocumentReference<PenghuniModel> penghuni(String idUser) {
-    return UtilsApp.firebaseFirestore
-        .collection(UtilsApp.penghuniCollection)
+    return ConstansApp.firebaseFirestore
+        .collection(ConstansApp.penghuniCollection)
         .doc(idUser)
         .withConverter(
             fromFirestore: (snapshot, options) =>
@@ -43,8 +43,8 @@ class UtilsApp {
   }
 
   static DocumentReference<KamarModel> kamar(String idKamar) {
-    return UtilsApp.firebaseFirestore
-        .collection(UtilsApp.kamarCollection)
+    return ConstansApp.firebaseFirestore
+        .collection(ConstansApp.kamarCollection)
         .doc(idKamar)
         .withConverter(
             fromFirestore: (snapshot, options) =>

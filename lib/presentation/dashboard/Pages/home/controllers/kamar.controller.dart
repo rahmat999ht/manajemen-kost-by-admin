@@ -8,8 +8,8 @@ class KamarController extends GetxController with StateMixin<List<KamarModel>> {
   List<KamarModel> listKamarKosong = [];
 
   Stream<QuerySnapshot<Map<String, dynamic>>> get getListKamar =>
-      UtilsApp.firebaseFirestore
-          .collection(UtilsApp.kamarCollection)
+      ConstansApp.firebaseFirestore
+          .collection(ConstansApp.kamarCollection)
           .snapshots();
 
   @override

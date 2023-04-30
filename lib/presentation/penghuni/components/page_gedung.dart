@@ -9,8 +9,9 @@ class PageGedung extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mhetodApp = MhetodApp();
     return StreamBuilder<DocumentSnapshot<NoKamarModel>>(
-      stream: UtilsApp.noKamar(gedung).snapshots(),
+      stream: mhetodApp.noKamar(gedung).snapshots(),
       builder: (context, s) {
         if (s.hasData) {
           final data = s.data!.data()!;

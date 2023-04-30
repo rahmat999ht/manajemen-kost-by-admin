@@ -1,18 +1,19 @@
 import 'dart:developer';
 
 import 'package:manajemen_kost_by_admin/domain/core/core.dart';
-import 'package:manajemen_kost_by_admin/domain/models/naive_bayes.dart';
 
 class HomeController extends GetxController
     with StateMixin<List<NaiveBayesModel>> {
+  final mhetodApp = MhetodApp();
+
   List<NaiveBayesModel> listNaiveBayes = [];
 
   List<KamarModel> listKamarKosong =
       Get.find<KamarController>().listKamarKosong;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> get penghuniStream =>
-      UtilsApp.firebaseFirestore
-          .collection(UtilsApp.naiveBayesCollection)
+      ConstansApp.firebaseFirestore
+          .collection(ConstansApp.naiveBayesCollection)
           .snapshots();
 
   @override

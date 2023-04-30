@@ -37,8 +37,8 @@ class VerifikasiController extends GetxController {
       );
       String userId = "";
       if (isRegis) {
-        final dataUser = await UtilsApp.firebaseFirestore
-            .collection(UtilsApp.adminCollection)
+        final dataUser = await ConstansApp.firebaseFirestore
+            .collection(ConstansApp.adminCollection)
             .add(
               Get.arguments["dataJsonRegis"],
             );
@@ -48,7 +48,7 @@ class VerifikasiController extends GetxController {
       }
       // Sign the user in (or link) with the credential
       UserCredential userCredential =
-          await UtilsApp.auth.signInWithCredential(credential);
+          await ConstansApp.auth.signInWithCredential(credential);
       if (userCredential.user != null) {
         prefs.setString("user_id", userId);
         Get.offAllNamed("${Routes.DASHBOARD}/$userId");

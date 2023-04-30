@@ -8,7 +8,7 @@ class FormKamarController extends GetxController {
   // List<PenghuniModel> listPenghuni = [];
   final isLoading = false.obs;
 
-  final updateById = UpdateByID();
+  final mhetodApp = MhetodApp();
 
   final listJkl = [
     'Laki-laki',
@@ -51,7 +51,7 @@ class FormKamarController extends GetxController {
 
   Future deleteTSbyID(List<TextEditingController> e) async {
     final idPenghuni = e[1].text;
-    DocumentReference<PenghuniModel> user = UtilsApp.penghuni(idPenghuni);
+    DocumentReference<PenghuniModel> user = mhetodApp.penghuni(idPenghuni);
     final penghuni = await user.get();
     if (penghuni.exists) {
       alertActions(
@@ -72,13 +72,13 @@ class FormKamarController extends GetxController {
               ButtonOutline(
                 width: 50,
                 onPressed: () {
-                  updateById.updateKamarById(
+                  mhetodApp.updateKamarById(
                     noKamar: noKamar,
                     data: {
                       'penghuni': FieldValue.arrayRemove([user]),
                     },
                   );
-                  updateById.updatePenghuniById(
+                  mhetodApp.updatePenghuniById(
                     idPenghuni: idPenghuni,
                     data: {
                       'isAktif': false,
@@ -167,8 +167,8 @@ class FormKamarController extends GetxController {
         for (int i = 0; i < listPenyewa.length; i++) {
           log(i.toString());
           log(listPenyewa.length.toString());
-          final dataPenghuni = await UtilsApp.firebaseFirestore
-              .collection(UtilsApp.penghuniCollection)
+          final dataPenghuni = await ConstansApp.firebaseFirestore
+              .collection(ConstansApp.penghuniCollection)
               .doc(getValue(i, 1))
               .get();
 
@@ -177,7 +177,7 @@ class FormKamarController extends GetxController {
 //dan if di bawah ini akan menambah data baru.
           if (!dataPenghuni.exists) {
             log("data 0", name: "Penghuni");
-            updateById.setPenghuniById(
+            mhetodApp.setPenghuniById(
               idPenghuni: dataPenghuni.id,
               data: PenghuniModel(
                 nama: getValue(i, 0),
@@ -196,7 +196,7 @@ class FormKamarController extends GetxController {
 //dan if di bawah ini akan mengupdate data yg sudah ada di tabel penghuni berdasarkan id penghuni.
           if (dataPenghuni.exists) {
             log("data ${dataPenghuni.id}", name: "Penghuni");
-            updateById.updatePenghuniById(
+            mhetodApp.updatePenghuniById(
               idPenghuni: dataPenghuni.id,
               data: PenghuniModel(
                 nama: getValue(i, 0),
@@ -210,12 +210,12 @@ class FormKamarController extends GetxController {
             // continue;
           }
           DocumentReference<PenghuniModel> user =
-              UtilsApp.penghuni(dataPenghuni.id);
+              mhetodApp.penghuni(dataPenghuni.id);
 
           log("data $user", name: "Penghuni");
 //kode di bawah ini akan mengupdate penghuni yg sudah ada di tabel kamar berdasarkan id kamar.
           if (dataKamar!.penghuni!.isNotEmpty) {
-            updateById.updateKamarById(
+            mhetodApp.updateKamarById(
               noKamar: noKamar,
               data: {
                 'fasilitas': listFasilitas.map((e) => e.text).toList(),
@@ -227,7 +227,7 @@ class FormKamarController extends GetxController {
           } else {
 // kode di bawah ini akan mengupdate penghuni yg sudah ada di tabel kamar berdasarkan id kamar.
 // dan sekaligus mengupdate tanggal sewa jika list penghuninya masih kosong,
-            updateById.updateKamarById(
+            mhetodApp.updateKamarById(
               noKamar: noKamar,
               data: {
                 'fasilitas': listFasilitas.map((e) => e.text).toList(),
@@ -239,11 +239,11 @@ class FormKamarController extends GetxController {
             );
           }
 
-          DocumentReference<KamarModel> kamarDoc = UtilsApp.kamar(noKamar);
+          DocumentReference<KamarModel> kamarDoc = mhetodApp.kamar(noKamar);
 
           log("kamarDoc $kamarDoc", name: "Penghuni");
-          final dataNaiveBayes = await UtilsApp.firebaseFirestore
-              .collection(UtilsApp.naiveBayesCollection)
+          final dataNaiveBayes = await ConstansApp.firebaseFirestore
+              .collection(ConstansApp.naiveBayesCollection)
               .where("idKamar", isEqualTo: kamarDoc)
               .get();
 
@@ -256,7 +256,7 @@ class FormKamarController extends GetxController {
             DateTime newDate = currentDate.add(const Duration(days: 30));
             // Mengonversi kembali ke Timestamp
             Timestamp timeNowPlusSebulan = Timestamp.fromDate(newDate);
-            updateById.addNaiveBayesById(
+            mhetodApp.addNaiveBayesById(
               data: {
                 'idKamar': kamarDoc,
                 'tglJatuhTempo': timeNowPlusSebulan,
@@ -295,7 +295,7 @@ class FormKamarController extends GetxController {
   void onInit() async {
     // listPenghuni = penghuniController.items;
     // log(listPenghuni.toString(), name: "list penghuni");
-    final data = await UtilsApp.kamar(noKamar).get();
+    final data = await mhetodApp.kamar(noKamar).get();
     log(data.data().toString(), name: 'kamar');
     dataKamar = data.data();
     initForm(

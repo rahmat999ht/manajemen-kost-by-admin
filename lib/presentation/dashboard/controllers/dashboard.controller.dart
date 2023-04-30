@@ -27,8 +27,8 @@ class DashboardController extends GetxController with StateMixin<AdminModel> {
     final prefs = await SharedPreferences.getInstance();
     String? isId = prefs.getString("user_id") ?? '';
     log(isId);
-    final dataAllUser = await UtilsApp.firebaseFirestore
-        .collection(UtilsApp.adminCollection)
+    final dataAllUser = await ConstansApp.firebaseFirestore
+        .collection(ConstansApp.adminCollection)
         .get();
     dataAdmin = dataAllUser.docs
         .map((e) => AdminModel.fromDocumentSnapshot(e))

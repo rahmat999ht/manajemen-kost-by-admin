@@ -17,14 +17,14 @@ class PenghuniController extends GetxController {
 
   Future addKamar(String noKamar, String lantai, String gedung) async {
     loading.value = !loading.value;
-    final dataKamar = await UtilsApp.firebaseFirestore
-        .collection(UtilsApp.kamarCollection)
+    final dataKamar = await ConstansApp.firebaseFirestore
+        .collection(ConstansApp.kamarCollection)
         .doc(noKamar)
         .get();
     if (!dataKamar.exists) {
       log("data 0");
-      UtilsApp.firebaseFirestore
-          .collection(UtilsApp.kamarCollection)
+      ConstansApp.firebaseFirestore
+          .collection(ConstansApp.kamarCollection)
           .doc(noKamar)
           .set(
             KamarModel.add(

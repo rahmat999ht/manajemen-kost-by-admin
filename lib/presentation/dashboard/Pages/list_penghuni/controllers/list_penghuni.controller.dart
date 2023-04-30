@@ -28,8 +28,8 @@ class ListPenghuniController extends GetxController
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> get penghuniStream =>
-      UtilsApp.firebaseFirestore
-          .collection(UtilsApp.penghuniCollection)
+      ConstansApp.firebaseFirestore
+          .collection(ConstansApp.penghuniCollection)
           .snapshots();
 
   @override

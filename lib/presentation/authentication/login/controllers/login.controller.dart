@@ -16,8 +16,8 @@ class LoginController extends GetxController {
     try {
       if (formKey.currentState!.validate()) {
         log("mulai");
-        final dataUser = await UtilsApp.firebaseFirestore
-            .collection(UtilsApp.adminCollection)
+        final dataUser = await ConstansApp.firebaseFirestore
+            .collection(ConstansApp.adminCollection)
             .where(
               "no_hp",
               isEqualTo: nomorPonsel.text,
@@ -48,7 +48,7 @@ class LoginController extends GetxController {
           return;
         }
         log("try : ${dataUser.docs.first.id}");
-        await UtilsApp.auth.verifyPhoneNumber(
+        await ConstansApp.auth.verifyPhoneNumber(
           phoneNumber: nomorPonsel.text,
           verificationCompleted: (credential) {},
           verificationFailed: (e) {
@@ -85,7 +85,7 @@ class LoginController extends GetxController {
 
       if (formKey.currentState!.validate()) {
         log("formKey");
-        await UtilsApp.auth.verifyPhoneNumber(
+        await ConstansApp.auth.verifyPhoneNumber(
           phoneNumber: nomorPonsel.text,
           verificationCompleted: (credential) {},
           verificationFailed: (e) {
