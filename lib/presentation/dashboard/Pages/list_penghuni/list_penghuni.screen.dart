@@ -30,6 +30,9 @@ class ListPenghuniScreen extends GetView<ListPenghuniController> {
         },
         onEmpty: const Center(child: Text("Masih Kosong")),
         onLoading: const LoadingState(),
+        onError: (e) {
+          return Center(child: Text("error : $e"));
+        },
       ),
     );
   }

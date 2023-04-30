@@ -15,13 +15,13 @@ class AvatarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return imageHash != null
-        ? SizedBox(
-            height: height,
-            width: width,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(radius!),
-              child: OctoImage(
+    return SizedBox(
+      height: height,
+      width: width,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(radius!),
+        child: imageHash != null
+            ? OctoImage(
                 image: CachedNetworkImageProvider(
                   imageHash!.imageUrl,
                   cacheKey: imageHash!.imageUrl,
@@ -31,13 +31,13 @@ class AvatarWidget extends StatelessWidget {
                 ),
                 errorBuilder: OctoError.icon(color: ColorApp.red),
                 fit: BoxFit.cover,
+              )
+            : Icon(
+                Icons.person_pin,
+                size: height! + 20,
+                color: ColorApp.orange,
               ),
-            ),
-          )
-        : Icon(
-            Icons.person_pin,
-            size: height! + 20,
-            color: ColorApp.orange,
-          );
+      ),
+    );
   }
 }

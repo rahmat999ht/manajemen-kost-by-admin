@@ -19,6 +19,7 @@ export 'interfaces/state/loading.dart';
 export 'models/admin.dart';
 export 'models/image_hash.dart';
 export 'models/kamar.dart';
+export 'models/naive_bayes.dart';
 export 'models/no_kamar.dart';
 export 'models/penghuni.dart';
 export 'validators/null_validation.dart';

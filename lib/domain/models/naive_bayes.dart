@@ -41,9 +41,7 @@ class NaiveBayesModel {
       idKamar: idKamar,
       statusKamar:
           map['statusKamar'] != null ? map['statusKamar'] as bool : null,
-      riwayatPembayaran: map['riwayatPembayaran'] != null
-          ? map['riwayatPembayaran'] as List<String>
-          : [],
+      // riwayatPembayaran: map['riwayatPembayaran'] ?? [],
     );
   }
   factory NaiveBayesModel.fromMapByID(Map<String, dynamic> map, String id) {
@@ -61,9 +59,7 @@ class NaiveBayesModel {
       idKamar: idKamar,
       statusKamar:
           map['statusKamar'] != null ? map['statusKamar'] as bool : null,
-      riwayatPembayaran: map['riwayatPembayaran'] != null
-          ? map['riwayatPembayaran'] as List<String>
-          : [],
+      // riwayatPembayaran: map['riwayatPembayaran'] ?? [],
     );
   }
 

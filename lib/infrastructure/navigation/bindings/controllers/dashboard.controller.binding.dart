@@ -19,5 +19,8 @@ class DashboardControllerBinding extends Bindings {
     Get.lazyPut<ProfilController>(
       () => ProfilController(),
     );
+    Get.lazyPut<KamarController>(
+      () => KamarController(),
+    );
   }
 }
