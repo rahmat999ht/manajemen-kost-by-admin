@@ -3,10 +3,11 @@ import 'dart:developer';
 import 'package:manajemen_kost_by_admin/domain/core/core.dart';
 
 class HomeController extends GetxController
-    with StateMixin<List<NaiveBayesModel>> {
+    with StateMixin<List<NaiveBayesModel?>> {
   final mhetodApp = MhetodApp();
 
-  List<NaiveBayesModel> listNaiveBayes = [];
+  List<NaiveBayesModel?> listNaiveBayes = [];
+  List<NaiveBayesModel?> listWhere = [];
 
   List<KamarModel> listKamarKosong =
       Get.find<KamarController>().listKamarKosong;
@@ -25,16 +26,21 @@ class HomeController extends GetxController
       } else {
         listNaiveBayes = List.generate(event.docs.length, (index) {
           final data = event.docs[index];
-          if (data.data()['penghuni'] == []) {
-            return NaiveBayesModel.fromDocumentSnapshot(data);
-          }
-          return {} as NaiveBayesModel;
+          // final tgl = data.data()['tglJatuhTempo'] as DateTime;
+          // final tglSkrg = Timestamp.now() as DateTime;
+          // if (tgl == tglSkrg) {
+          //   return NaiveBayesModel.fromDocumentSnapshot(data);
+          // }
+          return NaiveBayesModel.fromDocumentSnapshot(data);
         });
         log("${listNaiveBayes.length}");
-        change(listNaiveBayes, status: RxStatus.success());
+        listWhere =
+            listNaiveBayes.where((e) => e?.statusKamar == true).toList();
+        change(listWhere, status: RxStatus.success());
       }
     });
-    listNaiveBayes.sort((a, b) => a.idKamar!.id.compareTo(b.idKamar!.id));
+    listNaiveBayes
+        .sort((a, b) => a!.tglJatuhTempo!.compareTo(b!.tglJatuhTempo!));
     super.onInit();
   }
 }

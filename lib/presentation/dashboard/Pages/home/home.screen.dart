@@ -13,19 +13,14 @@ class HomeScreen extends GetView<HomeController> {
         (state) {
           return Column(
             children: [
-              SizedBox(
-                height: 220.0,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  itemCount: state?.length,
-                  itemBuilder: (context, index) {
-                    return CardNaiveBayes(
-                      naiveBayesModel: state![index],
-                    );
-                  },
-                ),
-              )
+              ContentHome(
+                title: "Jatuh Tempo",
+                state: state,
+              ),
+              ContentHome(
+                title: "Terdekat",
+                state: state,
+              ),
             ],
           );
         },
@@ -35,6 +30,63 @@ class HomeScreen extends GetView<HomeController> {
           return Center(child: Text("pesan error : $e"));
         },
       ),
+    );
+  }
+}
+
+class ContentHome extends StatelessWidget {
+  const ContentHome({
+    super.key,
+    required this.title,
+    required this.state,
+  });
+
+  final String title;
+  final List<NaiveBayesModel?>? state;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizeApp.h20,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: ColorApp.black,
+                  fontSize: 18,
+                ),
+              ),
+              const Text(
+                "See All",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: ColorApp.orange,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 230.0,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            itemCount: state?.length,
+            itemBuilder: (context, index) {
+              return CardNaiveBayes(
+                naiveBayesModel: state![index],
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

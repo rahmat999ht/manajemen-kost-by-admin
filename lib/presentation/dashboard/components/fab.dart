@@ -99,7 +99,7 @@ class _FABState extends State<FAB> with SingleTickerProviderStateMixin {
                   alignment: alignment2,
                   size: size2,
                   toogle: controller.toogle,
-                  icon: Assets.kamar,
+                  icon: Assets.daftarKamar,
                   title: "Penghuni",
                 ),
                 IconFAB(

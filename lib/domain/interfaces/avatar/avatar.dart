@@ -34,7 +34,7 @@ class AvatarWidget extends StatelessWidget {
               )
             : Icon(
                 Icons.person_pin,
-                size: height! + 20,
+                size: height! + 10,
                 color: ColorApp.orange,
               ),
       ),

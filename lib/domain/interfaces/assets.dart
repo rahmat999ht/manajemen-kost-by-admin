@@ -15,7 +15,10 @@ class Assets {
   static String pemasukan = 'assets/icons/pemasukan.svg';
   static String pemasukan2 = 'assets/icons/pemasukan2.svg';
   static String kamar = 'assets/icons/kamar.svg';
+  static String daftarKamar = 'assets/icons/daftar-kamar.svg';
   static String person = 'assets/icons/person.svg';
   static String tentang = 'assets/icons/tentang.svg';
   static String camera = 'assets/icons/camera.svg';
+  static String lantai = 'assets/icons/lantai.svg';
+  static String gedung = 'assets/icons/gedung.svg';
 }

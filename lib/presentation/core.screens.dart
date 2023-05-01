@@ -2,6 +2,7 @@ export 'authentication/login/login.screen.dart';
 export 'authentication/verifikasi/verifikasi.screen.dart';
 export 'dashboard/Pages/calender/calender.screen.dart';
 export 'dashboard/Pages/home/components/card_naive_bayes.dart';
+export 'dashboard/Pages/home/components/content_home.dart';
 export 'dashboard/Pages/home/home.screen.dart';
 export 'dashboard/Pages/list_penghuni/components/form_search.dart';
 export 'dashboard/Pages/list_penghuni/components/penghuni.dart';

@@ -6,7 +6,7 @@ class ProfilScreen extends GetView<ProfilController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<DocumentSnapshot<AdminModel>>(
-        stream: ConstansApp.admin(ConstansApp.idLogin).snapshots(),
+        stream: controller.mhetodApp.admin(ConstansApp.idLogin).snapshots(),
         builder: (context, s) {
           if (s.hasData) {
             final data = s.data?.data();
