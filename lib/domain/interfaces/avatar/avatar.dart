@@ -7,9 +7,11 @@ class AvatarWidget extends StatelessWidget {
     this.width = 80,
     this.height = 80,
     this.radius = 70,
+    this.heightPlus = 10,
   });
   final ImageHash? imageHash;
   final double? height;
+  final double? heightPlus;
   final double? width;
   final double? radius;
 
@@ -34,7 +36,7 @@ class AvatarWidget extends StatelessWidget {
               )
             : Icon(
                 Icons.person_pin,
-                size: height! + 10,
+                size: height! + heightPlus!,
                 color: ColorApp.orange,
               ),
       ),

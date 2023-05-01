@@ -2,6 +2,7 @@ export '../domain/core/method.dart';
 export 'authentication/login/controllers/login.controller.dart';
 export 'authentication/verifikasi/controllers/verifikasi.controller.dart';
 export 'dashboard/Pages/calender/controllers/calender.controller.dart';
+export 'dashboard/Pages/home/components/form_search_home.dart';
 export 'dashboard/Pages/home/controllers/home.controller.dart';
 export 'dashboard/Pages/home/controllers/kamar.controller.dart';
 export 'dashboard/Pages/list_penghuni/controllers/list_penghuni.controller.dart';

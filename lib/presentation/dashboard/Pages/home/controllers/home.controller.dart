@@ -12,6 +12,24 @@ class HomeController extends GetxController
   List<KamarModel> listKamarKosong =
       Get.find<KamarController>().listKamarKosong;
 
+  final cSearch = TextEditingController();
+  final isSearch = false.obs;
+
+  void onChange(String value) {
+    value.isEmpty ? isSearch.value = false : isSearch.value = true;
+
+    change(
+      value.isEmpty
+          ? listWhere
+          : listWhere
+              .where((element) => element!.idKamar!.id.toLowerCase().contains(
+                    value.toLowerCase(),
+                  ))
+              .toList(),
+      status: RxStatus.success(),
+    );
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> get penghuniStream =>
       ConstansApp.firebaseFirestore
           .collection(ConstansApp.naiveBayesCollection)
@@ -19,6 +37,7 @@ class HomeController extends GetxController
 
   @override
   void onInit() {
+    log("kamar kosong ${listKamarKosong.length}");
     penghuniStream.listen((event) {
       if (event.size == 0) {
         log("empty");
@@ -33,7 +52,7 @@ class HomeController extends GetxController
           // }
           return NaiveBayesModel.fromDocumentSnapshot(data);
         });
-        log("${listNaiveBayes.length}");
+        log("naive bayes ${listNaiveBayes.length}");
         listWhere =
             listNaiveBayes.where((e) => e?.statusKamar == true).toList();
         change(listWhere, status: RxStatus.success());
