@@ -1,14 +1,15 @@
-import 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/home/controllers/jatuh_tempo.controller.dart';
+import 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/home/controllers/terdekat.controller.dart';
 
 import '../../../../../domain/core/core.dart';
 
-class ValueJatuhTempo extends GetView<JatuhTempoController> {
-  const ValueJatuhTempo({
+class ValueTerdekat extends GetView<TerdekatController> {
+  const ValueTerdekat({
     super.key,
     required this.title,
   });
 
   final String title;
+
   @override
   Widget build(BuildContext context) {
     return controller.obx(
@@ -56,8 +57,8 @@ class ValueJatuhTempo extends GetView<JatuhTempoController> {
                     shrinkWrap: true,
                     itemCount: state.length,
                     itemBuilder: (context, index) {
-                      return CardJatuhTempo(
-                        listJatuhTempo: state,
+                      return CardTerdekat(
+                        listTerdekat: state,
                         index: index,
                       );
                     },

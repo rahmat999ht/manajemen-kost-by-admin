@@ -1,37 +1,65 @@
 import '../../../../../domain/core/core.dart';
 
 class CardKamarKosong extends StatelessWidget {
-  const CardKamarKosong({super.key, required this.data});
+  const CardKamarKosong({
+    super.key,
+    required this.listData,
+    required this.index,
+  });
 
-  final KamarModel data;
+  final List<KamarModel?> listData;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        // right: 12,
+    final KamarModel data = listData[index]!;
+    return Container(
+      margin: EdgeInsets.only(
         left: 12,
         bottom: 20,
         top: 12,
+        right: listData.length == index + 1 ? 30 : 0,
       ),
-      child: Container(
-        height: 180.0,
-        width: Get.width * 0.9,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              offset: const Offset(10.0, 10.0),
-              blurRadius: 10.0,
-              spreadRadius: 2.0,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      height: 67.0,
+      width: SizeApp.wFull * 0.44,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            offset: const Offset(10.0, 10.0),
+            blurRadius: 10.0,
+            spreadRadius: 2.0,
+          ),
+        ],
+      ),
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'No. ${data.id!}',
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: ColorApp.blackText,
+              ),
+            ),
+            SizeApp.h10,
+            SizedBox(
+              width: SizeApp.wFull,
+            ),
+            Text(
+              '${data.lantai}, ${data.gedung}',
+              style: const TextStyle(
+                fontSize: 13,
+                color: ColorApp.gray,
+              ),
             ),
           ],
-        ),
-        child: ListTile(
-          title: Text(data.id!),
-          subtitle: Text('${data.lantai} ${data.gedung}'),
         ),
       ),
     );

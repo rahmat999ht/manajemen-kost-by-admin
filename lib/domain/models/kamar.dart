@@ -84,7 +84,7 @@ class KamarModel {
           ? List<String>.from(
               (map['fasilitas']),
             ).toList()
-          : null,
+          : [],
       sewaBulanan:
           map['sewa_bulanan'] != null ? map['sewa_bulanan'] as int : null,
       sewaTahunan:
@@ -100,7 +100,7 @@ class KamarModel {
                 );
               }).toList(),
             )
-          : null,
+          : [],
       tglSewa: map['tglSewa'] != null ? map['tglSewa'] as Timestamp : null,
     );
   }

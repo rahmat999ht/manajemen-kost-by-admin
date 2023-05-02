@@ -17,34 +17,35 @@ class HomeScreen extends GetView<HomeController> {
         toolbarHeight: 140,
         elevation: 0,
       ),
-      body: controller.obx(
-        (state) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                SizeApp.h10,
-                ValueJatuhTempo(
-                  title: "Jatuh Tempo",
-                  value: state,
-                ),
-                ValueJatuhTempo(
-                  title: "Terdekat",
-                  value: state,
-                ),
-                ValueKamarKosong(
-                  title: "Kamar Kosong",
-                  value: controller.listKamarKosong,
-                ),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            SizeApp.h10,
+            // if (state is List<JatuhTempoModel>)
+            ValueJatuhTempo(
+              title: "Jatuh Tempo",
             ),
-          );
-        },
-        onEmpty: const Center(child: Text("Masih Kosong")),
-        onLoading: const LoadingState(),
-        onError: (e) {
-          return Center(child: Text("pesan error : $e"));
-        },
+            // if (state is List<TerdekatModel>)
+            ValueTerdekat(
+              title: "Terdekat",
+            ),
+            ValueKamarKosong(
+              title: "Kamar Kosong",
+            ),
+          ],
+        ),
       ),
+
+      //  controller.obx(
+      //   (state) {
+      //     return
+      //   },
+      //   onEmpty: const Center(child: Text("Masih Kosong")),
+      //   onLoading: const LoadingState(),
+      //   onError: (e) {
+      //     return Center(child: Text("pesan error : $e"));
+      //   },
+      // ),
     );
   }
 }

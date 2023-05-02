@@ -172,6 +172,15 @@ class FormKamarController extends GetxController {
               .doc(getValue(i, 1))
               .get();
 
+//kode di bawah ini akan mendaftarkan nomor penanggung jabab sebagai akun terdaftar
+//akun tersebut dapat di pake untuk login di app khusus penghuni kost
+          if (i == 0) {
+            log(
+              "nomor di daftarkan : ${listPenyewa[i][1].text}",
+              name: "Penghuni",
+            );
+            mhetodApp.regAdmin(formKey, listPenyewa[i][1]);
+          }
 //ketika id penghuni tidak di temukan.
 //maka if di bawah akan di jalankan.
 //dan if di bawah ini akan menambah data baru.
@@ -248,6 +257,7 @@ class FormKamarController extends GetxController {
               .get();
 
           log("NaiveBayes ${dataNaiveBayes.size}", name: "Penghuni");
+
           if (dataNaiveBayes.size == 0) {
             Timestamp currentTimestamp = Timestamp.now();
             // Mendapatkan tanggal saat ini
@@ -256,6 +266,7 @@ class FormKamarController extends GetxController {
             DateTime newDate = currentDate.add(const Duration(days: 30));
             // Mengonversi kembali ke Timestamp
             Timestamp timeNowPlusSebulan = Timestamp.fromDate(newDate);
+
             mhetodApp.addNaiveBayesById(
               data: {
                 'idKamar': kamarDoc,
@@ -266,6 +277,13 @@ class FormKamarController extends GetxController {
             );
             log('Timestamp setelah ditambah satu bulan: $timeNowPlusSebulan',
                 name: "tanggal");
+          } else {
+            mhetodApp.updateNaiveBayesById(
+              idNaiveBayes: dataNaiveBayes.docs.first.id,
+              data: {
+                'statusKamar': true,
+              },
+            );
           }
           if (i + 1 == listPenyewa.length) {
             log('maximal 3');

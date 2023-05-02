@@ -2,36 +2,35 @@
 
 import 'package:manajemen_kost_by_admin/domain/core/core.dart';
 
-class NaiveBayesModel {
-  final Timestamp? tglJatuhTempo;
-  final DocumentReference? idKamar;
-  final bool? statusKamar;
-  final List<String>? riwayatPembayaran;
+class JatuhTempoModel extends NaiveBayesModel {
+  final String? id;
 
-  NaiveBayesModel({
-    required this.tglJatuhTempo,
-    required this.idKamar,
-    this.statusKamar,
-    this.riwayatPembayaran,
+  JatuhTempoModel({
+    this.id,
+    required super.tglJatuhTempo,
+    required super.idKamar,
+    super.statusKamar,
+    super.riwayatPembayaran,
   });
 
-  // Map<String, dynamic> toMap() {
-  //   return <String, dynamic>{
-  //     'tglJatuhTempo': tglJatuhTempo,
-  //     'idKamar': idKamar,
-  //     'statusKamar': statusKamar,
-  //     'riwayatPembayaran': riwayatPembayaran,
-  //   };
-  // }
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'tglJatuhTempo': tglJatuhTempo,
+      'idKamar': idKamar,
+      'statusKamar': statusKamar,
+      'riwayatPembayaran': riwayatPembayaran,
+    };
+  }
 
-  factory NaiveBayesModel.fromMap(Map<String, dynamic> map) {
+  factory JatuhTempoModel.fromMap(Map<String, dynamic> map) {
     final dataKamar = map['idKamar'] as DocumentReference;
     DocumentReference<KamarModel> idKamar = dataKamar.withConverter(
       fromFirestore: (snapshot, options) =>
           KamarModel.fromDocumentSnapshot(snapshot),
       toFirestore: (value, options) => value.toMap(),
     );
-    return NaiveBayesModel(
+    return JatuhTempoModel(
+      id: map['id'] != null ? map['id'] as String : null,
       tglJatuhTempo: map['tglJatuhTempo'] != null
           ? map['tglJatuhTempo'] as Timestamp
           : null,
@@ -41,14 +40,15 @@ class NaiveBayesModel {
       // riwayatPembayaran: map['riwayatPembayaran'] ?? [],
     );
   }
-  factory NaiveBayesModel.fromMapByID(Map<String, dynamic> map, String id) {
+  factory JatuhTempoModel.fromMapByID(Map<String, dynamic> map, String id) {
     final dataKamar = map['idKamar'] as DocumentReference;
     DocumentReference<KamarModel> idKamar = dataKamar.withConverter(
       fromFirestore: (snapshot, options) =>
           KamarModel.fromDocumentSnapshot(snapshot),
       toFirestore: (value, options) => value.toMap(),
     );
-    return NaiveBayesModel(
+    return JatuhTempoModel(
+      id: id,
       tglJatuhTempo: map['tglJatuhTempo'] != null
           ? map['tglJatuhTempo'] as Timestamp
           : null,
@@ -59,10 +59,10 @@ class NaiveBayesModel {
     );
   }
 
-  factory NaiveBayesModel.fromDocumentSnapshot(
+  factory JatuhTempoModel.fromDocumentSnapshot(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
   ) {
     final data = snapshot.data()!;
-    return NaiveBayesModel.fromMapByID(data, snapshot.id);
+    return JatuhTempoModel.fromMapByID(data, snapshot.id);
   }
 }
