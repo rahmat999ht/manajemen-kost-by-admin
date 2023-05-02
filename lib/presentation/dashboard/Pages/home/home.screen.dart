@@ -20,12 +20,9 @@ class HomeScreen extends GetView<HomeController> {
       body: SingleChildScrollView(
         child: Column(
           children: const [
-            SizeApp.h10,
-            // if (state is List<JatuhTempoModel>)
             ValueJatuhTempo(
               title: "Jatuh Tempo",
             ),
-            // if (state is List<TerdekatModel>)
             ValueTerdekat(
               title: "Terdekat",
             ),
@@ -35,17 +32,6 @@ class HomeScreen extends GetView<HomeController> {
           ],
         ),
       ),
-
-      //  controller.obx(
-      //   (state) {
-      //     return
-      //   },
-      //   onEmpty: const Center(child: Text("Masih Kosong")),
-      //   onLoading: const LoadingState(),
-      //   onError: (e) {
-      //     return Center(child: Text("pesan error : $e"));
-      //   },
-      // ),
     );
   }
 }
