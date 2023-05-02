@@ -12,7 +12,7 @@ class CalenderController extends GetxController
     'Februari',
     'Maret',
     'April',
-    'Mai',
+    'Mei',
     'Juni',
     'Juli',
     'Agustus',

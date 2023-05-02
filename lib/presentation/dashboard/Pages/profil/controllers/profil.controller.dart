@@ -30,7 +30,7 @@ class ProfilController extends GetxController {
   }
 
   void tapTentang() {
-    Get.offNamed(Routes.TENTANG_APP);
+    Get.toNamed(Routes.TENTANG_APP);
   }
 
   void tapLogOut() {}

@@ -33,19 +33,35 @@ class CalenderScreen extends GetView<CalenderController> {
                       .toDate();
                 },
               );
+
               log(eventDate.toString(), name: "calender");
               controller.kEvents.removeWhere((key, value) => true);
               for (var i = 0; i < s.data!.docs.length; i++) {
-                final tgl = s.data!.docs[i]["tglJatuhTempo"] as Timestamp;
-                final newData =
-                    controller.tglSkrg.difference(tgl.toDate()).inDays == -3
-                        ? TerdekatModel.fromDocumentSnapshot(s.data!.docs[i])
-                        : JatuhTempoModel.fromDocumentSnapshot(s.data!.docs[i]);
+                final dateNowMin3 =
+                    TerdekatModel.fromDocumentSnapshot(s.data!.docs[i]);
 
-                if (eventDate.toList()[i] == newData.tglJatuhTempo!.toDate()) {
+                final dateNow =
+                    JatuhTempoModel.fromDocumentSnapshot(s.data!.docs[i]);
+
+                log(
+                  dateNow.tglJatuhTempo!.toDate().toString(),
+                  name: 'dateNow',
+                );
+                log(
+                  dateNowMin3.tglJatuhTempo!.toDate().toString(),
+                  name: 'dateNowMin3',
+                );
+                DateTime currentDate = eventDate.toList()[i];
+                // Menambahkan satu bulan ke tanggal saat ini
+                DateTime newDate = currentDate.add(const Duration(days: -3));
+
+                if (eventDate.toList()[i] == dateNow.tglJatuhTempo!.toDate()) {
                   controller.kEvents[eventDate.toList()[i]] = [
-                    newData,
+                    dateNow,
                     ...?controller.kEvents[eventDate.toList()[i]]
+                  ];
+                  controller.kEvents[newDate] = [
+                    dateNowMin3,
                   ];
                 }
               }

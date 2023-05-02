@@ -18,9 +18,7 @@ class CalenderEmpty extends StatelessWidget {
             fontSize: 16,
           ),
         ),
-        const SizedBox(
-          height: 30,
-        ),
+        SizeApp.h30,
       ],
     );
   }

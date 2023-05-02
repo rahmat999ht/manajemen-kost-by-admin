@@ -34,7 +34,7 @@ class Calendar extends GetView<CalenderController> {
           markerSize: 5,
           markersMaxCount: 3,
           markerDecoration: const BoxDecoration(
-            color: ColorApp.orange,
+            color: ColorApp.red,
             shape: BoxShape.circle,
           ),
           todayDecoration: BoxDecoration(

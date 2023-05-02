@@ -11,9 +11,9 @@ class CardCalender extends GetView<CalenderController> {
 
   @override
   Widget build(BuildContext context) {
-    final sisa3Hari =
-        controller.tglSkrg.difference(data!.tglJatuhTempo!.toDate()).inDays ==
-            -3;
+    final sisa3Hari = data is TerdekatModel;
+    final day = data!.tglJatuhTempo!.toDate().day;
+    final month = data!.tglJatuhTempo!.toDate().month;
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -46,14 +46,30 @@ class CardCalender extends GetView<CalenderController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 20,
-                child: Text(
-                  sisa3Hari ? '3 hari ke depan' : 'Hari ini',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(color: Colors.white, fontSize: 13),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    sisa3Hari ? '3 hari ke depan' : 'Hari ini',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: ColorApp.white,
+                      fontSize: 13,
+                    ),
+                  ),
+                  if (sisa3Hari)
+                    Text(
+                      '$day ${controller.monthsFormat[month - 1]} ',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: ColorApp.red,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                ],
               ),
               SizeApp.h6,
               Row(
@@ -69,20 +85,60 @@ class CardCalender extends GetView<CalenderController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             sisa3Hari
-                                ? Text(
-                                    'Kamar dengan No. ${kamarModel.id} ${kamarModel.lantai} ${kamarModel.gedung} dalam \n3 hari ke depan akan jatuh tempo ',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                      height: 1.5,
+                                ? RichText(
+                                    text: TextSpan(
+                                      text: 'Kamar dengan ',
+                                      style: const TextStyle(
+                                        color: ColorApp.white,
+                                        fontSize: 14,
+                                      ),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text:
+                                              'No. ${kamarModel.id}, ${kamarModel.lantai}, ${kamarModel.gedung},',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: ColorApp.white,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                        const TextSpan(
+                                          text:
+                                              ' dalam \n3 hari ke depan akan jatuh tempo',
+                                          style: TextStyle(
+                                            color: ColorApp.white,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   )
-                                : Text(
-                                    'Kamar dengan No. ${kamarModel.id} ${kamarModel.lantai} ${kamarModel.gedung} telah \nmelewati tanggal pembayaran',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                      height: 1.5,
+                                : RichText(
+                                    text: TextSpan(
+                                      text: 'Kamar dengan ',
+                                      style: const TextStyle(
+                                        color: ColorApp.white,
+                                        fontSize: 14,
+                                      ),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text:
+                                              'No. ${kamarModel.id}, ${kamarModel.lantai}, ${kamarModel.gedung},',
+                                          style: const TextStyle(
+                                            color: ColorApp.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        const TextSpan(
+                                          text:
+                                              ' telah \nmencapai tanggal pembayaran',
+                                          style: TextStyle(
+                                            color: ColorApp.white,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                             SizeApp.h12,
@@ -96,7 +152,7 @@ class CardCalender extends GetView<CalenderController> {
                                   return Text(
                                     '${penghuniModel.nama} - ${penghuniModel.peran}',
                                     style: const TextStyle(
-                                      color: Colors.white,
+                                      color: ColorApp.white,
                                       fontSize: 14,
                                       height: 1.5,
                                     ),
@@ -105,7 +161,7 @@ class CardCalender extends GetView<CalenderController> {
                                 return const Text(
                                   'Proses ...',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: ColorApp.white,
                                     fontSize: 14,
                                     height: 1.5,
                                   ),
@@ -115,10 +171,7 @@ class CardCalender extends GetView<CalenderController> {
                           ],
                         );
                       }
-                      return const Text(
-                        ' - ',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
-                      );
+                      return const LoadingState();
                     },
                   ),
                 ],

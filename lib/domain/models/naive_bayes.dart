@@ -10,18 +10,33 @@ class NaiveBayesModel {
 
   NaiveBayesModel({
     required this.tglJatuhTempo,
-    required this.idKamar,
+    this.idKamar,
     this.statusKamar,
     this.riwayatPembayaran,
   });
 
-  // Map<String, dynamic> toMap() {
+  // Map<String, dynamic> toJson() {
   //   return <String, dynamic>{
   //     'tglJatuhTempo': tglJatuhTempo,
   //     'idKamar': idKamar,
   //     'statusKamar': statusKamar,
   //     'riwayatPembayaran': riwayatPembayaran,
   //   };
+  // }
+
+  // toDocumentSnapshot(id, data) {
+  //   return ConstansApp.firebaseFirestore
+  //       .collection(ConstansApp.naiveBayesCollection)
+  //       .doc(id)
+  //       .set(data)
+  //       .then(
+  //     (_) {
+  //       return ConstansApp.firebaseFirestore
+  //           .collection(ConstansApp.naiveBayesCollection)
+  //           .doc(id)
+  //           .get();
+  //     },
+  //   );
   // }
 
   factory NaiveBayesModel.fromMap(Map<String, dynamic> map) {
