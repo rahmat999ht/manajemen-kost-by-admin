@@ -8,7 +8,7 @@ class FormKamarController extends GetxController {
   // List<PenghuniModel> listPenghuni = [];
   final isLoading = false.obs;
 
-  final mhetodApp = MhetodApp();
+  final methodApp = MethodApp();
 
   final listJkl = [
     'Laki-laki',
@@ -51,7 +51,7 @@ class FormKamarController extends GetxController {
 
   Future deleteTSbyID(List<TextEditingController> e) async {
     final idPenghuni = e[1].text;
-    DocumentReference<PenghuniModel> user = mhetodApp.penghuni(idPenghuni);
+    DocumentReference<PenghuniModel> user = methodApp.penghuni(idPenghuni);
     final penghuni = await user.get();
     if (penghuni.exists) {
       alertActions(
@@ -72,13 +72,13 @@ class FormKamarController extends GetxController {
               ButtonOutline(
                 width: 50,
                 onPressed: () {
-                  mhetodApp.updateKamarById(
+                  methodApp.updateKamarById(
                     noKamar: noKamar,
                     data: {
                       'penghuni': FieldValue.arrayRemove([user]),
                     },
                   );
-                  mhetodApp.updatePenghuniById(
+                  methodApp.updatePenghuniById(
                     idPenghuni: idPenghuni,
                     data: {
                       'isAktif': false,
@@ -179,14 +179,14 @@ class FormKamarController extends GetxController {
               "nomor di daftarkan : ${listPenyewa[i][1].text}",
               name: "Penghuni",
             );
-            mhetodApp.regAdmin(formKey, listPenyewa[i][1]);
+            methodApp.regAdmin(formKey, listPenyewa[i][1]);
           }
 //ketika id penghuni tidak di temukan.
 //maka if di bawah akan di jalankan.
 //dan if di bawah ini akan menambah data baru.
           if (!dataPenghuni.exists) {
             log("data 0", name: "Penghuni");
-            mhetodApp.setPenghuniById(
+            methodApp.setPenghuniById(
               idPenghuni: dataPenghuni.id,
               data: PenghuniModel(
                 nama: getValue(i, 0),
@@ -205,7 +205,7 @@ class FormKamarController extends GetxController {
 //dan if di bawah ini akan mengupdate data yg sudah ada di tabel penghuni berdasarkan id penghuni.
           if (dataPenghuni.exists) {
             log("data ${dataPenghuni.id}", name: "Penghuni");
-            mhetodApp.updatePenghuniById(
+            methodApp.updatePenghuniById(
               idPenghuni: dataPenghuni.id,
               data: PenghuniModel(
                 nama: getValue(i, 0),
@@ -219,12 +219,12 @@ class FormKamarController extends GetxController {
             // continue;
           }
           DocumentReference<PenghuniModel> user =
-              mhetodApp.penghuni(dataPenghuni.id);
+              methodApp.penghuni(dataPenghuni.id);
 
           log("data $user", name: "Penghuni");
 //kode di bawah ini akan mengupdate penghuni yg sudah ada di tabel kamar berdasarkan id kamar.
           if (dataKamar!.penghuni!.isNotEmpty) {
-            mhetodApp.updateKamarById(
+            methodApp.updateKamarById(
               noKamar: noKamar,
               data: {
                 'fasilitas': listFasilitas.map((e) => e.text).toList(),
@@ -236,7 +236,7 @@ class FormKamarController extends GetxController {
           } else {
 // kode di bawah ini akan mengupdate penghuni yg sudah ada di tabel kamar berdasarkan id kamar.
 // dan sekaligus mengupdate tanggal sewa jika list penghuninya masih kosong,
-            mhetodApp.updateKamarById(
+            methodApp.updateKamarById(
               noKamar: noKamar,
               data: {
                 'fasilitas': listFasilitas.map((e) => e.text).toList(),
@@ -248,7 +248,7 @@ class FormKamarController extends GetxController {
             );
           }
 
-          DocumentReference<KamarModel> kamarDoc = mhetodApp.kamar(noKamar);
+          DocumentReference<KamarModel> kamarDoc = methodApp.kamar(noKamar);
 
           log("kamarDoc $kamarDoc", name: "Penghuni");
           final dataNaiveBayes = await ConstansApp.firebaseFirestore
@@ -267,7 +267,7 @@ class FormKamarController extends GetxController {
             // Mengonversi kembali ke Timestamp
             Timestamp timeNowPlusSebulan = Timestamp.fromDate(newDate);
 
-            mhetodApp.addNaiveBayesById(
+            methodApp.addNaiveBayesById(
               data: {
                 'idKamar': kamarDoc,
                 'tglJatuhTempo': timeNowPlusSebulan,
@@ -278,7 +278,7 @@ class FormKamarController extends GetxController {
             log('Timestamp setelah ditambah satu bulan: $timeNowPlusSebulan',
                 name: "tanggal");
           } else {
-            mhetodApp.updateNaiveBayesById(
+            methodApp.updateNaiveBayesById(
               idNaiveBayes: dataNaiveBayes.docs.first.id,
               data: {
                 'statusKamar': true,
@@ -313,7 +313,7 @@ class FormKamarController extends GetxController {
   void onInit() async {
     // listPenghuni = penghuniController.items;
     // log(listPenghuni.toString(), name: "list penghuni");
-    final data = await mhetodApp.kamar(noKamar).get();
+    final data = await methodApp.kamar(noKamar).get();
     log(data.data().toString(), name: 'kamar');
     dataKamar = data.data();
     initForm(

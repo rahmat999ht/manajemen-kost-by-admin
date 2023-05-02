@@ -1,6 +1,11 @@
 export 'authentication/login/login.screen.dart';
 export 'authentication/verifikasi/verifikasi.screen.dart';
 export 'dashboard/Pages/calender/calender.screen.dart';
+export 'dashboard/Pages/calender/components/calender.dart';
+export 'dashboard/Pages/calender/components/calender_empty.dart';
+export 'dashboard/Pages/calender/components/card_calender.dart';
+export 'dashboard/Pages/calender/components/value_calender.dart';
+export 'dashboard/Pages/calender/components/value_date.dart';
 export 'dashboard/Pages/home/components/card_jatuh_tempo.dart';
 export 'dashboard/Pages/home/components/card_kamar_kosong.dart';
 export 'dashboard/Pages/home/components/card_terdekat.dart';

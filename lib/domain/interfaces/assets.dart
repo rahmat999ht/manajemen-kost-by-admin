@@ -1,5 +1,6 @@
 class Assets {
   static String imgWelcome = 'assets/images/welcome.png';
+  static String imgEmpty = 'assets/images/empty.png';
   static String illustration = 'assets/images/Illustration.png';
   static String listPenghuni = 'assets/icons/list-penghuni.svg';
   static String listPenghuni2 = 'assets/icons/list-penghuni2.svg';

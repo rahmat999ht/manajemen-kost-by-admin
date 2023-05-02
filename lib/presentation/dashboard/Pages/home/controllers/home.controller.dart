@@ -1,7 +1,7 @@
 import '../../../../../domain/core/core.dart';
 
 class HomeController extends GetxController with StateMixin<List<dynamic>> {
-  final mhetodApp = MhetodApp();
+  final methodApp = MethodApp();
   final tglSkrg = Timestamp.now().toDate();
   final months = [
     'Jan',

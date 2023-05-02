@@ -18,7 +18,7 @@ class HeaderHome extends GetView<HomeController> {
           ),
         ),
         StreamBuilder<DocumentSnapshot<AdminModel>>(
-          stream: controller.mhetodApp.admin(ConstansApp.idLogin).snapshots(),
+          stream: controller.methodApp.admin(ConstansApp.idLogin).snapshots(),
           builder: (ctx, s) {
             final data = s.data?.data()!;
             if (s.hasData) {

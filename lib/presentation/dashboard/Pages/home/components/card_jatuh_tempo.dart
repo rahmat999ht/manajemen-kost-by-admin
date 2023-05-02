@@ -37,7 +37,7 @@ class CardJatuhTempo extends GetView<HomeController> {
         ],
       ),
       child: StreamBuilder(
-        stream: controller.mhetodApp
+        stream: controller.methodApp
             .kamar(
               jatuhTempoModel.idKamar!.id,
             )
@@ -46,7 +46,7 @@ class CardJatuhTempo extends GetView<HomeController> {
           if (s.hasData) {
             final data = s.data!.data()!;
             return StreamBuilder(
-              stream: controller.mhetodApp
+              stream: controller.methodApp
                   .penghuni(
                     data.penghuni!.first.id,
                   )
