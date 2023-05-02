@@ -12,9 +12,9 @@ class CardJatuhTempo extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final data = listJatuhTempo[index];
-    final day = data!.tglJatuhTempo!.toDate().day;
-    final month = data.tglJatuhTempo?.toDate().month;
+    final jatuhTempoModel = listJatuhTempo[index];
+    final day = jatuhTempoModel!.tglJatuhTempo?.toDate().day;
+    final month = jatuhTempoModel.tglJatuhTempo?.toDate().month;
     return Container(
       margin: EdgeInsets.only(
         left: 12,
@@ -39,7 +39,7 @@ class CardJatuhTempo extends GetView<HomeController> {
       child: StreamBuilder(
         stream: controller.mhetodApp
             .kamar(
-              data.idKamar!.id,
+              jatuhTempoModel.idKamar!.id,
             )
             .snapshots(),
         builder: (ctx, s) {
@@ -148,8 +148,8 @@ class CardJatuhTempo extends GetView<HomeController> {
                                 children: <TextSpan>[
                                   TextSpan(
                                     text: controller.months[month! - 1],
-                                    style: TextStyle(
-                                      color: ColorApp.red.withOpacity(90),
+                                    style: const TextStyle(
+                                      color: ColorApp.red,
                                       fontSize: 14,
                                     ),
                                   ),

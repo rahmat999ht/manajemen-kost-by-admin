@@ -19,7 +19,9 @@ class FormSearchHome extends GetView<HomeController> {
               controller: controller.cSearch,
               color: ColorApp.grayForm,
               onChanged: (v) {
-                controller.onChange(v);
+                controller.cJatuhTempo.onChange(v, controller.isSearch);
+                controller.cTerdekat.onChange(v, controller.isSearch);
+                controller.cKamarKosong.onChange(v, controller.isSearch);
               },
               prefixIcon: const Icon(Icons.search, size: 30),
               suffixIcon: controller.isSearch.isFalse

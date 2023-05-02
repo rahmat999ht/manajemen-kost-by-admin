@@ -1,6 +1,6 @@
 import '../../../../../domain/core/core.dart';
 
-class CardTerdekat extends StatelessWidget {
+class CardTerdekat extends GetView<HomeController> {
   const CardTerdekat({
     super.key,
     required this.listTerdekat,
@@ -12,23 +12,9 @@ class CardTerdekat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final naiveBayesModel = listTerdekat[index];
-    final mhetodApp = MhetodApp();
-    final day = naiveBayesModel!.tglJatuhTempo?.toDate().day;
-    final month = naiveBayesModel.tglJatuhTempo?.toDate().month;
-    final months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'Mei',
-      'Jun',
-      'Jul',
-      'Agu',
-      'Sep',
-      'Nov',
-      'Des',
-    ];
+    final terdekatModel = listTerdekat[index];
+    final day = terdekatModel!.tglJatuhTempo?.toDate().day;
+    final month = terdekatModel.tglJatuhTempo?.toDate().month;
     return Container(
       margin: EdgeInsets.only(
         left: 12,
@@ -51,16 +37,16 @@ class CardTerdekat extends StatelessWidget {
         ],
       ),
       child: StreamBuilder(
-        stream: mhetodApp
+        stream: controller.mhetodApp
             .kamar(
-              naiveBayesModel.idKamar!.id,
+              terdekatModel.idKamar!.id,
             )
             .snapshots(),
         builder: (ctx, s) {
           if (s.hasData) {
             final data = s.data!.data()!;
             return StreamBuilder(
-              stream: mhetodApp
+              stream: controller.mhetodApp
                   .penghuni(
                     data.penghuni!.first.id,
                   )
@@ -156,12 +142,12 @@ class CardTerdekat extends StatelessWidget {
                                 text: '$day ',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: ColorApp.black,
+                                  color: ColorApp.blackText,
                                   fontSize: 20,
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: months[month! - 1],
+                                    text: controller.months[month! - 1],
                                     style: const TextStyle(
                                       color: ColorApp.gray,
                                       fontSize: 14,

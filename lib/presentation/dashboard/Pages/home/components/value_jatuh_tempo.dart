@@ -1,5 +1,3 @@
-import 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/home/controllers/jatuh_tempo.controller.dart';
-
 import '../../../../../domain/core/core.dart';
 
 class ValueJatuhTempo extends GetView<JatuhTempoController> {

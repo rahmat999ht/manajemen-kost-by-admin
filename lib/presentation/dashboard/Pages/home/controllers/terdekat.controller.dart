@@ -9,6 +9,21 @@ class TerdekatController extends GetxController
   List<TerdekatModel> listTerdekat = [];
   List<TerdekatModel>? listWhere = [];
 
+  void onChange(String value, RxBool isSearch) {
+    value.isEmpty ? isSearch.value = false : isSearch.value = true;
+
+    change(
+      value.isEmpty
+          ? listWhere
+          : listWhere!
+              .where((element) => element.idKamar!.id.toLowerCase().contains(
+                    value.toLowerCase(),
+                  ))
+              .toList(),
+      status: RxStatus.success(),
+    );
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> get penghuniStream =>
       ConstansApp.firebaseFirestore
           .collection(ConstansApp.naiveBayesCollection)

@@ -28,6 +28,7 @@ class ValueKamarKosong extends GetView<KamarController> {
           ),
           SizedBox(
             height: 130.0,
+            width: SizeApp.wFull,
             child: state!.isEmpty
                 ? const Center(
                     child: Text(

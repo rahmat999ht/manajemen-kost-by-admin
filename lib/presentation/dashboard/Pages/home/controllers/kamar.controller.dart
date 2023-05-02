@@ -6,6 +6,21 @@ class KamarController extends GetxController with StateMixin<List<KamarModel>> {
   List<KamarModel> listKamarModel = [];
   List<KamarModel> listKamarKosong = [];
 
+  void onChange(String value, RxBool isSearch) {
+    value.isEmpty ? isSearch.value = false : isSearch.value = true;
+
+    change(
+      value.isEmpty
+          ? listKamarKosong
+          : listKamarKosong
+              .where((element) => element.id!.toLowerCase().contains(
+                    value.toLowerCase(),
+                  ))
+              .toList(),
+      status: RxStatus.success(),
+    );
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> get getListKamar =>
       ConstansApp.firebaseFirestore
           .collection(ConstansApp.kamarCollection)

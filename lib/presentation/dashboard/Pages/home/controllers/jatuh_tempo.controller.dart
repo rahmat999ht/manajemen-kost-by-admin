@@ -9,6 +9,21 @@ class JatuhTempoController extends GetxController
   List<JatuhTempoModel> listJatuhTempo = [];
   List<JatuhTempoModel>? listWhere = [];
 
+  void onChange(String value, RxBool isSearch) {
+    value.isEmpty ? isSearch.value = false : isSearch.value = true;
+
+    change(
+      value.isEmpty
+          ? listWhere
+          : listWhere!
+              .where((element) => element.idKamar!.id.toLowerCase().contains(
+                    value.toLowerCase(),
+                  ))
+              .toList(),
+      status: RxStatus.success(),
+    );
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> get penghuniStream =>
       ConstansApp.firebaseFirestore
           .collection(ConstansApp.naiveBayesCollection)
@@ -23,7 +38,7 @@ class JatuhTempoController extends GetxController
       } else {
         listJatuhTempo = List.generate(event.docs.length, (index) {
           final data = event.docs[index];
-          log("data kurang dari 3 hari ${data.data()}");
+          log("data jatuh tempo ${data.data()}");
           return JatuhTempoModel.fromDocumentSnapshot(data);
         });
         log("naive bayes ${listJatuhTempo.length}");
