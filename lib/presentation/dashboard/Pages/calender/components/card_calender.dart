@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../../../../../domain/core/core.dart';
 
 class CardCalender extends GetView<CalenderController> {
@@ -148,13 +150,32 @@ class CardCalender extends GetView<CalenderController> {
                                   .snapshots(),
                               builder: (ctx, s) {
                                 if (s.hasData) {
+                                  log('kondisi tgl ${data!.tglJatuhTempo!.toDate().isBefore(DateTime.now())}');
+                                  log('kondisi ${data!.statusKamar == true && data!.tglJatuhTempo!.toDate().isAfter(DateTime.now())}');
                                   final penghuniModel = s.data!.data()!;
-                                  return Text(
-                                    '${penghuniModel.nama} - ${penghuniModel.peran}',
-                                    style: const TextStyle(
-                                      color: ColorApp.white,
-                                      fontSize: 14,
-                                      height: 1.5,
+                                  return SizedBox(
+                                    width: SizeApp.wFull * 0.85,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          '${penghuniModel.nama} - ${penghuniModel.peran}',
+                                          style: const TextStyle(
+                                            color: ColorApp.white,
+                                            fontSize: 14,
+                                            height: 1.5,
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        if (data!.statusKamar == true &&
+                                            data!.tglJatuhTempo!
+                                                .toDate()
+                                                .isBefore(DateTime.now()))
+                                          const Icon(
+                                            Icons.beenhere_outlined,
+                                            color: ColorApp.green,
+                                          ),
+                                      ],
                                     ),
                                   );
                                 }

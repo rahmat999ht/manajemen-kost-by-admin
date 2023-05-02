@@ -7,12 +7,14 @@ class NaiveBayesModel {
   final DocumentReference? idKamar;
   final bool? statusKamar;
   final List<String>? riwayatPembayaran;
+  final bool? terisi;
 
   NaiveBayesModel({
     required this.tglJatuhTempo,
     this.idKamar,
     this.statusKamar,
     this.riwayatPembayaran,
+    this.terisi,
   });
 
   // Map<String, dynamic> toJson() {
@@ -54,6 +56,7 @@ class NaiveBayesModel {
       statusKamar:
           map['statusKamar'] != null ? map['statusKamar'] as bool : null,
       // riwayatPembayaran: map['riwayatPembayaran'] ?? [],
+      terisi: map['terisi'] != null ? map['terisi'] as bool : null,
     );
   }
   factory NaiveBayesModel.fromMapByID(Map<String, dynamic> map, String id) {
@@ -71,6 +74,7 @@ class NaiveBayesModel {
       statusKamar:
           map['statusKamar'] != null ? map['statusKamar'] as bool : null,
       // riwayatPembayaran: map['riwayatPembayaran'] ?? [],
+      terisi: map['terisi'] != null ? map['terisi'] as bool : null,
     );
   }
 

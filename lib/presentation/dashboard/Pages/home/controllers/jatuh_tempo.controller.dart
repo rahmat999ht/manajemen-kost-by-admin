@@ -45,7 +45,8 @@ class JatuhTempoController extends GetxController
         listWhere = listJatuhTempo
             .where(
               (e) =>
-                  e.statusKamar == true &&
+                  e.terisi == true &&
+                  e.statusKamar == false &&
                   tglSkrg.difference(e.tglJatuhTempo!.toDate()).inDays >= 0,
             )
             .toList();

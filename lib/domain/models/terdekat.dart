@@ -11,6 +11,7 @@ class TerdekatModel extends NaiveBayesModel {
     required super.idKamar,
     super.statusKamar,
     super.riwayatPembayaran,
+    super.terisi,
   });
 
   Map<String, dynamic> toMap() {
@@ -19,6 +20,7 @@ class TerdekatModel extends NaiveBayesModel {
       'idKamar': idKamar,
       'statusKamar': statusKamar,
       'riwayatPembayaran': riwayatPembayaran,
+      'terisi': terisi,
     };
   }
 
@@ -38,6 +40,7 @@ class TerdekatModel extends NaiveBayesModel {
       statusKamar:
           map['statusKamar'] != null ? map['statusKamar'] as bool : null,
       // riwayatPembayaran: map['riwayatPembayaran'] ?? [],
+      terisi: map['terisi'] != null ? map['terisi'] as bool : null,
     );
   }
   factory TerdekatModel.fromMapByID(Map<String, dynamic> map, String id) {
@@ -56,6 +59,7 @@ class TerdekatModel extends NaiveBayesModel {
       statusKamar:
           map['statusKamar'] != null ? map['statusKamar'] as bool : null,
       // riwayatPembayaran: map['riwayatPembayaran'] ?? [],
+      terisi: map['terisi'] != null ? map['terisi'] as bool : null,
     );
   }
 

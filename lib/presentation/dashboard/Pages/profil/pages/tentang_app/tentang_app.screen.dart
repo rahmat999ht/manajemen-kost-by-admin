@@ -5,9 +5,12 @@ class TentangAppScreen extends GetView<TentangAppController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorApp.white,
       appBar: AppBar(
-        title: const Text('Tentang'),
+        backgroundColor: ColorApp.white,
+        title: const Text('Tentang App'),
         centerTitle: true,
+        elevation: 0,
       ),
       body: const Center(
         child: Text(

@@ -45,8 +45,9 @@ class TerdekatController extends GetxController
         listWhere = listTerdekat
             .where(
               (e) =>
-                  e.statusKamar == true &&
-                  tglSkrg.difference(e.tglJatuhTempo!.toDate()).inDays >= -3,
+                  e.terisi == true &&
+                  tglSkrg.difference(e.tglJatuhTempo!.toDate()).inDays >= -3 &&
+                  tglSkrg.difference(e.tglJatuhTempo!.toDate()).inDays < 0,
             )
             .toList();
         log("listWhere ${listWhere!.length}");

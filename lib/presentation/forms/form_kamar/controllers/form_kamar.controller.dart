@@ -272,7 +272,8 @@ class FormKamarController extends GetxController {
                 'idKamar': kamarDoc,
                 'tglJatuhTempo': timeNowPlusSebulan,
                 'statusKamar': true,
-                'riwayatPembayaran': [],
+                'terisi': true,
+                'riwayatPembayaran': <String>[],
               },
             );
             log('Timestamp setelah ditambah satu bulan: $timeNowPlusSebulan',
@@ -281,7 +282,7 @@ class FormKamarController extends GetxController {
             methodApp.updateNaiveBayesById(
               idNaiveBayes: dataNaiveBayes.docs.first.id,
               data: {
-                'statusKamar': true,
+                'terisi': true,
               },
             );
           }
