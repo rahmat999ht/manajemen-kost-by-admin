@@ -1,13 +1,13 @@
 import 'dart:developer';
 
+import 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/calender/components/details.dart';
+
 import '../../../../../domain/core/core.dart';
 
 class CardCalender extends GetView<CalenderController> {
-  final void Function()? onTap;
   final NaiveBayesModel? data;
   const CardCalender({
     Key? key,
-    required this.onTap,
     required this.data,
   }) : super(key: key);
 
@@ -16,8 +16,16 @@ class CardCalender extends GetView<CalenderController> {
     final sisa3Hari = data is TerdekatModel;
     final day = data!.tglJatuhTempo!.toDate().day;
     final month = data!.tglJatuhTempo!.toDate().month;
+
+    KamarModel? kamarModel;
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        Get.to(
+          Detail(
+            kamarModel: kamarModel!,
+          ),
+        );
+      },
       child: Container(
         margin: const EdgeInsets.symmetric(
           vertical: 5,
@@ -82,7 +90,7 @@ class CardCalender extends GetView<CalenderController> {
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        final kamarModel = snapshot.data!.data()!;
+                        kamarModel = snapshot.data!.data()!;
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -97,7 +105,7 @@ class CardCalender extends GetView<CalenderController> {
                                       children: <TextSpan>[
                                         TextSpan(
                                           text:
-                                              'No. ${kamarModel.id}, ${kamarModel.lantai}, ${kamarModel.gedung},',
+                                              'No. ${kamarModel!.id}, ${kamarModel!.lantai}, ${kamarModel!.gedung},',
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: ColorApp.white,
@@ -125,7 +133,7 @@ class CardCalender extends GetView<CalenderController> {
                                       children: <TextSpan>[
                                         TextSpan(
                                           text:
-                                              'No. ${kamarModel.id}, ${kamarModel.lantai}, ${kamarModel.gedung},',
+                                              'No. ${kamarModel!.id}, ${kamarModel!.lantai}, ${kamarModel!.gedung},',
                                           style: const TextStyle(
                                             color: ColorApp.white,
                                             fontSize: 14,
@@ -146,7 +154,7 @@ class CardCalender extends GetView<CalenderController> {
                             SizeApp.h12,
                             StreamBuilder<DocumentSnapshot<PenghuniModel>>(
                               stream: controller.methodApp
-                                  .penghuni(kamarModel.penghuni!.first.id)
+                                  .penghuni(kamarModel!.penghuni!.first.id)
                                   .snapshots(),
                               builder: (ctx, s) {
                                 if (s.hasData) {
@@ -188,7 +196,7 @@ class CardCalender extends GetView<CalenderController> {
                                   ),
                                 );
                               },
-                            )
+                            ),
                           ],
                         );
                       }

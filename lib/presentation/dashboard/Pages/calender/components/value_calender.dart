@@ -19,7 +19,6 @@ class ValueCalender extends GetView<CalenderController> {
                 var datacCalender = value[index];
                 return CardCalender(
                   data: datacCalender,
-                  onTap: () {},
                 );
               },
             );
