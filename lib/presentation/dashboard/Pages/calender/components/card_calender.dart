@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:manajemen_kost_by_admin/presentation/dashboard/components/details.dart';
+import 'package:manajemen_kost_by_admin/presentation/dashboard/components/details_kamar.dart';
 
 import '../../../../../domain/core/core.dart';
 
@@ -21,7 +21,7 @@ class CardCalender extends GetView<CalenderController> {
     return InkWell(
       onTap: () {
         Get.to(
-          Detail(
+          DetailKamar(
             kamarModel: kamarModel!,
             naiveBayesModel: data!,
           ),

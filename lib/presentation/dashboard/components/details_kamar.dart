@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import '../../../domain/core/core.dart';
 
-class Detail extends StatelessWidget {
-  const Detail({
+class DetailKamar extends StatelessWidget {
+  const DetailKamar({
     super.key,
     required this.kamarModel,
     required this.naiveBayesModel,
@@ -77,6 +77,7 @@ class Detail extends StatelessWidget {
                       );
                     },
                     child: Card(
+                      elevation: 5,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
