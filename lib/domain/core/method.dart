@@ -182,7 +182,7 @@ class MethodApp {
 
   void launchWhatsApp({required numberWA, required message}) async {
     final whatsappURlAndroid = 'https://wa.me/$numberWA';
-    // final whatsappURlAndroid = "whatsapp://send?phone=$numberWA&text=$message";
+    // final whatsappURlAndroid = "https://api.whatsapp.com/send?phone=$numberWA";
     var whatappURLIos = "https://wa.me/$numberWA?text=${Uri.parse("$message")}";
 
     if (Platform.isIOS) {

@@ -37,6 +37,7 @@ Future statusKamar(
                   idNaiveBayes: naiveBayesModel.idNaiveBayes,
                   data: {
                     'terisi': false,
+                    'statusKamar': false,
                   },
                 );
                 methodApp.updateKamarById(
