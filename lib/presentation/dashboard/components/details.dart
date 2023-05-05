@@ -1,16 +1,16 @@
 import 'dart:developer';
 
-import 'package:manajemen_kost_by_admin/domain/core/core.dart';
-
-import '../../../../../domain/interfaces/app_bar/app_bar_back.dart';
+import '../../../domain/core/core.dart';
 
 class Detail extends StatelessWidget {
   const Detail({
     super.key,
     required this.kamarModel,
+    required this.naiveBayesModel,
   });
 
   final KamarModel kamarModel;
+  final NaiveBayesModel naiveBayesModel;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +29,19 @@ class Detail extends StatelessWidget {
             deskripsi: '',
           )
         ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: ButtonPrymary(
+          text: 'Status Kamar',
+          onPressed: () async {
+            await statusKamar(
+              context,
+              naiveBayesModel,
+            );
+          },
+        ),
       ),
     );
   }
@@ -57,7 +70,12 @@ class Detail extends StatelessWidget {
                     penghuniModel.peran!,
                   ),
                   trailing: GestureDetector(
-                    onTap: () {},
+                    onTap: () async {
+                      await callBy(
+                        ctx,
+                        penghuniModel.noHp,
+                      );
+                    },
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),

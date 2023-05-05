@@ -12,6 +12,7 @@ export 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 export 'package:octo_image/octo_image.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:table_calendar/table_calendar.dart';
+export 'package:url_launcher/url_launcher.dart';
 
 export '/config.dart';
 export '/domain/core.domain.dart';

@@ -7,6 +7,7 @@ class ButtonPrymary extends StatelessWidget {
     required this.text,
     this.textColor,
     this.isLoading = false,
+    this.bgColor,
   }) : isBlack = false;
 
   const ButtonPrymary.isBlack({
@@ -15,11 +16,13 @@ class ButtonPrymary extends StatelessWidget {
     required this.text,
     this.textColor,
     this.isLoading = false,
-  }) : isBlack = true;
+  })  : isBlack = true,
+        bgColor = null;
 
   final void Function() onPressed;
   final String text;
   final Color? textColor;
+  final Color? bgColor;
   final bool isBlack;
   final bool? isLoading;
 
@@ -27,7 +30,8 @@ class ButtonPrymary extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: isBlack ? ColorApp.blackNavi : ColorApp.orange,
+        backgroundColor:
+            isBlack ? ColorApp.blackNavi : bgColor ?? ColorApp.orange,
         fixedSize: Size(SizeApp.wFull, isBlack ? 40 : 50),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(

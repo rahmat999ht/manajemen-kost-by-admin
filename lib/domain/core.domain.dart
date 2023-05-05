@@ -2,6 +2,7 @@ export 'core/constans.dart';
 export 'interfaces/alerts/alert_actions.dart';
 export 'interfaces/alerts/alert_content.dart';
 export 'interfaces/alerts/alert_info.dart';
+export 'interfaces/app_bar/app_bar_back.dart';
 export 'interfaces/app_bar/app_bar_batal.dart';
 export 'interfaces/assets.dart';
 export 'interfaces/avatar/avatar.dart';

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/calender/components/details.dart';
+import 'package:manajemen_kost_by_admin/presentation/dashboard/components/details.dart';
 
 import '../../../../../domain/core/core.dart';
 
@@ -23,6 +23,7 @@ class CardCalender extends GetView<CalenderController> {
         Get.to(
           Detail(
             kamarModel: kamarModel!,
+            naiveBayesModel: data!,
           ),
         );
       },

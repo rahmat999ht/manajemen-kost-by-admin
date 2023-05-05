@@ -3,6 +3,7 @@
 import 'package:manajemen_kost_by_admin/domain/core/core.dart';
 
 class NaiveBayesModel {
+  final String? idNaiveBayes;
   final Timestamp? tglJatuhTempo;
   final DocumentReference? idKamar;
   final bool? statusKamar;
@@ -10,6 +11,7 @@ class NaiveBayesModel {
   final bool? terisi;
 
   NaiveBayesModel({
+    this.idNaiveBayes,
     required this.tglJatuhTempo,
     this.idKamar,
     this.statusKamar,
@@ -67,6 +69,7 @@ class NaiveBayesModel {
       toFirestore: (value, options) => value.toMap(),
     );
     return NaiveBayesModel(
+      idNaiveBayes: id,
       tglJatuhTempo: map['tglJatuhTempo'] != null
           ? map['tglJatuhTempo'] as Timestamp
           : null,

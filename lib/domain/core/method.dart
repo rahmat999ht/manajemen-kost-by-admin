@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:manajemen_kost_by_admin/domain/core/core.dart';
 
@@ -177,5 +178,36 @@ class MethodApp {
     } catch (e) {
       alertInfo("error", e.toString());
     }
+  }
+
+  void launchWhatsApp({required numberWA, required message}) async {
+    final whatsappURlAndroid = 'https://wa.me/$numberWA';
+    // final whatsappURlAndroid = "whatsapp://send?phone=$numberWA&text=$message";
+    var whatappURLIos = "https://wa.me/$numberWA?text=${Uri.parse("$message")}";
+
+    if (Platform.isIOS) {
+      if (await canLaunchUrl(Uri.parse(whatappURLIos))) {
+        await launchUrl(Uri.parse(whatappURLIos));
+      } else {
+        Get.snackbar('info', "whatsapp no installed");
+      }
+    } else {
+      // android , web
+      if (await canLaunchUrl(Uri.parse(whatsappURlAndroid))) {
+        await launchUrl(Uri.parse(whatsappURlAndroid));
+        log(whatsappURlAndroid);
+      } else {
+        Get.snackbar('info', "whatsapp no installed");
+      }
+    }
+    return;
+  }
+
+  void launchTelegram({required numberTele}) async {
+    // var url = "tg://msg?text=Mi_mensaje&to=+62$numberTele";
+    var url = "tg://to=+62$numberTele";
+    await canLaunchUrl(Uri.parse(url))
+        ? await launchUrl(Uri.parse(url))
+        : log('Could not launch Telegram');
   }
 }
