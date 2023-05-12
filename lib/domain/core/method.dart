@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:manajemen_kost_by_admin/domain/core/core.dart';
 
@@ -180,34 +179,22 @@ class MethodApp {
     }
   }
 
-  void launchWhatsApp({required numberWA, required message}) async {
-    final whatsappURlAndroid = 'https://wa.me/$numberWA';
-    // final whatsappURlAndroid = "https://api.whatsapp.com/send?phone=$numberWA";
-    var whatappURLIos = "https://wa.me/$numberWA?text=${Uri.parse("$message")}";
-
-    if (Platform.isIOS) {
-      if (await canLaunchUrl(Uri.parse(whatappURLIos))) {
-        await launchUrl(Uri.parse(whatappURLIos));
-      } else {
-        Get.snackbar('info', "whatsapp no installed");
-      }
+  Future launchWhatsApp({required numberWA, required message}) async {
+    final whatsappURl = 'https://wa.me/$numberWA?text=${Uri.parse("$message")}';
+    log('https://wa.me/$numberWA?text=${Uri.parse("$message")}');
+    if (await canLaunch(whatsappURl)) {
+      await launch(whatsappURl);
     } else {
-      // android , web
-      if (await canLaunchUrl(Uri.parse(whatsappURlAndroid))) {
-        await launchUrl(Uri.parse(whatsappURlAndroid));
-        log(whatsappURlAndroid);
-      } else {
-        Get.snackbar('info', "whatsapp no installed");
-      }
+      Get.snackbar('info', "whatsapp no installed");
     }
-    return;
   }
 
-  void launchTelegram({required numberTele}) async {
-    // var url = "tg://msg?text=Mi_mensaje&to=+62$numberTele";
-    var url = "tg://to=+62$numberTele";
-    await canLaunchUrl(Uri.parse(url))
-        ? await launchUrl(Uri.parse(url))
-        : log('Could not launch Telegram');
+  Future launchTelegram({required numberTele}) async {
+    var url = 'https://t.me/$numberTele';
+    log('https://t.me/$numberTele');
+    await canLaunch(url)
+        ? await launch(url)
+        : Get.snackbar('info', "Could not launch Telegram");
+    // log('Could not launch Telegram');
   }
 }

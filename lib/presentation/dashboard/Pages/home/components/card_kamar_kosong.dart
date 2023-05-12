@@ -22,7 +22,7 @@ class CardKamarKosong extends StatelessWidget {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       height: 67.0,
-      width: SizeApp.wFull * 0.44,
+      width: Get.width * 0.44,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
@@ -49,9 +49,7 @@ class CardKamarKosong extends StatelessWidget {
               ),
             ),
             SizeApp.h10,
-            SizedBox(
-              width: SizeApp.wFull,
-            ),
+            SizeApp.wFull,
             Text(
               '${data.lantai}, ${data.gedung}',
               style: const TextStyle(

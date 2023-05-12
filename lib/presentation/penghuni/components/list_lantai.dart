@@ -42,8 +42,8 @@ class ListLantai extends StatelessWidget {
               ],
             )
           : SizedBox(
-              height: SizeApp.hFull - 290,
-              width: SizeApp.wFull,
+              height: Get.height - 290,
+              width: Get.width,
               child: const LoadingState(),
             ),
     );

@@ -1,7 +1,7 @@
 import '../core/core.dart';
 
 class SizeApp {
-  static final double hFull = Get.size.height;
+  static final SizedBox hFull = SizedBox(height: Get.size.height);
   static const SizedBox h2 = SizedBox(height: 2.0);
   static const SizedBox h4 = SizedBox(height: 4.0);
   static const SizedBox h6 = SizedBox(height: 6.0);
@@ -53,7 +53,7 @@ class SizeApp {
   static const SizedBox h98 = SizedBox(height: 98.0);
   static const SizedBox h100 = SizedBox(height: 100.0);
 
-  static final double wFull = Get.size.width;
+  static final SizedBox wFull = SizedBox(width: Get.size.width);
   static const SizedBox w2 = SizedBox(width: 2.0);
   static const SizedBox w4 = SizedBox(width: 4.0);
   static const SizedBox w6 = SizedBox(width: 6.0);

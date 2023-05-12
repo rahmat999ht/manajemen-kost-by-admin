@@ -32,7 +32,7 @@ class ButtonPrymary extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor:
             isBlack ? ColorApp.blackNavi : bgColor ?? ColorApp.orange,
-        fixedSize: Size(SizeApp.wFull, isBlack ? 40 : 50),
+        fixedSize: Size(Get.width, isBlack ? 40 : 50),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(10),

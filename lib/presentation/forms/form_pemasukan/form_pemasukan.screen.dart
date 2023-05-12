@@ -5,14 +5,22 @@ class FormPemasukanScreen extends GetView<FormPemasukanController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('FormPemasukanScreen'),
-        centerTitle: true,
+      backgroundColor: ColorApp.white,
+      appBar: appBar(
+        'Pemasukan',
+        Get.back,
       ),
-      body: const Center(
-        child: Text(
-          'FormPemasukanScreen is working',
-          style: TextStyle(fontSize: 20),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const FormPemasukan(),
+            ButtonPrymary.isBlack(
+              text: 'Simpan',
+              onPressed: () {},
+            ),
+          ],
         ),
       ),
     );

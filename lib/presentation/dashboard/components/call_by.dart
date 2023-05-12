@@ -9,9 +9,9 @@ Future callBy(BuildContext context, String? noHp) async {
       CardContackBy(
         contackBy: 'Telegram',
         icon: Assets.imgTele,
-        onTap: () {
-          methodApp.launchTelegram(
-            numberTele: noHp,
+        onTap: () async {
+          await methodApp.launchTelegram(
+            numberTele: noHp!.replaceAll("+62", "62"),
           );
         },
       ),
@@ -20,9 +20,9 @@ Future callBy(BuildContext context, String? noHp) async {
         contackBy: 'WhatsApp',
         icon: Assets.imgWa,
         onTap: () async {
-          methodApp.launchWhatsApp(
+          await methodApp.launchWhatsApp(
             numberWA: noHp!.replaceAll("+62", "62"),
-            message: '',
+            message: 'Halo',
           );
         },
       ),

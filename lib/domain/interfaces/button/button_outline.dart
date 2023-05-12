@@ -18,7 +18,7 @@ class ButtonOutline extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-        fixedSize: Size(width ?? SizeApp.wFull, height ?? 25),
+        fixedSize: Size(width ?? Get.width, height ?? 25),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(10),
