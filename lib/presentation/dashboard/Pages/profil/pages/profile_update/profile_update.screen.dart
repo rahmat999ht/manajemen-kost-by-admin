@@ -6,7 +6,7 @@ class ProfileUpdateScreen extends GetView<ProfileUpdateController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorApp.white,
-      appBar: appBar(
+      appBar: appBarBatal(
         'Edit profil',
         () {
           Get.offAllNamed(Routes.DASHBOARD);
@@ -14,62 +14,65 @@ class ProfileUpdateScreen extends GetView<ProfileUpdateController> {
       ),
       body: Form(
         key: controller.formKey,
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      const WrapperImageUpdateProfil(),
-                      SizeApp.h36,
-                      TextForm.border(
-                        controller: controller.namaC,
-                        titel: 'Nama lengkap',
-                        color: ColorApp.gray,
-                        isCheck: true,
-                      ),
-                      SizeApp.h12,
-                      TextForm.border(
-                        controller: controller.noHpC,
-                        titel: 'No. HP',
-                        color: ColorApp.gray,
-                        isCheck: true,
-                        isPhone: true,
-                      ),
-                      SizeApp.h12,
-                      TextForm.border(
-                        onTap: controller.alertJK,
-                        controller: controller.jkC,
-                        titel: 'Jenis kelamin',
-                        color: ColorApp.gray,
-                        isCheck: true,
-                      ),
-                      SizeApp.h12,
-                      TextForm.border(
-                        controller: controller.statusC,
-                        titel: 'Status',
-                        color: ColorApp.gray,
-                        isCheck: true,
-                      ),
-                    ],
-                  ),
-                  SizeApp.h100,
-                  SizeApp.h30,
-                  ButtonPrymary.isBlack(
-                    onPressed: controller.updateProfil,
-                    text: 'Simpan',
-                  )
-                ],
-              ),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              const WrapperImageUpdateProfil(),
+              SizeApp.h36,
+              const ListFormProfilUpdate(),
+              const Spacer(),
+              ButtonPrymary.isBlack(
+                text: 'Simpan',
+                onPressed: controller.updateProfil,
+              )
+            ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+class ListFormProfilUpdate extends GetView<ProfileUpdateController> {
+  const ListFormProfilUpdate({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextForm.border(
+          controller: controller.namaC,
+          titel: 'Nama lengkap',
+          color: ColorApp.gray,
+          isCheck: true,
+        ),
+        SizeApp.h12,
+        TextForm.border(
+          controller: controller.noHpC,
+          titel: 'No. HP',
+          color: ColorApp.gray,
+          isCheck: true,
+          isPhone: true,
+        ),
+        SizeApp.h12,
+        TextForm.border(
+          onTap: controller.alertJK,
+          controller: controller.jkC,
+          titel: 'Jenis kelamin',
+          color: ColorApp.gray,
+          isCheck: true,
+        ),
+        SizeApp.h12,
+        TextForm.border(
+          controller: controller.statusC,
+          titel: 'Status',
+          color: ColorApp.gray,
+          isCheck: true,
+        ),
+      ],
     );
   }
 }

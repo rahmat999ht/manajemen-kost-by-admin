@@ -1,6 +1,6 @@
 import 'package:manajemen_kost_by_admin/domain/core/core.dart';
 
-PreferredSizeWidget appBar(String title, void Function()? onTap) {
+PreferredSizeWidget appBarBatal(String title, void Function()? onTap) {
   return AppBar(
     elevation: 0,
     backgroundColor: ColorApp.white,

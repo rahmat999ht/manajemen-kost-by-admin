@@ -28,5 +28,8 @@ class DashboardControllerBinding extends Bindings {
     Get.lazyPut<TerdekatController>(
       () => TerdekatController(),
     );
+    Get.lazyPut<ImagesPemasukanController>(
+      () => ImagesPemasukanController(),
+    );
   }
 }

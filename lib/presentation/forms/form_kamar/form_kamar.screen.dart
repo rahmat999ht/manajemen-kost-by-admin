@@ -5,7 +5,7 @@ class FormKamarScreen extends GetView<FormKamarController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
+      appBar: appBarBatal(
         'Kamar ${controller.noKamar}',
         () {
           Get.offAllNamed(Routes.PENGHUNI);

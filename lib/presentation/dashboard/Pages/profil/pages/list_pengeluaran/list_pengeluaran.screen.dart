@@ -5,7 +5,7 @@ class ListPengeluaranScreen extends GetView<ListPengeluaranController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(
+      appBar: appBarBatal(
         'Pemasukan',
         () {
           Get.offAllNamed(Routes.DASHBOARD);

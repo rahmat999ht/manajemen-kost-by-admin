@@ -34,7 +34,7 @@ class ProfileUpdateController extends GetxController {
   }
 
   Future alertJK() async {
-    await alertValueProfil(
+    await alertValueProfilUpdate(
       title: "Jenil Kelamin",
       listValue: listJK,
       textC: jkC,
