@@ -25,7 +25,7 @@ class PemasukanModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'dateUpload': dateUpload,
-      'foto': foto,
+      'foto': foto.toJson(),
       'jenis': jenis,
       'idr': idr,
       'waktu': waktu,

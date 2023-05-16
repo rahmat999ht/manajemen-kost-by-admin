@@ -9,35 +9,35 @@ class ValueJatuhTempo extends GetView<JatuhTempoController> {
   final String title;
   @override
   Widget build(BuildContext context) {
-    return controller.obx(
-      (state) => Column(
-        children: [
-          SizeApp.h20,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: ColorApp.blackText,
-                    fontSize: 18,
-                  ),
+    return Column(
+      children: [
+        SizeApp.h20,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: ColorApp.blackText,
+                  fontSize: 18,
                 ),
-                const Text(
-                  "See All",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: ColorApp.orange,
-                    fontSize: 14,
-                  ),
+              ),
+              const Text(
+                "See All",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: ColorApp.orange,
+                  fontSize: 14,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          SizedBox(
+        ),
+        controller.obx(
+          (state) => SizedBox(
             height: 230.0,
             child: state!.isEmpty
                 ? Center(
@@ -61,13 +61,13 @@ class ValueJatuhTempo extends GetView<JatuhTempoController> {
                     },
                   ),
           ),
-        ],
-      ),
-      onEmpty: const Center(child: Text("Masih Kosong")),
-      onLoading: const LoadingState(),
-      onError: (e) {
-        return Center(child: Text("pesan error : $e"));
-      },
+          onEmpty: const Center(child: Text("Masih Kosong")),
+          onLoading: const SizedBox(height: 230, child: LoadingState()),
+          onError: (e) {
+            return Center(child: Text("pesan error : $e"));
+          },
+        ),
+      ],
     );
   }
 }
