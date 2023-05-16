@@ -23,6 +23,8 @@ export 'models/jatuh_tempo.dart';
 export 'models/kamar.dart';
 export 'models/naive_bayes.dart';
 export 'models/no_kamar.dart';
+export 'models/pemasukan.dart';
+export 'models/pengeluaran.dart';
 export 'models/penghuni.dart';
 export 'models/terdekat.dart';
 export 'validators/null_validation.dart';

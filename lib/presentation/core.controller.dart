@@ -17,5 +17,6 @@ export 'forms/form_kamar/controllers/form_kamar.controller.dart';
 export 'forms/form_pemasukan/controllers/form_pemasukan.controller.dart';
 export 'forms/form_pemasukan/controllers/image_pemasukan.controller.dart';
 export 'forms/form_pengeluaran/controllers/form_pengeluaran.controller.dart';
+export 'forms/form_pengeluaran/controllers/image_pengeluaran.controller.dart';
 export 'penghuni/controllers/penghuni.controller.dart';
 export 'welcome/controllers/welcome.controller.dart';

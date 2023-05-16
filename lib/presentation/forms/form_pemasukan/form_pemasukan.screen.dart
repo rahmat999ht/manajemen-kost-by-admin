@@ -17,7 +17,7 @@ class FormPemasukanScreen extends GetView<FormPemasukanController> {
           child: Column(
             children: [
               const FormPemasukan(),
-              const WrapperImagePicker(),
+              const WrapperImagePickerPemasukan(),
               const Spacer(),
               ButtonPrymary.isBlack(
                 text: 'Simpan',
@@ -27,22 +27,6 @@ class FormPemasukanScreen extends GetView<FormPemasukanController> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class WrapperImagePicker extends GetView<ImagesPemasukanController>
-    with ImageState {
-  const WrapperImagePicker({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return controller.obx(
-      (state) => imageSuccess(
-        state!,
-        (index) => controller.removeImage(index),
-      ),
-      onEmpty: imageEmpty(controller.getImage),
     );
   }
 }

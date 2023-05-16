@@ -1,6 +1,10 @@
 import 'dart:developer';
+import 'dart:io';
 
-import 'package:manajemen_kost_by_admin/domain/core/core.dart';
+import 'package:blurhash_dart/blurhash_dart.dart';
+import 'package:image/image.dart' as img;
+
+import '/domain/core/core.dart';
 
 class MethodApp {
   void updateKamarById({
@@ -35,7 +39,7 @@ class MethodApp {
         .update(data!);
   }
 
-  void addNaiveBayesById({
+  void addNaiveBayes({
     Map<String, dynamic>? data,
   }) {
     ConstansApp.firebaseFirestore
@@ -51,6 +55,22 @@ class MethodApp {
         .collection(ConstansApp.naiveBayesCollection)
         .doc(idNaiveBayes)
         .update(data!);
+  }
+
+  void addPemasukan({
+    Map<String, dynamic>? data,
+  }) {
+    ConstansApp.firebaseFirestore
+        .collection(ConstansApp.pemasukanCollection)
+        .add(data!);
+  }
+
+  void addPengeluaran({
+    Map<String, dynamic>? data,
+  }) {
+    ConstansApp.firebaseFirestore
+        .collection(ConstansApp.pengeluaranCollection)
+        .add(data!);
   }
 
   DocumentReference<NoKamarModel> noKamar(String id) {
@@ -196,5 +216,32 @@ class MethodApp {
         ? await launch(url)
         : Get.snackbar('info', "Could not launch Telegram");
     // log('Could not launch Telegram');
+  }
+
+  String blurImage(File dataImage) {
+    final data = dataImage.readAsBytesSync();
+    final image = img.decodeImage(data);
+    log(image.toString());
+    final blurHash = BlurHash.encode(image!, numCompX: 4, numCompY: 3);
+    return blurHash.hash;
+  }
+
+  Future<ImageHash> uploadWithImage(
+    File file,
+    String uniqName, {
+    bool pemasukan = true,
+  }) async {
+    final String folder = pemasukan == true ? 'pemasukan' : 'pengeluaran';
+    final uploadTask =
+        await ConstansApp.storageRef.child("$folder/$uniqName.jpg").putFile(
+              file,
+              ConstansApp.metadata,
+            );
+    final String urlImage = await uploadTask.ref.getDownloadURL();
+
+    return ImageHash(
+      imageHash: blurImage(file),
+      imageUrl: urlImage,
+    );
   }
 }

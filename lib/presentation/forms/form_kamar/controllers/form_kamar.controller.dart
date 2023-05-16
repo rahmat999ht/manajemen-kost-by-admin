@@ -267,7 +267,7 @@ class FormKamarController extends GetxController {
             // Mengonversi kembali ke Timestamp
             Timestamp timeNowPlusSebulan = Timestamp.fromDate(newDate);
 
-            methodApp.addNaiveBayesById(
+            methodApp.addNaiveBayes(
               data: {
                 'idKamar': kamarDoc,
                 'tglJatuhTempo': timeNowPlusSebulan,

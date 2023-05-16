@@ -5,14 +5,26 @@ class FormPengeluaranScreen extends GetView<FormPengeluaranController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('FormPengeluaranScreen'),
-        centerTitle: true,
+      backgroundColor: ColorApp.white,
+      appBar: appBarBatal(
+        'Pengeluaran',
+        Get.back,
       ),
-      body: const Center(
-        child: Text(
-          'FormPengeluaranScreen is working',
-          style: TextStyle(fontSize: 20),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Form(
+          key: controller.formKey,
+          child: Column(
+            children: [
+              const FormPengeluaran(),
+              const WrapperImagePickerPengeluaran(),
+              const Spacer(),
+              ButtonPrymary.isBlack(
+                text: 'Simpan',
+                onPressed: controller.addPengeluaran,
+              ),
+            ],
+          ),
         ),
       ),
     );
