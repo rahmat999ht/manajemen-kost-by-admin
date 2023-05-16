@@ -5,12 +5,7 @@ class ListPengeluaranScreen extends GetView<ListPengeluaranController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarBatal(
-        'Pemasukan',
-        () {
-          Get.offAllNamed(Routes.DASHBOARD);
-        },
-      ),
+      appBar: appBarBatal('Pemasukan', Get.back),
       body: const Center(
         child: Text(
           'ListPengeluaranScreen is working',

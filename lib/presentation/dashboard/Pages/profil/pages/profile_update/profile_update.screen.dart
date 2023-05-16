@@ -6,19 +6,16 @@ class ProfileUpdateScreen extends GetView<ProfileUpdateController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorApp.white,
-      appBar: appBarBatal(
-        'Edit profil',
-        () {
-          Get.offAllNamed(Routes.DASHBOARD);
-        },
-      ),
+      appBar: appBarBatal('Edit profil', Get.back),
       body: Form(
         key: controller.formKey,
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              const WrapperImageUpdateProfil(),
+              WrapperImageUpdateProfil(
+                image: controller.adminModel.foto,
+              ),
               SizeApp.h36,
               const ListFormProfilUpdate(),
               const Spacer(),

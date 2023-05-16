@@ -6,8 +6,8 @@ class ProfileUpdateControllerBinding extends Bindings {
     Get.lazyPut<ProfileUpdateController>(
       () => ProfileUpdateController(),
     );
-    Get.lazyPut<ImageUpdateController>(
-      () => ImageUpdateController(),
+    Get.lazyPut<ImageProfileUpdateController>(
+      () => ImageProfileUpdateController(),
     );
   }
 }

@@ -1,8 +1,13 @@
 import '../../../../../../../domain/core/core.dart';
 
-class WrapperImageUpdateProfil extends GetView<ImageUpdateController>
+class WrapperImageUpdateProfil extends GetView<ImageProfileUpdateController>
     with ImageState {
-  const WrapperImageUpdateProfil({Key? key}) : super(key: key);
+  const WrapperImageUpdateProfil({
+    Key? key,
+    required this.image,
+  }) : super(key: key);
+
+  final ImageHash? image;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +17,7 @@ class WrapperImageUpdateProfil extends GetView<ImageUpdateController>
         controller.getImage,
       ),
       onEmpty: imageUpdateProfilEmpty(
-        controller.avatar,
+        image,
         controller.getImage,
       ),
     );

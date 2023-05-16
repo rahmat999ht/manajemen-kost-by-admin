@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import '../../../../../../../domain/core/core.dart';
 
-class ImageUpdateController extends GetxController
+class ImageProfileUpdateController extends GetxController
     with StateMixin<List<XFile>> {
   final formKey = GlobalKey<FormState>();
   final _picker = ImagePicker();

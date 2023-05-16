@@ -15,18 +15,18 @@ class ProfilController extends GetxController {
   ];
 
   void tapPersonalDetails(AdminModel admin) {
-    Get.offAllNamed(
+    Get.toNamed(
       Routes.PROFILE_UPDATE,
       arguments: admin,
     );
   }
 
   void tapPemasukan() {
-    Get.offAllNamed(Routes.LIST_PEMASUKAN);
+    Get.toNamed(Routes.LIST_PEMASUKAN);
   }
 
   void tapPengeluaran() {
-    Get.offAllNamed(Routes.LIST_PENGELUARAN);
+    Get.toNamed(Routes.LIST_PENGELUARAN);
   }
 
   void tapTentang() {
