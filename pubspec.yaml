@@ -26,6 +26,7 @@ dependencies:
   url_launcher: 6.0.20
   blurhash_dart: ^1.2.1
   image: ^4.0.17
+  grouped_list: ^5.1.2
 
 dev_dependencies: 
   flutter_lints: 2.0.1

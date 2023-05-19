@@ -8,6 +8,7 @@ export 'package:flutter/material.dart';
 export 'package:flutter/services.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:get/get.dart';
+export 'package:grouped_list/grouped_list.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 export 'package:octo_image/octo_image.dart';

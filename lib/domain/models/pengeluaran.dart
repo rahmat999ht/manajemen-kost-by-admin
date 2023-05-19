@@ -5,7 +5,7 @@ import '../core/core.dart';
 class PengeluaranModel {
   final String? id;
   final Timestamp dateUpload;
-  final ImageHash foto;
+  final ImageHash? foto;
   final String jenis;
   final int idr;
   PengeluaranModel({
@@ -19,7 +19,7 @@ class PengeluaranModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'dateUpload': dateUpload,
-      'foto': foto.toJson(),
+      'foto': foto!.toJson(),
       'jenis': jenis,
       'idr': idr,
     };
@@ -29,7 +29,9 @@ class PengeluaranModel {
     return PengeluaranModel(
       id: id,
       dateUpload: map['dateUpload'] as Timestamp,
-      foto: map['foto'] as ImageHash,
+      foto: map['foto'] != null
+          ? ImageHash.fromJson(map['foto'] as Map<String, dynamic>)
+          : null,
       jenis: map['jenis'] as String,
       idr: map['idr'] as int,
     );
