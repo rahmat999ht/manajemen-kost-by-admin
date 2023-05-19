@@ -19,9 +19,12 @@ class FormPemasukanScreen extends GetView<FormPemasukanController> {
               const FormPemasukan(),
               const WrapperImagePickerPemasukan(),
               const Spacer(),
-              ButtonPrymary.isBlack(
-                text: 'Simpan',
-                onPressed: () {},
+              Obx(
+                () => ButtonPrymary.isBlack(
+                  isLoading: controller.loading.value,
+                  text: 'Simpan',
+                  onPressed: controller.addPemasukan,
+                ),
               ),
             ],
           ),

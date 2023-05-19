@@ -12,6 +12,11 @@ class FormPemasukanController extends GetxController
   final idrC = TextEditingController();
   final waktuC = TextEditingController();
   List<KamarModel> listKamarTerisi = [];
+  final loading = false.obs;
+
+  void loadingState() {
+    loading.value = !loading.value;
+  }
 
   final listJenis = [
     'Air',
@@ -39,17 +44,15 @@ class FormPemasukanController extends GetxController
       if (formKey.currentState!.validate()) {
         final dataImage = Get.find<ImagesPemasukanController>();
         if (dataImage.imageFileList.isNotEmpty) {
+          loadingState();
           final foto = await methodApp.uploadWithImage(
             File(dataImage.imageFileList.first.path),
             "${ConstansApp.idLogin}_${DateTime.now().toIso8601String()}",
           );
-
           DocumentReference<PenghuniModel> idKamar =
               methodApp.penghuni(kamarC.text);
-
           DocumentReference<PenghuniModel> idAdmin =
               methodApp.penghuni(ConstansApp.idLogin);
-
           methodApp.addPemasukan(
             data: PemasukanModel(
               foto: foto,
@@ -61,6 +64,9 @@ class FormPemasukanController extends GetxController
               dateUpload: Timestamp.now(),
             ).toMap(),
           );
+          dataImage.removeImage(0);
+          Get.offAllNamed(Routes.DASHBOARD);
+          loadingState();
         } else {
           Get.snackbar('Info', "Tolong tambahkan Image");
         }

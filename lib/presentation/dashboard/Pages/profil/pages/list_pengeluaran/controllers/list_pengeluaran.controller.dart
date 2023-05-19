@@ -4,8 +4,8 @@ import '/domain/core/core.dart';
 
 class ListPengeluaranController extends GetxController
     with StateMixin<List<PengeluaranModel>> {
-  final cSearch = TextEditingController();
-  final isSearch = false.obs;
+  // final cSearch = TextEditingController();
+  // final isSearch = false.obs;
   var items = <PengeluaranModel>[];
 
   final listNameMonth = [
@@ -67,20 +67,20 @@ class ListPengeluaranController extends GetxController
     return '-Rp $formattedAmount';
   }
 
-  void onChange(String value) {
-    value.isEmpty ? isSearch.value = false : isSearch.value = true;
+  // void onChange(String value) {
+  //   value.isEmpty ? isSearch.value = false : isSearch.value = true;
 
-    change(
-      value.isEmpty
-          ? items
-          : items
-              .where((element) => element.jenis.toLowerCase().contains(
-                    value.toLowerCase(),
-                  ))
-              .toList(),
-      status: RxStatus.success(),
-    );
-  }
+  //   change(
+  //     value.isEmpty
+  //         ? items
+  //         : items
+  //             .where((element) => element.jenis.toLowerCase().contains(
+  //                   value.toLowerCase(),
+  //                 ))
+  //             .toList(),
+  //     status: RxStatus.success(),
+  //   );
+  // }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> get pengeluaranStream =>
       ConstansApp.firebaseFirestore

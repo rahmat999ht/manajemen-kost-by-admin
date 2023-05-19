@@ -19,9 +19,11 @@ class FormPengeluaranScreen extends GetView<FormPengeluaranController> {
               const FormPengeluaran(),
               const WrapperImagePickerPengeluaran(),
               const Spacer(),
-              ButtonPrymary.isBlack(
-                text: 'Simpan',
-                onPressed: controller.addPengeluaran,
+              Obx(
+                () => ButtonPrymary.isBlack(
+                  text: 'Simpan',
+                  onPressed: controller.addPengeluaran,
+                ),
               ),
             ],
           ),

@@ -8,6 +8,11 @@ class FormPengeluaranController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final jenisC = TextEditingController();
   final idrC = TextEditingController();
+  final loading = false.obs;
+
+  void loadingState() {
+    loading.value = !loading.value;
+  }
 
   final listJenis = [
     'Air',
@@ -27,6 +32,7 @@ class FormPengeluaranController extends GetxController {
       if (formKey.currentState!.validate()) {
         final dataImage = Get.find<ImagesPengeluaranController>();
         if (dataImage.imageFileList.isNotEmpty) {
+          loadingState();
           final foto = await methodApp.uploadWithImage(
             File(dataImage.imageFileList.first.path),
             "${ConstansApp.idLogin}_${DateTime.now().toIso8601String()}",
@@ -43,6 +49,7 @@ class FormPengeluaranController extends GetxController {
           log('berhasil');
           dataImage.removeImage(0);
           Get.offAllNamed(Routes.DASHBOARD);
+          loadingState();
         } else {
           Get.snackbar('Info', "Tolong tambahkan Image");
         }

@@ -112,7 +112,15 @@ mixin ImageState {
                 onTap: () {
                   removeImage(index);
                 },
-                child: const Icon(Icons.cancel),
+                child: const ClipOval(
+                  child: Card(
+                    margin: EdgeInsets.all(0),
+                    color: ColorApp.white,
+                    child: Icon(
+                      Icons.cancel,
+                    ),
+                  ),
+                ),
               ),
             ],
           );
