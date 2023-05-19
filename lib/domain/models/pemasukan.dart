@@ -50,7 +50,7 @@ class PemasukanModel {
     return PemasukanModel(
       id: id,
       dateUpload: map['dateUpload'] as Timestamp,
-      foto: map['foto'] as ImageHash,
+      foto: ImageHash.fromJson(map['foto'] as Map<String, dynamic>),
       jenis: map['jenis'] as String,
       idr: map['idr'] as int,
       waktu: map['waktu'] as String,

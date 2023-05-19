@@ -9,6 +9,7 @@ export 'dashboard/Pages/home/controllers/kamar.controller.dart';
 export 'dashboard/Pages/home/controllers/terdekat.controller.dart';
 export 'dashboard/Pages/list_penghuni/controllers/list_penghuni.controller.dart';
 export 'dashboard/Pages/profil/controllers/profil.controller.dart';
+export 'dashboard/Pages/profil/pages/list_pemasukan/controllers/list_pemasukan.controller.dart';
 export 'dashboard/Pages/profil/pages/list_pengeluaran/controllers/list_pengeluaran.controller.dart';
 export 'dashboard/Pages/profil/pages/profile_update/controllers/image_update.contoller.dart';
 export 'dashboard/Pages/profil/pages/profile_update/controllers/profile_update.controller.dart';

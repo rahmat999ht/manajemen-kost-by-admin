@@ -1,4 +1,4 @@
-import '../../../../../../../domain/core/core.dart';
+import '../../../../../domain/core/core.dart';
 
 class GroupSeparator extends StatelessWidget {
   const GroupSeparator(
