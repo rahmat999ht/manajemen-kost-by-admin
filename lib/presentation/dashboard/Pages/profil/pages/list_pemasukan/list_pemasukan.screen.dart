@@ -1,6 +1,3 @@
-import 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/profil/pages/list_pemasukan/components/detail_pemasukan.dart';
-import 'package:manajemen_kost_by_admin/presentation/dashboard/Pages/profil/pages/list_pemasukan/components/value_grub.dart';
-
 import '../../../../../../domain/core/core.dart';
 
 class ListPemasukanScreen extends GetView<ListPemasukanController> {

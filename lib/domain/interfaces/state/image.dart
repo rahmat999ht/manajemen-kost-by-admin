@@ -17,7 +17,7 @@ mixin ImageState {
             width: 5,
           ),
           Text(
-            'Tambahkan Foto',
+            'Tambahkan Nota',
             style: TextStyle(fontSize: 12),
           ),
         ],
@@ -118,6 +118,7 @@ mixin ImageState {
                     color: ColorApp.white,
                     child: Icon(
                       Icons.cancel,
+                      color: ColorApp.orange,
                     ),
                   ),
                 ),

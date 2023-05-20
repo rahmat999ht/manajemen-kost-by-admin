@@ -21,6 +21,8 @@ class FormPengeluaran extends GetView<FormPengeluaranController> {
           controller: controller.idrC,
           titel: "IDR",
           isCheck: true,
+          textInputType: TextInputType.number,
+          inputFormatters: [MoneyFormatter()],
         ),
       ],
     );

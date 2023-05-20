@@ -22,7 +22,8 @@ class ListPenghuniScreen extends GetView<ListPenghuniController> {
               index,
             ) {
               return Penghuni(
-                penghuni: state[index],
+                listPenghuni: state,
+                index: index,
                 onTap: () {},
               );
             },

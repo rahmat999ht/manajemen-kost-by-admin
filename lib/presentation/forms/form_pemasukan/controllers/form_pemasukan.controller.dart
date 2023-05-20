@@ -10,7 +10,6 @@ class FormPemasukanController extends GetxController
   final jenisC = TextEditingController();
   final kamarC = TextEditingController();
   final idrC = TextEditingController();
-  final waktuC = TextEditingController();
   List<KamarModel> listKamarTerisi = [];
   final loading = false.obs;
 
@@ -43,24 +42,25 @@ class FormPemasukanController extends GetxController
     try {
       if (formKey.currentState!.validate()) {
         final dataImage = Get.find<ImagesPemasukanController>();
+        final idr = idrC.text.replaceAll('Rp', '');
+        final fixIdr = idr.replaceAll(',', '');
+        log(fixIdr);
         if (dataImage.imageFileList.isNotEmpty) {
           loadingState();
           final foto = await methodApp.uploadWithImage(
             File(dataImage.imageFileList.first.path),
             "${ConstansApp.idLogin}_${DateTime.now().toIso8601String()}",
           );
-          DocumentReference<PenghuniModel> idKamar =
-              methodApp.penghuni(kamarC.text);
-          DocumentReference<PenghuniModel> idAdmin =
-              methodApp.penghuni(ConstansApp.idLogin);
+          DocumentReference<KamarModel> idKamar = methodApp.kamar(kamarC.text);
+          DocumentReference<AdminModel> idAdmin =
+              methodApp.admin(ConstansApp.idLogin);
           methodApp.addPemasukan(
             data: PemasukanModel(
               foto: foto,
               jenis: jenisC.text,
-              idr: int.parse(idrC.text),
-              waktu: waktuC.text,
+              idr: int.parse(fixIdr),
               idKamar: idKamar,
-              idLogin: idAdmin,
+              idAdmin: idAdmin,
               dateUpload: Timestamp.now(),
             ).toMap(),
           );
@@ -68,7 +68,7 @@ class FormPemasukanController extends GetxController
           Get.offAllNamed(Routes.DASHBOARD);
           loadingState();
         } else {
-          Get.snackbar('Info', "Tolong tambahkan Image");
+          Get.snackbar('Info', "Tolong tambahkan Nota");
         }
       } else {
         Get.snackbar('Info', "Tolong isi semua form");

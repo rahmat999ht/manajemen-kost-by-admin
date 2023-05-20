@@ -27,6 +27,7 @@ dependencies:
   blurhash_dart: ^1.2.1
   image: ^4.0.17
   grouped_list: ^5.1.2
+  intl: ^0.18.1
 
 dev_dependencies: 
   flutter_lints: 2.0.1

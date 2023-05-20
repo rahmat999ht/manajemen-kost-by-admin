@@ -25,3 +25,4 @@ export '/infrastructure/navigation/routes.dart';
 export '/infrastructure/theme/colors.dart';
 export '/presentation/core.controller.dart';
 export '/presentation/core.screens.dart';
+export '/presentation/forms/formatter/money_formatter.dart';

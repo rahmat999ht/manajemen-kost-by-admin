@@ -30,6 +30,11 @@ class DetailPemasukan extends GetView<ListPemasukanController> {
               child: Column(
                 children: [
                   content(
+                    'Nomor kamar',
+                    e.idKamar.id,
+                  ),
+                  const Divider(),
+                  content(
                     'Jenis pembayaran',
                     e.jenis,
                   ),
@@ -46,36 +51,6 @@ class DetailPemasukan extends GetView<ListPemasukanController> {
                   ),
                 ],
               ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Padding content(
-    String title,
-    String value, {
-    Color? colorValue,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 14,
-              color: ColorApp.blackText,
-            ),
-          ),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: colorValue ?? ColorApp.blackNavi,
             ),
           ),
         ],

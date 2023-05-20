@@ -52,34 +52,4 @@ class DetailPengeluaran extends GetView<ListPengeluaranController> {
       ),
     );
   }
-
-  Padding content(
-    String title,
-    String value, {
-    Color? colorValue,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 14,
-              color: ColorApp.blackText,
-            ),
-          ),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: colorValue ?? ColorApp.blackNavi,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

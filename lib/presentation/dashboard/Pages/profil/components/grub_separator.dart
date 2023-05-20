@@ -24,10 +24,10 @@ class GroupSeparator extends StatelessWidget {
               color: ColorApp.blackNavi,
             ),
           ),
-          // const Icon(
-          //   Icons.arrow_forward_ios,
-          //   size: 16,
-          // ),
+          const Icon(
+            Icons.arrow_forward_ios,
+            size: 16,
+          ),
         ],
       ),
     );

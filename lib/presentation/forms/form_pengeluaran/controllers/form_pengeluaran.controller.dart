@@ -31,6 +31,9 @@ class FormPengeluaranController extends GetxController {
     try {
       if (formKey.currentState!.validate()) {
         final dataImage = Get.find<ImagesPengeluaranController>();
+        final idr = idrC.text.replaceAll('Rp', '');
+        final fixIdr = idr.replaceAll(',', '');
+        log(fixIdr);
         if (dataImage.imageFileList.isNotEmpty) {
           loadingState();
           final foto = await methodApp.uploadWithImage(
@@ -41,7 +44,7 @@ class FormPengeluaranController extends GetxController {
           final data = PengeluaranModel(
             foto: foto,
             jenis: jenisC.text,
-            idr: int.parse(idrC.text),
+            idr: int.parse(fixIdr),
             dateUpload: Timestamp.now(),
           ).toMap();
           log(data.toString());
@@ -51,7 +54,7 @@ class FormPengeluaranController extends GetxController {
           Get.offAllNamed(Routes.DASHBOARD);
           loadingState();
         } else {
-          Get.snackbar('Info', "Tolong tambahkan Image");
+          Get.snackbar('Info', "Tolong tambahkan Nota");
         }
       } else {
         Get.snackbar('Info', "Tolong isi semua form");

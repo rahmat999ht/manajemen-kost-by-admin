@@ -22,6 +22,7 @@ class FormPengeluaranScreen extends GetView<FormPengeluaranController> {
               Obx(
                 () => ButtonPrymary.isBlack(
                   text: 'Simpan',
+                  isLoading: controller.loading.value,
                   onPressed: controller.addPengeluaran,
                 ),
               ),
