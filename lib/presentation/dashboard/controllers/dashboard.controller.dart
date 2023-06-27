@@ -1,8 +1,6 @@
 import 'dart:developer';
 import 'dart:isolate';
 
-import 'package:flutter_isolate/flutter_isolate.dart';
-
 import '../../../domain/core/core.dart';
 
 class DashboardController extends GetxController with StateMixin<AdminModel> {

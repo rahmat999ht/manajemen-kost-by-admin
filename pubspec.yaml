@@ -18,7 +18,7 @@ dependencies:
   cloud_firestore: ^4.5.1
   octo_image: ^1.0.2
   cached_network_image: ^3.2.3
-  get_cli: ^0.2.30
+  # get_cli: ^0.2.30
   image_picker: ^0.8.6+1
   firebase_storage: ^11.2.0
   collection: ^1.17.0
@@ -29,6 +29,7 @@ dependencies:
   grouped_list: ^5.1.2
   intl: ^0.18.1
   firebase_messaging: ^14.6.2
+  get_cli: ^1.8.1
   # flutter_isolate: ^2.0.4
   # cloud_firestore: ^4.8.0
 
