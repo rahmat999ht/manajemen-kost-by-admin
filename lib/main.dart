@@ -15,6 +15,18 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await FirebaseMessaging.instance.subscribeToTopic(isId);
+  // FirebaseMessaging messaging = FirebaseMessaging.instance;
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    log('Got a message whilst in the foreground!');
+    log('Message data: ${message.data}');
+
+    if (message.notification != null) {
+      log('Message also contained a notification: ${message.notification}');
+    }
+  });
+  FirebaseMessaging.instance.sendMessage();
   runApp(Main(initialRoute));
 }
 
@@ -32,3 +44,10 @@ class Main extends StatelessWidget {
     );
   }
 }
+
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   // If you're going to use other Firebase services in the background, such as Firestore,
+//   // make sure you call `initializeApp` before using other Firebase services.
+//   await Firebase.initializeApp();
+//   log("Handling a background message: ${message.data}");
+// }
