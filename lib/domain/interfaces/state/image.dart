@@ -6,9 +6,9 @@ mixin ImageState {
   TextButton imageEmpty(dynamic getImg) {
     return TextButton(
       onPressed: () async => await getImg(),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: const [
+        children: [
           Icon(
             Icons.photo_camera,
             size: 20,
@@ -36,6 +36,7 @@ mixin ImageState {
             imageHash: imageHash,
             height: 180,
             width: 180,
+            radius: 100,
           ),
         ),
         InkWell(
@@ -58,7 +59,7 @@ mixin ImageState {
       alignment: AlignmentDirectional.bottomEnd,
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(100),
+          borderRadius: BorderRadius.circular(200),
           child: Image.file(
             File(state.first.path),
             fit: BoxFit.cover,

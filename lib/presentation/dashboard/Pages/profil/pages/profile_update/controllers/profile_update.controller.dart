@@ -18,11 +18,16 @@ class ProfileUpdateController extends GetxController {
   late final AdminModel adminModel;
   final isLoading = false.obs;
 
+  void initLoading() {
+    isLoading.value = !isLoading.value;
+  }
+
   Future updateProfil() async {
     try {
       if (formKey.currentState!.validate()) {
         final dataImage = Get.find<ImageProfileUpdateController>();
         if (dataImage.imageFileList.isNotEmpty || adminModel.foto != null) {
+          initLoading();
           log('masuk');
           log(' image : ${dataImage.imageFileList.length}');
           if (dataImage.imageFileList.isNotEmpty) {
@@ -61,6 +66,7 @@ class ProfileUpdateController extends GetxController {
                 );
             Get.offAllNamed(Routes.PROFIL);
           }
+          initLoading();
         } else {
           Get.snackbar('Info', "Tolong tambahkan Image");
         }

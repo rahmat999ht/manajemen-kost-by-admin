@@ -6,6 +6,8 @@ class ListPemasukanController extends GetxController
     with StateMixin<List<PemasukanModel>> {
   final methodApp = MethodApp();
   var items = <PemasukanModel>[];
+  String threeDigits(String value) =>
+      value.substring(value.indexOf(" ") + 1, value.indexOf(" ") + 4);
 
   final listNameMonth = [
     "Jan",

@@ -37,6 +37,7 @@ export 'dashboard/components/bottom_sheet.dart';
 export 'dashboard/components/button_nav_bar.dart';
 export 'dashboard/components/call_by.dart';
 export 'dashboard/components/card_contact_by.dart';
+export 'dashboard/components/details_kamar.dart';
 export 'dashboard/components/fab.dart';
 export 'dashboard/components/fab_empty.dart';
 export 'dashboard/components/icon_fab.dart';

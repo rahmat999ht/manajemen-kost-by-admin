@@ -17,9 +17,9 @@ class HomeScreen extends GetView<HomeController> {
         toolbarHeight: 140,
         elevation: 0,
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
-          children: const [
+          children: [
             ValueJatuhTempo(
               title: "Jatuh Tempo",
             ),

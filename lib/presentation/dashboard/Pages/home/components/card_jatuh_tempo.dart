@@ -54,112 +54,122 @@ class CardJatuhTempo extends GetView<HomeController> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final dataPenghuni = snapshot.data!.data()!;
-                  return Row(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(0),
-                        height: Get.height,
-                        decoration: const BoxDecoration(
-                          color: ColorApp.grayForm,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
+                  return GestureDetector(
+                    onTap: () {
+                      Get.to(
+                        DetailKamar(
+                          kamarModel: data,
+                          naiveBayesModel: jatuhTempoModel,
+                        ),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(0),
+                          height: Get.height,
+                          decoration: const BoxDecoration(
+                            color: ColorApp.grayForm,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                            ),
+                          ),
+                          child: AvatarWidget(
+                            imageHash: dataPenghuni.image,
+                            width: 107,
+                            height: dataPenghuni.image != null ? 189 : 100,
                           ),
                         ),
-                        child: AvatarWidget(
-                          imageHash: dataPenghuni.image,
-                          width: 107,
-                          height: dataPenghuni.image != null ? 189 : 100,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Row(
-                              children: [
-                                SvgPicture.asset(
-                                  Assets.kamar,
-                                ),
-                                SizeApp.w8,
-                                Text(
-                                  'No. ${data.id!}',
-                                  style: const TextStyle(
-                                    color: ColorApp.blackNavi,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    Assets.kamar,
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizeApp.h10,
-                            Text(
-                              dataPenghuni.nama,
-                              style: const TextStyle(
-                                color: ColorApp.blackText,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizeApp.h20,
-                            Text(
-                              dataPenghuni.status,
-                              style: const TextStyle(
-                                color: ColorApp.gray,
-                              ),
-                            ),
-                            SizeApp.h12,
-                            Row(
-                              children: [
-                                SvgPicture.asset(
-                                  Assets.lantai,
-                                ),
-                                SizeApp.w8,
-                                Text(
-                                  data.lantai!,
-                                  style: const TextStyle(
-                                    color: ColorApp.gray,
-                                  ),
-                                ),
-                                SizeApp.w20,
-                                SvgPicture.asset(
-                                  Assets.gedung,
-                                ),
-                                SizeApp.w8,
-                                Text(
-                                  data.gedung!,
-                                  style: const TextStyle(
-                                    color: ColorApp.gray,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizeApp.h18,
-                            RichText(
-                              text: TextSpan(
-                                text: '$day ',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorApp.red,
-                                  fontSize: 20,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: controller.months[month! - 1],
+                                  SizeApp.w8,
+                                  Text(
+                                    'No. ${data.id!}',
                                     style: const TextStyle(
-                                      color: ColorApp.red,
+                                      color: ColorApp.blackNavi,
                                       fontSize: 14,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ],
                               ),
-                            ),
-                          ],
+                              SizeApp.h10,
+                              Text(
+                                dataPenghuni.nama,
+                                style: const TextStyle(
+                                  color: ColorApp.blackText,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              SizeApp.h20,
+                              Text(
+                                dataPenghuni.status,
+                                style: const TextStyle(
+                                  color: ColorApp.gray,
+                                ),
+                              ),
+                              SizeApp.h12,
+                              Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    Assets.lantai,
+                                  ),
+                                  SizeApp.w8,
+                                  Text(
+                                    data.lantai!,
+                                    style: const TextStyle(
+                                      color: ColorApp.gray,
+                                    ),
+                                  ),
+                                  SizeApp.w20,
+                                  SvgPicture.asset(
+                                    Assets.gedung,
+                                  ),
+                                  SizeApp.w8,
+                                  Text(
+                                    data.gedung!,
+                                    style: const TextStyle(
+                                      color: ColorApp.gray,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizeApp.h18,
+                              RichText(
+                                text: TextSpan(
+                                  text: '$day ',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: ColorApp.red,
+                                    fontSize: 20,
+                                  ),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: controller.months[month! - 1],
+                                      style: const TextStyle(
+                                        color: ColorApp.red,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   );
                 }
                 return const Center(

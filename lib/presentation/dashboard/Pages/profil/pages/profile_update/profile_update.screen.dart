@@ -7,23 +7,29 @@ class ProfileUpdateScreen extends GetView<ProfileUpdateController> {
     return Scaffold(
       backgroundColor: ColorApp.white,
       appBar: appBarBatal('Edit profil', Get.back),
-      body: Form(
-        key: controller.formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              WrapperImageUpdateProfil(
-                image: controller.adminModel.foto,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: Get.height,
+          child: Form(
+            key: controller.formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  SizeApp.h36,
+                  WrapperImageUpdateProfil(
+                    image: controller.adminModel.foto,
+                  ),
+                  SizeApp.h36,
+                  const ListFormProfilUpdate(),
+                  SizeApp.h50,
+                  ButtonPrymary.isBlack(
+                    text: 'Simpan',
+                    onPressed: controller.updateProfil,
+                  )
+                ],
               ),
-              SizeApp.h36,
-              const ListFormProfilUpdate(),
-              const Spacer(),
-              ButtonPrymary.isBlack(
-                text: 'Simpan',
-                onPressed: controller.updateProfil,
-              )
-            ],
+            ),
           ),
         ),
       ),
