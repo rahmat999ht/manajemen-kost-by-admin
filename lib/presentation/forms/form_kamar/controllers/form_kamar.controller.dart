@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import '../../../../domain/core/core.dart';
 
-class FormKamarController extends GetxController {
+class FormKamarController extends GetxController
+    with StateMixin<List<PenghuniModel>> {
   // final penghuniController = Get.find<KamarController>();
   KamarModel? dataKamar;
   // List<PenghuniModel> listPenghuni = [];
@@ -197,9 +198,7 @@ class FormKamarController extends GetxController {
                 isAktif: true,
               ).toMap(),
             );
-            // continue;
           }
-
 //ketika id penghuni sama dengan nomor yg kita input .
 //maka if di bawah akan di jalankan.
 //dan if di bawah ini akan mengupdate data yg sudah ada di tabel penghuni berdasarkan id penghuni.
@@ -216,7 +215,6 @@ class FormKamarController extends GetxController {
                 isAktif: true,
               ).toMap(),
             );
-            // continue;
           }
           DocumentReference<PenghuniModel> user =
               methodApp.penghuni(dataPenghuni.id);
@@ -310,6 +308,12 @@ class FormKamarController extends GetxController {
     }
   }
 
+  var items = <PenghuniModel>[];
+  Stream<QuerySnapshot<Map<String, dynamic>>> get penghuniStream =>
+      ConstansApp.firebaseFirestore
+          .collection(ConstansApp.penghuniCollection)
+          .snapshots();
+
   @override
   void onInit() async {
     // listPenghuni = penghuniController.items;
@@ -317,8 +321,30 @@ class FormKamarController extends GetxController {
     final data = await methodApp.kamar(noKamar).get();
     log(data.data().toString(), name: 'kamar');
     dataKamar = data.data();
+    var listPengh = <PenghuniModel>[];
+
+    penghuniStream.listen((event) {
+      if (event.size == 0) {
+        log("empty");
+        change(null, status: RxStatus.empty());
+      } else {
+        items = List.generate(event.docs.length, (index) {
+          final data = event.docs[index];
+          return PenghuniModel.fromDocumentSnapshot(data);
+        });
+        for (int i = 0; i < dataKamar!.penghuni!.length; i++) {
+          listPengh = items.where((element) {
+            final el = element.noHp == dataKamar!.penghuni![i].id;
+            log(el.toString(), name: 'data');
+            return element.noHp == dataKamar!.penghuni![i].id;
+          }).toList();
+        }
+        log(listPengh.length.toString(), name: 'data');
+        change(listPengh, status: RxStatus.success());
+      }
+    });
     initForm(
-      penyewa: dataKamar?.penghuni,
+      penyewa: listPengh,
       sewaBulanan: dataKamar?.sewaBulanan.toString(),
       sewaTahunan: dataKamar?.sewaTahunan.toString(),
       fasilitas: dataKamar?.fasilitas,
@@ -328,7 +354,7 @@ class FormKamarController extends GetxController {
   }
 
   void initForm({
-    final List<DocumentReference<PenghuniModel>>? penyewa,
+    final List<PenghuniModel>? penyewa,
     final String? sewaBulanan,
     final String? sewaTahunan,
     final List<String>? fasilitas,
@@ -336,16 +362,16 @@ class FormKamarController extends GetxController {
     penyewa == null || penyewa.isEmpty
         ? listPenyewa.length
         : listPenyewa.value = penyewa.map((e) {
+            // final data = items.firstWhere((element) => element.noHp == e.id);
             // listPenghuni.first.id == e.id;
+            log(e.nama, name: 'data');
             return [
-              TextEditingController(text: e.id),
-              TextEditingController(text: e.id),
-              TextEditingController(text: e.id),
-              TextEditingController(text: e.id),
+              TextEditingController(text: e.nama),
+              TextEditingController(text: e.noHp),
+              TextEditingController(text: e.jkl),
+              TextEditingController(text: e.status),
             ];
           }).toList();
-    sewaBulanan == null ? null : hargaSebulan.text = sewaBulanan;
-    sewaTahunan == null ? null : hargaSetahun.text = sewaTahunan;
     fasilitas == null || fasilitas.isEmpty
         ? listFasilitas.length
         : listFasilitas.value = fasilitas
@@ -353,5 +379,7 @@ class FormKamarController extends GetxController {
               (e) => TextEditingController(text: e),
             )
             .toList();
+    sewaBulanan == null ? null : hargaSebulan.text = sewaBulanan;
+    sewaTahunan == null ? null : hargaSetahun.text = sewaTahunan;
   }
 }

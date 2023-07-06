@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-import 'package:manajemen_kost_by_admin/presentation/dashboard/components/details_kamar.dart';
-
 import '../../../../../domain/core/core.dart';
 
 class CardCalender extends GetView<CalenderController> {

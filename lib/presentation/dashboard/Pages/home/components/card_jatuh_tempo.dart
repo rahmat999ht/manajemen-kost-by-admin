@@ -15,54 +15,54 @@ class CardJatuhTempo extends GetView<HomeController> {
     final jatuhTempoModel = listJatuhTempo[index];
     final day = jatuhTempoModel!.tglJatuhTempo?.toDate().day;
     final month = jatuhTempoModel.tglJatuhTempo?.toDate().month;
-    return Container(
-      margin: EdgeInsets.only(
-        left: 12,
-        bottom: 20,
-        top: 12,
-        right: listJatuhTempo.length == index + 1 ? 30 : 0,
-      ),
-      height: 180.0,
-      width: Get.width * 0.9,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            offset: const Offset(10.0, 10.0),
-            blurRadius: 10.0,
-            spreadRadius: 2.0,
-          ),
-        ],
-      ),
-      child: StreamBuilder(
-        stream: controller.methodApp
-            .kamar(
-              jatuhTempoModel.idKamar!.id,
-            )
-            .snapshots(),
-        builder: (ctx, s) {
-          if (s.hasData) {
-            final data = s.data!.data()!;
-            return StreamBuilder(
-              stream: controller.methodApp
-                  .penghuni(
-                    data.penghuni!.first.id,
-                  )
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final dataPenghuni = snapshot.data!.data()!;
-                  return GestureDetector(
-                    onTap: () {
-                      Get.to(
-                        DetailKamar(
-                          kamarModel: data,
-                          naiveBayesModel: jatuhTempoModel,
+    return StreamBuilder(
+      stream: controller.methodApp
+          .kamar(
+            jatuhTempoModel.idKamar!.id,
+          )
+          .snapshots(),
+      builder: (ctx, s) {
+        if (s.hasData) {
+          final data = s.data!.data()!;
+          return StreamBuilder(
+            stream: controller.methodApp
+                .penghuni(
+                  data.penghuni!.first.id,
+                )
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final dataPenghuni = snapshot.data!.data()!;
+                return GestureDetector(
+                  onTap: () {
+                    Get.to(
+                      DetailKamar(
+                        kamarModel: data,
+                        naiveBayesModel: jatuhTempoModel,
+                      ),
+                    );
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      left: 12,
+                      bottom: 20,
+                      top: 12,
+                      right: listJatuhTempo.length == index + 1 ? 30 : 0,
+                    ),
+                    height: 180.0,
+                    width: Get.width * 0.9,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          offset: const Offset(10.0, 10.0),
+                          blurRadius: 10.0,
+                          spreadRadius: 2.0,
                         ),
-                      );
-                    },
+                      ],
+                    ),
                     child: Row(
                       children: [
                         Container(
@@ -170,19 +170,19 @@ class CardJatuhTempo extends GetView<HomeController> {
                         ),
                       ],
                     ),
-                  );
-                }
-                return const Center(
-                  child: Text("Proses ..."),
+                  ),
                 );
-              },
-            );
-          }
-          return const Center(
-            child: Text("Masih Kosong"),
+              }
+              return const Center(
+                child: Text("Proses ..."),
+              );
+            },
           );
-        },
-      ),
+        }
+        return const Center(
+          child: Text("Masih Kosong"),
+        );
+      },
     );
   }
 }

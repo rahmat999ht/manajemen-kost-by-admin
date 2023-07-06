@@ -29,6 +29,7 @@ dependencies:
   firebase_messaging: ^14.6.2
   get_cli: ^1.8.1
   collection: ^1.17.1
+  simple_grouped_listview: ^2.0.0
 
 dev_dependencies: 
   flutter_lints: 2.0.1

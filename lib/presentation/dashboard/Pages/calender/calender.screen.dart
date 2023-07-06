@@ -65,8 +65,8 @@ class CalenderScreen extends GetView<CalenderController> {
                   ];
                 }
               }
-              return Column(
-                children: const [
+              return const Column(
+                children: [
                   Calendar(),
                   SizedBox(height: 12.0),
                   ValueDate(),

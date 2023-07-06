@@ -15,7 +15,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await FirebaseMessaging.instance.subscribeToTopic(isId);
   // FirebaseMessaging messaging = FirebaseMessaging.instance;
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -26,7 +25,6 @@ void main() async {
       log('Message also contained a notification: ${message.notification}');
     }
   });
-  FirebaseMessaging.instance.sendMessage();
   runApp(Main(initialRoute));
 }
 

@@ -4,11 +4,13 @@ class CardTapKamar extends StatelessWidget {
   const CardTapKamar({
     super.key,
     required this.onTap,
+    this.penghuni,
     required this.noKamar,
     required this.isLoading,
   });
 
   final String noKamar;
+  final List<DocumentReference<PenghuniModel>>? penghuni;
   final void Function()? onTap;
   final bool isLoading;
 
@@ -25,7 +27,8 @@ class CardTapKamar extends StatelessWidget {
             ),
           ),
         ),
-        color: ColorApp.orange,
+        color: penghuni!.isEmpty ? ColorApp.red : ColorApp.orange,
+        // color: ColorApp.orange,
         child: Center(
           child: isLoading == true
               ? const SizedBox(
@@ -35,9 +38,10 @@ class CardTapKamar extends StatelessWidget {
                 )
               : Text(
                   noKamar,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
-                    color: ColorApp.blueText,
+                    color:
+                        penghuni!.isEmpty ? ColorApp.white : ColorApp.blueText,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

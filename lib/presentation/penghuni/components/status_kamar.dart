@@ -3,12 +3,12 @@ import '../../../domain/core/core.dart';
 class StatusKamar extends StatelessWidget {
   const StatusKamar({
     super.key,
-    required this.isStream,
+    // required this.isStream,
     required this.terisi,
     required this.kosong,
   });
 
-  final bool isStream;
+  // final bool isStream;
   final String terisi;
   final String kosong;
 
@@ -71,19 +71,20 @@ class StatusKamar extends StatelessWidget {
             color: ColorApp.blueText,
           ),
         ),
-        isStream
-            ? Text(
-                value,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: colors,
-                ),
-              )
-            : const SizedBox(
-                height: 10,
-                width: 10,
-                child: LoadingState(),
-              ),
+        // isStream
+        //     ?
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 14,
+            color: colors,
+          ),
+        )
+        // : const SizedBox(
+        //     height: 10,
+        //     width: 10,
+        //     child: LoadingState(),
+        //   ),
       ],
     );
   }

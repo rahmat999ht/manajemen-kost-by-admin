@@ -62,7 +62,6 @@ export 'penghuni/components/ket_warna.dart';
 export 'penghuni/components/list_lantai.dart';
 export 'penghuni/components/page_gedung.dart';
 export 'penghuni/components/status_kamar.dart';
-export 'penghuni/components/stream.dart';
 export 'penghuni/components/tab_button.dart';
 export 'penghuni/components/tap_kamar.dart';
 export 'penghuni/penghuni.screen.dart';
