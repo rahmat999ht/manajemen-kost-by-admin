@@ -53,6 +53,7 @@ class LoginController extends GetxController {
           verificationCompleted: (credential) {},
           verificationFailed: (e) {
             log("verificationFailed : ${e.message} ${e.phoneNumber}");
+            isLoadingChange();
           },
           codeSent: (String verificationId, int? resendToken) {
             log("codeSent");

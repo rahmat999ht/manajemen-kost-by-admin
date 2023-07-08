@@ -60,9 +60,12 @@ class BodyLogin extends StatelessWidget {
                 color: ColorApp.grayForm,
               ),
               SizeApp.h30,
-              ButtonPrymary(
-                onPressed: c.tapSelanjutnya,
-                text: 'Selanjutnya',
+              Obx(
+                () => ButtonPrymary(
+                  onPressed: c.tapSelanjutnya,
+                  text: 'Selanjutnya',
+                  isLoading: c.isLoading.value,
+                ),
               ),
             ],
           ),

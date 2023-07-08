@@ -1,12 +1,14 @@
 import '../../../../../domain/core/core.dart';
 
-class ValueJatuhTempo extends GetView<JatuhTempoController> {
-  const ValueJatuhTempo({
+class ValueJatuhTempo extends StatelessWidget {
+  const ValueJatuhTempo( {
     super.key,
     required this.title,
+    required this.controller,
   });
 
   final String title;
+  final JatuhTempoController controller;
   @override
   Widget build(BuildContext context) {
     return Column(

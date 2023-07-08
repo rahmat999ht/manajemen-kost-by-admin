@@ -20,7 +20,7 @@ class HomeController extends GetxController with StateMixin<List<dynamic>> {
   final cSearch = TextEditingController();
   final isSearch = false.obs;
 
-  final cTerdekat = Get.find<TerdekatController>();
-  final cJatuhTempo = Get.find<JatuhTempoController>();
-  final cKamarKosong = Get.find<KamarController>();
+  // final cTerdekat = Get.find<TerdekatController>();
+  // final cJatuhTempo = Get.find<JatuhTempoController>();
+  // final cKamarKosong = Get.find<KamarController>();
 }

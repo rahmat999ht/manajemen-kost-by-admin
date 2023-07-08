@@ -3,7 +3,8 @@ import 'dart:developer';
 import '../../../../domain/core/core.dart';
 
 class FormKamarController extends GetxController
-    with StateMixin<List<PenghuniModel>> {
+// with StateMixin<List<PenghuniModel>>
+{
   // final penghuniController = Get.find<KamarController>();
   KamarModel? dataKamar;
   // List<PenghuniModel> listPenghuni = [];
@@ -51,53 +52,57 @@ class FormKamarController extends GetxController
   // }
 
   Future deleteTSbyID(List<TextEditingController> e) async {
-    final idPenghuni = e[1].text;
-    DocumentReference<PenghuniModel> user = methodApp.penghuni(idPenghuni);
-    final penghuni = await user.get();
-    if (penghuni.exists) {
-      alertActions(
-        'Peringatan',
-        'dengan menghapus form ini\nmaka akan menghapus data yang sudah ada sebelumnya.',
-        [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ButtonOutline(
-                width: 50,
-                onPressed: () {
-                  Get.back();
-                },
-                text: 'No',
-              ),
-              SizeApp.w10,
-              ButtonOutline(
-                width: 50,
-                onPressed: () {
-                  methodApp.updateKamarById(
-                    noKamar: noKamar,
-                    data: {
-                      'penghuni': FieldValue.arrayRemove([user]),
-                    },
-                  );
-                  methodApp.updatePenghuniById(
-                    idPenghuni: idPenghuni,
-                    data: {
-                      'isAktif': false,
-                    },
-                  );
-                  listPenyewa.remove(e);
-                  Get.back();
-                  Get.snackbar(
-                    "Info",
-                    'berhasil menghapus Teman sekamar',
-                  );
-                },
-                text: 'Yes',
-              ),
-            ],
-          )
-        ],
-      );
+    if (e[1].text.isNotEmpty) {
+      final idPenghuni = e[1].text;
+      DocumentReference<PenghuniModel> user = methodApp.penghuni(idPenghuni);
+      final penghuni = await user.get();
+      if (penghuni.exists) {
+        alertActions(
+          'Peringatan',
+          'dengan menghapus form ini\nmaka akan menghapus data yang sudah ada sebelumnya.',
+          [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ButtonOutline(
+                  width: 50,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  text: 'No',
+                ),
+                SizeApp.w10,
+                ButtonOutline(
+                  width: 50,
+                  onPressed: () {
+                    methodApp.updateKamarById(
+                      noKamar: noKamar,
+                      data: {
+                        'penghuni': FieldValue.arrayRemove([user]),
+                      },
+                    );
+                    methodApp.updatePenghuniById(
+                      idPenghuni: idPenghuni,
+                      data: {
+                        'isAktif': false,
+                      },
+                    );
+                    listPenyewa.remove(e);
+                    Get.back();
+                    Get.snackbar(
+                      "Info",
+                      'berhasil menghapus Teman sekamar',
+                    );
+                  },
+                  text: 'Yes',
+                ),
+              ],
+            )
+          ],
+        );
+      } else {
+        listPenyewa.remove(e);
+      }
     } else {
       listPenyewa.remove(e);
     }
@@ -326,30 +331,30 @@ class FormKamarController extends GetxController
     penghuniStream.listen((event) {
       if (event.size == 0) {
         log("empty");
-        change(null, status: RxStatus.empty());
+        listPengh = [];
+        // change(null, status: RxStatus.empty());
       } else {
         items = List.generate(event.docs.length, (index) {
           final data = event.docs[index];
           return PenghuniModel.fromDocumentSnapshot(data);
         });
         for (int i = 0; i < dataKamar!.penghuni!.length; i++) {
-          listPengh = items.where((element) {
+          listPengh.addAll(items.where((element) {
             final el = element.noHp == dataKamar!.penghuni![i].id;
             log(el.toString(), name: 'data');
-            return element.noHp == dataKamar!.penghuni![i].id;
-          }).toList();
+            return el;
+          }).toList());
         }
-        log(listPengh.length.toString(), name: 'data');
-        change(listPengh, status: RxStatus.success());
+        log(listPengh.length.toString(), name: 'panjang');
+        initForm(
+          penyewa: listPengh,
+          sewaBulanan: dataKamar?.sewaBulanan.toString(),
+          sewaTahunan: dataKamar?.sewaTahunan.toString(),
+          fasilitas: dataKamar?.fasilitas,
+        );
+        // change(listPengh, status: RxStatus.success());
       }
     });
-    initForm(
-      penyewa: listPengh,
-      sewaBulanan: dataKamar?.sewaBulanan.toString(),
-      sewaTahunan: dataKamar?.sewaTahunan.toString(),
-      fasilitas: dataKamar?.fasilitas,
-    );
-
     super.onInit();
   }
 
@@ -359,12 +364,10 @@ class FormKamarController extends GetxController
     final String? sewaTahunan,
     final List<String>? fasilitas,
   }) async {
-    penyewa == null || penyewa.isEmpty
+    log(penyewa!.length.toString(), name: 'panjang penyewa');
+    penyewa.isEmpty
         ? listPenyewa.length
         : listPenyewa.value = penyewa.map((e) {
-            // final data = items.firstWhere((element) => element.noHp == e.id);
-            // listPenghuni.first.id == e.id;
-            log(e.nama, name: 'data');
             return [
               TextEditingController(text: e.nama),
               TextEditingController(text: e.noHp),

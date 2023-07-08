@@ -4,6 +4,9 @@ class ListPenghuniScreen extends GetView<ListPenghuniController> {
   const ListPenghuniScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<ListPenghuniController>(
+      () => ListPenghuniController(),
+    );
     return Scaffold(
       backgroundColor: ColorApp.white,
       appBar: AppBar(

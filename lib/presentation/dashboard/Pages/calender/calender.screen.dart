@@ -6,6 +6,9 @@ class CalenderScreen extends GetView<CalenderController> {
   const CalenderScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<CalenderController>(
+      () => CalenderController(),
+    );
     return Scaffold(
       backgroundColor: ColorApp.white,
       appBar: AppBar(
@@ -65,8 +68,8 @@ class CalenderScreen extends GetView<CalenderController> {
                   ];
                 }
               }
-              return const Column(
-                children: [
+              return Column(
+                children: const [
                   Calendar(),
                   SizedBox(height: 12.0),
                   ValueDate(),

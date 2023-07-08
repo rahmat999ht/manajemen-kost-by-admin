@@ -178,6 +178,7 @@ class MethodApp {
               "info",
               '${nomorPonsel.text} berhasil di daftarkan',
             );
+            // return;
           },
           verificationFailed: (e) {
             log("verificationFailed : ${e.message} ${e.phoneNumber}");
@@ -185,10 +186,12 @@ class MethodApp {
               "info",
               '${nomorPonsel.text} gagal di daftarkan',
             );
+            // return;
           },
           codeSent: (String verificationId, int? resendToken) {
-            log("code di kirim");
+            log("code $verificationId di kirim");
           },
+          timeout: const Duration(seconds: 60),
           codeAutoRetrievalTimeout: (verificationId) {
             log("codeAutoRetrievalTimeout ini : $verificationId");
           },

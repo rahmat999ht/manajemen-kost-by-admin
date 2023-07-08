@@ -1,12 +1,14 @@
 import '../../../../../domain/core/core.dart';
 
-class ValueKamarKosong extends GetView<KamarController> {
+class ValueKamarKosong extends StatelessWidget {
   const ValueKamarKosong({
     super.key,
     required this.title,
+    required this.controller,
   });
 
   final String title;
+  final KamarController controller;
 
   @override
   Widget build(BuildContext context) {

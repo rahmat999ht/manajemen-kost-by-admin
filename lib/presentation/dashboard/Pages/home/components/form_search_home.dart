@@ -3,7 +3,14 @@ import '../../../../../domain/core/core.dart';
 class FormSearchHome extends GetView<HomeController> {
   const FormSearchHome({
     super.key,
+    required this.cTerdekat,
+    required this.cJatuhTempo,
+    required this.cKamarKosong,
   });
+
+  final TerdekatController cTerdekat;
+  final JatuhTempoController cJatuhTempo;
+  final KamarController cKamarKosong;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +26,9 @@ class FormSearchHome extends GetView<HomeController> {
               controller: controller.cSearch,
               color: ColorApp.grayForm,
               onChanged: (v) {
-                controller.cJatuhTempo.onChange(v, controller.isSearch);
-                controller.cTerdekat.onChange(v, controller.isSearch);
-                controller.cKamarKosong.onChange(v, controller.isSearch);
+                cJatuhTempo.onChange(v, controller.isSearch);
+                cTerdekat.onChange(v, controller.isSearch);
+                cKamarKosong.onChange(v, controller.isSearch);
               },
               prefixIcon: const Icon(Icons.search, size: 30),
               suffixIcon: controller.isSearch.isFalse

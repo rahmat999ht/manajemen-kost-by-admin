@@ -1,12 +1,14 @@
 import '../../../../../domain/core/core.dart';
 
-class ValueTerdekat extends GetView<TerdekatController> {
+class ValueTerdekat extends StatelessWidget {
   const ValueTerdekat({
     super.key,
     required this.title,
+    required this.controller,
   });
 
   final String title;
+  final TerdekatController controller;
 
   @override
   Widget build(BuildContext context) {
