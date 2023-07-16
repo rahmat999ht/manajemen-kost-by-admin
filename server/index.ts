@@ -30,14 +30,24 @@ const queryNaiveBayes = firestore.collection("naive_bayes")
 
 function main() {
     const targetId = '07 A';
-    let listKamar = [];
-    let listPenghuni = [];
+    const listKamar = [];
+    const listPenghuni = [];
     queryNaiveBayes.onSnapshot(
         (snapshot) => {
             snapshot.docs.forEach((docNB) => {
                 const data = docNB.data() as INaiveBayes;
                 if (data.idKamar.id === targetId) {
                     listKamar.push(data.idKamar);
+                    data.riwayatPembayaran.push({
+                        bulan : "",
+                        dateUpload : admin.firestore.Timestamp.now(),
+                        isBermasalah : false,
+                        isTahunan : "",
+                        sewaBulanan : "",
+                        sewaTahunan : "",
+                        tahun : "",
+                    })
+                    queryNaiveBayes.doc(docNB.id).update({...data})
                 }
             });
             console.log('List Kamar:', listKamar);
