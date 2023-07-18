@@ -177,16 +177,6 @@ class FormKamarController extends GetxController
               .collection(ConstansApp.penghuniCollection)
               .doc(getValue(i, 1))
               .get();
-
-//kode di bawah ini akan mendaftarkan nomor penanggung jabab sebagai akun terdaftar
-//akun tersebut dapat di pake untuk login di app khusus penghuni kost
-          // if (i == 0) {
-          //   log(
-          //     "nomor di daftarkan : ${listPenyewa[i][1].text}",
-          //     name: "Penghuni",
-          //   );
-          //   methodApp.regAdmin(formKey, listPenyewa[i][1]);
-          // }
 //ketika id penghuni tidak di temukan.
 //maka if di bawah akan di jalankan.
 //dan if di bawah ini akan menambah data baru.
@@ -339,11 +329,13 @@ class FormKamarController extends GetxController
           return PenghuniModel.fromDocumentSnapshot(data);
         });
         for (int i = 0; i < dataKamar!.penghuni!.length; i++) {
-          listPengh.addAll(items.where((element) {
-            final el = element.noHp == dataKamar!.penghuni![i].id;
-            log(el.toString(), name: 'data');
-            return el;
-          }).toList());
+          if (isLoading.isFalse) {
+            listPengh.addAll(items.where((element) {
+              final el = element.noHp == dataKamar!.penghuni![i].id;
+              log(el.toString(), name: 'data');
+              return el;
+            }).toList());
+          }
         }
         log(listPengh.length.toString(), name: 'panjang');
         initForm(

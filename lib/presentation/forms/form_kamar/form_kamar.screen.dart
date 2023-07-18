@@ -11,31 +11,47 @@ class FormKamarScreen extends GetView<FormKamarController> {
           Get.offAllNamed(Routes.PENGHUNI);
         },
       ),
-      body: Container(
+      body: Card(
         color: Colors.white,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Form(
-          key: controller.formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                const InformasiPenyewa(),
-                SizeApp.h20,
-                const InformasiFasilitas(),
-                SizeApp.h20,
-                const InformasiHarga(),
-                SizeApp.h20,
-                Obx(
-                  () => ButtonPrymary.isBlack(
-                    isLoading: controller.isLoading.value,
-                    onPressed: controller.updateKamar,
-                    text: 'Simpan',
+        margin: const EdgeInsets.all(0),
+        child: Obx(
+          () => Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Form(
+                  key: controller.formKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const InformasiPenyewa(),
+                        SizeApp.h20,
+                        const InformasiFasilitas(),
+                        SizeApp.h20,
+                        const InformasiHarga(),
+                        SizeApp.h20,
+                        Obx(
+                          () => ButtonPrymary.isBlack(
+                            isLoading: controller.isLoading.value,
+                            onPressed: controller.updateKamar,
+                            text: 'Simpan',
+                          ),
+                        ),
+                        SizeApp.h20,
+                      ],
+                    ),
                   ),
                 ),
-                SizeApp.h20,
-              ],
-            ),
+              ),
+              if (controller.isLoading.value == true)
+                Container(
+                  width: Get.width,
+                  height: Get.height,
+                  color: Colors.black.withOpacity(0.5),
+                  child: const Center(child: CircularProgressIndicator()),
+                ),
+            ],
           ),
         ),
       ),
