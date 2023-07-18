@@ -282,7 +282,7 @@ class FormKamarController extends GetxController
           if (i + 1 == listPenyewa.length) {
             log('maximal 3');
             initLoadingState();
-            Get.offAllNamed(Routes.DASHBOARD);
+            Get.back();
             alertActions(
               "Info",
               "Kamar dengan nomor ($noKamar) berhasil di perbarui",

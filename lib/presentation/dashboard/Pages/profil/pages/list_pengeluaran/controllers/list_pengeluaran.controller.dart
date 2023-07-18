@@ -7,6 +7,8 @@ class ListPengeluaranController extends GetxController
   // final cSearch = TextEditingController();
   // final isSearch = false.obs;
   var items = <PengeluaranModel>[];
+  String threeDigits(String value) =>
+      value.substring(value.indexOf(" ") + 1, value.indexOf(" ") + 4);
 
   final listNameMonth = [
     "Jan",

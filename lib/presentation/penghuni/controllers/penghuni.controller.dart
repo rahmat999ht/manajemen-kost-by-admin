@@ -47,7 +47,7 @@ class PenghuniController extends GetxController
     // }
     Future.delayed(const Duration(seconds: 3)).then(
       (_) {
-        Get.offAllNamed(
+        Get.toNamed(
           Routes.FORM_KAMAR,
           arguments: noKamar,
         );

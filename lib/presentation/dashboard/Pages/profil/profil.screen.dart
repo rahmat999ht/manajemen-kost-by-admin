@@ -4,6 +4,9 @@ class ProfilScreen extends GetView<ProfilController> {
   const ProfilScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<ProfilController>(
+      () => ProfilController(),
+    );
     return Scaffold(
       body: StreamBuilder<DocumentSnapshot<AdminModel>>(
         stream: controller.methodApp.admin(ConstansApp.idLogin).snapshots(),
@@ -43,9 +46,6 @@ class StreamProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut<ProfilController>(
-      () => ProfilController(),
-    );
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(

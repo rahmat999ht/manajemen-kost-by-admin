@@ -22,7 +22,7 @@ class ListPemasukanScreen extends GetView<ListPemasukanController> {
           groupSeparatorBuilder: (String value) => GroupSeparator(
             value,
             onTap: () {
-              Get.to(RekapanBulanan(
+              Get.to(RekapanPemasukanBulanan(
                 title: value,
               ));
               log(value);
@@ -45,8 +45,8 @@ class ListPemasukanScreen extends GetView<ListPemasukanController> {
   }
 }
 
-class RekapanBulanan extends GetView<ListPemasukanController> {
-  const RekapanBulanan({super.key, required this.title});
+class RekapanPemasukanBulanan extends GetView<ListPemasukanController> {
+  const RekapanPemasukanBulanan({super.key, required this.title});
 
   final String title;
 
@@ -68,22 +68,61 @@ class RekapanBulanan extends GetView<ListPemasukanController> {
           final data = state!.where((e) {
             return e.dateUpload.toDate().month == monthNumber;
           }).toList();
-          return ListView.builder(
-            itemCount: data.length,
-            itemBuilder: (context, index) {
-              final value = data[index];
-              final idr = controller.formatRupiah("${value.idr}");
-              return ListTile(
-                title: Text(value.jenis),
-                subtitle: Text(value.dateUpload.toDate().day.toString()),
-                trailing: Text(
-                  idr,
-                  style: const TextStyle(
-                    color: ColorApp.green,
+          int valueTotalBulanan = 0;
+          // for (int i = 0; i < data.length; i++) {
+          for (var e in data) {
+            final bulanan = e.idr;
+            valueTotalBulanan = valueTotalBulanan + bulanan;
+          }
+          final totalBulanan = controller.formatRupiah("$valueTotalBulanan");
+          // }
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    final value = data[index];
+                    final idr = controller.formatRupiah("${value.idr}");
+                    return ListTile(
+                      title: Text(value.jenis),
+                      subtitle: Text("tgl ${value.dateUpload.toDate().day}"),
+                      trailing: Text(
+                        idr,
+                        style: const TextStyle(
+                          color: ColorApp.green,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Card(
+                elevation: 10,
+                color: ColorApp.orange,
+                margin: const EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  bottom: 16,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      const Text('Total Pemasukan'),
+                      const Spacer(),
+                      Text(
+                        ':   ${totalBulanan.replaceAll('+', '')}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              );
-            },
+              ),
+            ],
           );
         },
         onEmpty: const Center(child: Text("Masih Kosong")),
