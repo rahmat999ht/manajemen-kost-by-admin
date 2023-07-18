@@ -6,9 +6,9 @@ mixin ImageState {
   TextButton imageEmpty(dynamic getImg) {
     return TextButton(
       onPressed: () async => await getImg(),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: const [
+        children: [
           Icon(
             Icons.photo_camera,
             size: 20,

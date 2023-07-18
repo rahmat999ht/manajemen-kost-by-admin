@@ -7,12 +7,12 @@ class KetWarna extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       mainAxisSize: MainAxisSize.max,
       children: [
         Column(
-          children: const [
+          children: [
             SizedBox(
               height: 25,
               width: 25,
@@ -30,7 +30,7 @@ class KetWarna extends StatelessWidget {
           ],
         ),
         Column(
-          children: const [
+          children: [
             SizedBox(
               height: 25,
               width: 25,
