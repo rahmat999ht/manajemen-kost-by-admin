@@ -180,13 +180,13 @@ class FormKamarController extends GetxController
 
 //kode di bawah ini akan mendaftarkan nomor penanggung jabab sebagai akun terdaftar
 //akun tersebut dapat di pake untuk login di app khusus penghuni kost
-          if (i == 0) {
-            log(
-              "nomor di daftarkan : ${listPenyewa[i][1].text}",
-              name: "Penghuni",
-            );
-            methodApp.regAdmin(formKey, listPenyewa[i][1]);
-          }
+          // if (i == 0) {
+          //   log(
+          //     "nomor di daftarkan : ${listPenyewa[i][1].text}",
+          //     name: "Penghuni",
+          //   );
+          //   methodApp.regAdmin(formKey, listPenyewa[i][1]);
+          // }
 //ketika id penghuni tidak di temukan.
 //maka if di bawah akan di jalankan.
 //dan if di bawah ini akan menambah data baru.
