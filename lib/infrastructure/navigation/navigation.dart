@@ -99,5 +99,10 @@ class Nav {
       page: () => const FormPengeluaranScreen(),
       binding: FormPengeluaranControllerBinding(),
     ),
+    GetPage(
+      name: Routes.PEMBERITAHUAN,
+      page: () => const PemberitahuanScreen(),
+      binding: PemberitahuanControllerBinding(),
+    ),
   ];
 }

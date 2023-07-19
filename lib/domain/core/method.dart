@@ -73,6 +73,18 @@ class MethodApp {
         .add(data!);
   }
 
+  void updatePemberitahuanById({
+    String? id,
+    Map<String, dynamic>? data,
+  }) {
+    ConstansApp.firebaseFirestore
+        .collection(ConstansApp.pemberitahuanCollection)
+        .doc(id)
+        .update(
+          data!,
+        );
+  }
+
   DocumentReference<NoKamarModel> noKamar(String id) {
     return ConstansApp.firebaseFirestore
         .collection(ConstansApp.noKamarCollection)

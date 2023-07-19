@@ -57,6 +57,7 @@ export 'forms/form_pemasukan/form_pemasukan.screen.dart';
 export 'forms/form_pengeluaran/components/image_wrapper_pengeluaran.dart';
 export 'forms/form_pengeluaran/components/list_form_pengeluaran.dart';
 export 'forms/form_pengeluaran/form_pengeluaran.screen.dart';
+export 'pemberitahuan/pemberitahuan.screen.dart';
 export 'penghuni/components/item_lantai.dart';
 export 'penghuni/components/ket_warna.dart';
 export 'penghuni/components/list_lantai.dart';

@@ -8,12 +8,14 @@ class PemberitahuanModel {
   DocumentReference? idKamar;
   String? deskripsi;
   Timestamp? tglJatuhTempo;
+  bool? isView;
   PemberitahuanModel({
     this.id,
     required this.dateUpload,
     required this.idKamar,
     required this.deskripsi,
     required this.tglJatuhTempo,
+    required this.isView,
   });
 
   Map<String, dynamic> toMap() {
@@ -22,6 +24,7 @@ class PemberitahuanModel {
       'idKamar': idKamar,
       'deskripsi': deskripsi,
       'tglJatuhTempo': tglJatuhTempo,
+      'isView': isView,
     };
   }
 
@@ -41,6 +44,7 @@ class PemberitahuanModel {
       tglJatuhTempo: map['tglJatuhTempo'] != null
           ? map['tglJatuhTempo'] as Timestamp
           : null,
+      isView: map['isView'] != null ? map['isView'] as bool : null,
     );
   }
   factory PemberitahuanModel.fromDocumentSnapshot(

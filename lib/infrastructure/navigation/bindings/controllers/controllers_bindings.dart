@@ -5,6 +5,7 @@ export 'form_pengeluaran.controller.binding.dart';
 export 'list_pemasukan.controller.binding.dart';
 export 'list_pengeluaran.controller.binding.dart';
 export 'login.controller.binding.dart';
+export 'package:manajemen_kost_by_admin/infrastructure/navigation/bindings/controllers/pemberitahuan.controller.binding.dart'; 
 export 'penghuni.controller.binding.dart';
 export 'profile_update.controller.binding.dart';
 export 'tentang_app.controller.binding.dart';

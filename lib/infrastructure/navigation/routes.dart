@@ -9,6 +9,7 @@ class Routes {
   static const DASHBOARD = '/dashboard';
   static const FORM_KAMAR = '/form-kamar';
   static const FORM_PEMASUKAN = '/form-pemasukan';
+  static const FORM_PENGELUARAN = '/form-pengeluaran';
   static const HOME = '/home';
   static const LIST_PEMASUKAN = '/list-pemasukan';
   static const LIST_PENGELUARAN = '/list-pengeluaran';
@@ -20,5 +21,5 @@ class Routes {
   static const TENTANG_APP = '/tentang-app';
   static const VERIFIKASI = '/verifikasi';
   static const WELCOME = '/welcome';
-  static const FORM_PENGELUARAN = '/form-pengeluaran';
+  static const PEMBERITAHUAN = '/pemberitahuan';
 }

@@ -24,10 +24,10 @@ class DetailKamar extends StatelessWidget {
           _fasilitas(
             title: 'Fasilitas',
           ),
-          _deskripsi(
-            title: 'Deskripsi',
-            deskripsi: '',
-          )
+          // _deskripsi(
+          //   title: 'Deskripsi',
+          //   deskripsi: '',
+          // )
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
