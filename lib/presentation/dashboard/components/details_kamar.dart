@@ -24,10 +24,11 @@ class DetailKamar extends StatelessWidget {
           _fasilitas(
             title: 'Fasilitas',
           ),
-          // _deskripsi(
-          //   title: 'Deskripsi',
-          //   deskripsi: '',
-          // )
+          _deskripsi(
+            title: 'Deskripsi',
+            kamarModel: kamarModel,
+            jatuhTempo: naiveBayesModel.tglJatuhTempo,
+          )
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -165,8 +166,13 @@ class DetailKamar extends StatelessWidget {
 
   Widget _deskripsi({
     final String? title,
-    final String? deskripsi,
+    final KamarModel? kamarModel,
+    final Timestamp? jatuhTempo,
+    // final KamarModel? kamarModel,
   }) {
+    final day = initDay(jatuhTempo!);
+    final month = initMonth(jatuhTempo);
+    final year = inityear(jatuhTempo);
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -181,15 +187,76 @@ class DetailKamar extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
-            deskripsi!,
-            style: const TextStyle(
-              color: ColorApp.blackText,
-              fontSize: 16,
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                details(
+                  'Sewa bulanan',
+                  formatRupiah('${kamarModel!.sewaBulanan}'),
+                ),
+                const SizedBox(height: 12),
+                details(
+                  'Sewa tahunan',
+                  formatRupiah('${kamarModel.sewaTahunan}'),
+                ),
+                const SizedBox(height: 12),
+                details(
+                  'Tgl jatuh tempo',
+                  '$day - $month -$year',
+                ),
+              ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  Row details(String title, String subTitle) {
+    return Row(
+      children: [
+        const Icon(Icons.album, size: 10),
+        const SizedBox(width: 8),
+        Text(
+          title,
+          style: const TextStyle(
+            color: ColorApp.blackText,
+            fontSize: 16,
+          ),
+        ),
+        const Spacer(),
+        Text(
+          subTitle,
+          style: const TextStyle(
+            color: ColorApp.blackText,
+            fontSize: 16,
+          ),
+        ),
+      ],
+    );
+  }
+
+  int initDay(Timestamp time) {
+    final value = time.toDate().day;
+    return value;
+  }
+
+  int initMonth(Timestamp time) {
+    final value = time.toDate().month;
+    return value;
+  }
+
+  int inityear(Timestamp time) {
+    final value = time.toDate().year;
+    return value;
+  }
+
+  String formatRupiah(String amount) {
+    final formattedAmount = amount.toString().replaceAllMapped(
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+        (Match match) => '${match.group(1)}.');
+    return '+Rp $formattedAmount';
   }
 }
