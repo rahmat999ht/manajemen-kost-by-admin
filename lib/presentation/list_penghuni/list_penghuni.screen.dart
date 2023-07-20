@@ -12,7 +12,7 @@ class ListPenghuniScreen extends GetView<ListPenghuniController> {
       appBar: AppBar(
         backgroundColor: ColorApp.white,
         elevation: 0,
-        toolbarHeight: 65,
+        toolbarHeight: 70,
         flexibleSpace: const FormSearch(),
       ),
       body: controller.obx(

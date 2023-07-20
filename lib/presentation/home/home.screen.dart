@@ -76,7 +76,10 @@ class Acions extends GetView<PemberitahuanController> {
     );
     return controller.obx(
       (state) => data(state!),
-      onEmpty: const Center(child: Text("Masih Kosong")),
+      onEmpty: const Padding(
+        padding: EdgeInsets.only(right: 20, top: 8),
+        child: Icon(Icons.notifications_active_outlined),
+      ),
       onLoading: const SizedBox(height: 130, child: LoadingState()),
       onError: (e) {
         return Center(child: Text("pesan error : $e"));
@@ -99,14 +102,15 @@ class Acions extends GetView<PemberitahuanController> {
               Icons.notifications_active_outlined,
               // size: 28,
             ),
-            if (dataPemberitahuan.isNotEmpty)
-              const Card(
-                color: ColorApp.red,
-                child: SizedBox(
-                  height: 8,
-                  width: 8,
-                ),
-              ),
+            dataPemberitahuan.isNotEmpty
+                ? const Card(
+                    color: ColorApp.red,
+                    child: SizedBox(
+                      height: 8,
+                      width: 8,
+                    ),
+                  )
+                : const SizedBox(),
           ],
         ),
       ),

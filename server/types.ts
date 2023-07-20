@@ -39,3 +39,12 @@ export interface IKamar {
     tglSewa: firestore.Timestamp
 }
 
+
+export interface IPemberitahuan {
+    dateUpload: firestore.Timestamp
+    idKamar: firestore.DocumentReference
+    deskripsi: string
+    tglJatuhTempo: firestore.Timestamp
+    isView: boolean
+}
+
