@@ -43,10 +43,11 @@ function main() {
                 min3Day.setDate(min3Day.getDate() - 3);
                 const min3DayTimestamp = admin.firestore.Timestamp.fromDate(min3Day);
 
-                if (currentTime == min3DayTimestamp && currentTime < targetTimestamp) {
+                if (currentTime >= min3DayTimestamp && currentTime < targetTimestamp) {
                     console.log(`Kamar ${data.idKamar.id} dalam tiga hari ke depan akan jatuh tempo`);
-                } else if (currentTime == targetTimestamp) {
+                } else if (currentTime >= targetTimestamp) {
                     console.log(`Kamar ${data.idKamar.id} telah jatuh tempo`);
+                    queryNaiveBayes.doc(docNB.id).update({statusKamar: false, })
                 }
                 if (data.statusKamar === false) {
                     console.log(`Status kamar ${data.idKamar.id} = false`);
@@ -87,7 +88,7 @@ function main() {
     //                 //     .catch((error) => {
     //                 //         console.error("Error menambahkan pemberitahuan:", error);
     //                 //     });
-    //                 //     queryNaiveBayes.doc(docNB.id).update({statusKamar: false, })
+    //                 //     
     //             }
     //             if (currentTime >= targetTime) {
     //                 console.log('kamar telah jatuh tempo')
@@ -126,7 +127,6 @@ function main() {
     //                 //         console.error("Error menambahkan pemberitahuan:", error);
     //                 //     });
     //             }
-
     //             // if (data.idKamar.id === targetId) {
     //             //     listKamar.push(data.idKamar);
     //             //     data.riwayatPembayaran.push({
@@ -147,21 +147,21 @@ function main() {
     //         console.log('Error getting documents: ', error);
     //     }
     // );
-    queryKamar.where(admin.firestore.FieldPath.documentId(), '==', targetId)
-        .get()
-        .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // console.log(doc.id, '=>', doc.data());
-                const data = doc.data() as IKamar;
-                console.log(data.penghuni.forEach((docPenghuni) => {
-                    listPenghuni.push(docPenghuni.id);
-                }));
-            });
-            console.log('List Penghuni:', listPenghuni);
-        })
-        .catch((error) => {
-            console.log('Error getting documents: ', error);
-        });
+    // queryKamar.where(admin.firestore.FieldPath.documentId(), '==', targetId)
+    //     .get()
+    //     .then((querySnapshot) => {
+    //         querySnapshot.forEach((doc) => {
+    //             // console.log(doc.id, '=>', doc.data());
+    //             const data = doc.data() as IKamar;
+    //             console.log(data.penghuni.forEach((docPenghuni) => {
+    //                 listPenghuni.push(docPenghuni.id);
+    //             }));
+    //         });
+    //         console.log('List Penghuni:', listPenghuni);
+    //     })
+    //     .catch((error) => {
+    //         console.log('Error getting documents: ', error);
+    //     });
     // queryPenghuni.onSnapshot((snapshot) => {
     //     snapshot.docs.map((docPenghuni) => {
     //         idPenghuni = docPenghuni.id
