@@ -1,4 +1,4 @@
-import '../../../../../domain/core/core.dart';
+import '../../../../domain/core/core.dart';
 
 class DetailPengeluaran extends GetView<ListPengeluaranController> {
   const DetailPengeluaran({super.key, required this.e});

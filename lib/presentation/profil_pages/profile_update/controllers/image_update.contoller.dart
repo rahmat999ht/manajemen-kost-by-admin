@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import '../../../../../domain/core/core.dart';
+import '../../../../domain/core/core.dart';
 
 class ImageProfileUpdateController extends GetxController
     with StateMixin<List<XFile>> {

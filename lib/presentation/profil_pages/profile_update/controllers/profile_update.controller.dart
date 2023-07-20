@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
-import '../../../../../domain/core/core.dart';
+import '../../../../domain/core/core.dart';
 
 class ProfileUpdateController extends GetxController {
   final formKey = GlobalKey<FormState>();

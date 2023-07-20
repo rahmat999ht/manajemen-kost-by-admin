@@ -1,4 +1,4 @@
-import '../../../../domain/core/core.dart';
+import '../../../domain/core/core.dart';
 
 class TentangAppScreen extends GetView<TentangAppController> {
   const TentangAppScreen({Key? key}) : super(key: key);

@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:grouped_list/grouped_list.dart';
 
-import '../../../../domain/core/core.dart';
+import '../../../domain/core/core.dart';
 
 class ListPengeluaranScreen extends GetView<ListPengeluaranController> {
   const ListPengeluaranScreen({Key? key}) : super(key: key);

@@ -1,4 +1,4 @@
-import '../../../../domain/core/core.dart';
+import '../../../domain/core/core.dart';
 
 class ProfileUpdateScreen extends GetView<ProfileUpdateController> {
   const ProfileUpdateScreen({Key? key}) : super(key: key);
