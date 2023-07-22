@@ -22,18 +22,26 @@ const app = admin.initializeApp({
 
 const firestore = admin.firestore(app);
 
-const queryKamar = firestore.collection("kamar")
-const queryNaiveBayes = firestore.collection("naive_bayes")
-const queryPemberitahuan = firestore.collection("pemberitahuan")
+async function sendNotification({ topic, message }) {
+    try {
+        const response = await admin.messaging().sendToTopic(topic, message);
+        console.log("Notification sent successfully:", response);
+    } catch (error) {
+        console.error("Error sending notification:", error);
+    }
+}
+
 
 function main() {
-    const targetId = '07 A';
-    const listKamar = [];
     const listPenghuni = [];
+    const queryKamar = firestore.collection("kamar")
+    const queryNaiveBayes = firestore.collection("naive_bayes")
+    const queryPemberitahuan = firestore.collection("pemberitahuan")
 
     queryNaiveBayes.onSnapshot(
         (snapshot) => {
             snapshot.docs.forEach((docNB) => {
+
                 const data = docNB.data() as INaiveBayes;
                 const currentTime = admin.firestore.Timestamp.now();
 
@@ -45,137 +53,119 @@ function main() {
 
                 if (currentTime >= min3DayTimestamp && currentTime < targetTimestamp) {
                     console.log(`Kamar ${data.idKamar.id} dalam tiga hari ke depan akan jatuh tempo`);
+                    //kode di bawah ini akan mencari nomor kamar berdasarkan variabel data.idKamar.id
+                    queryKamar.where(admin.firestore.FieldPath.documentId(), '==', data.idKamar.id)
+                        .get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // console.log(doc.id, '=>', doc.data());
+                                const data = doc.data() as IKamar;
+                                // kode dibawah ini akan menambahkan penghuni kamar 
+                                // yang menjadi penanggung jawabk edalam variabel listPenghuni
+                                listPenghuni.push(data.penghuni[0].id);
+                            });
+                            console.log('Penghuni:', listPenghuni);
+                        })
+                        .catch((error) => {
+                            console.log('Error getting documents: ', error);
+                        });
+
+                    if (listPenghuni.length > 0) {
+                        const firstValue = listPenghuni[0];
+                        const notificationMessage = {
+                            notification: {
+                                title: "Info",
+                                body: `Kamar ${data.idKamar.id} dalam tiga hari ke depan akan jatuh tempo`,
+                            },
+                            topic: firstValue, // topic to send the notification
+                        };
+                        // kode dibawah ini akan mengirim notifikasi
+                        sendNotification({ topic: firstValue, message: notificationMessage });
+                        console.log("First value:", firstValue);
+                        // kode dibawah ini akan mengirim data notifikasi ke tabel pemberitahuan
+                        const newPemberitahuan: IPemberitahuan = {
+                            dateUpload: admin.firestore.Timestamp.now(),
+                            idKamar: data.idKamar,
+                            deskripsi: `Kamar ${data.idKamar.id} dalam tiga hari ke depan akan jatuh tempo`,
+                            tglJatuhTempo: data.tglJatuhTempo,
+                            isView: false,
+                        };
+                        queryPemberitahuan
+                            .add(newPemberitahuan)
+                            .then((docRef) => {
+                                console.log("Pemberitahuan 3 hari sebelum jatuh tempo berhasil ditambahkan dengan ID:", docRef.id);
+                            })
+                            .catch((error) => {
+                                console.error("Error menambahkan pemberitahuan:", error);
+                            });
+                    } else {
+                        console.log("The list is empty.");
+                    }
+
                 } else if (currentTime >= targetTimestamp) {
                     console.log(`Kamar ${data.idKamar.id} telah jatuh tempo`);
-                    queryNaiveBayes.doc(docNB.id).update({statusKamar: false, })
+                    //kode di bawah ini akan mencari nomor kamar berdasarkan variabel data.idKamar.id
+                    queryKamar.where(admin.firestore.FieldPath.documentId(), '==', data.idKamar.id)
+                        .get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // console.log(doc.id, '=>', doc.data());
+                                const data = doc.data() as IKamar;
+                                // kode dibawah ini akan menambahkan penghuni kamar 
+                                // yang menjadi penanggung jawabk edalam variabel listPenghuni
+                                listPenghuni.push(data.penghuni[0].id);
+                            });
+                            console.log('Penghuni:', listPenghuni);
+                        })
+                        .catch((error) => {
+                            console.log('Error getting documents: ', error);
+                        });
+
+                    if (listPenghuni.length > 0) {
+
+                        const firstValue = listPenghuni[0];
+                        const notificationMessage = {
+                            notification: {
+                                title: "Info",
+                                body: `Kamar ${data.idKamar.id} telah jatuh tempo`,
+                            },
+                            topic: firstValue, // topic to send the notification
+                        };
+                        // kode dibawah ini akan mengirim notifikasi
+                        sendNotification({ topic: firstValue, message: notificationMessage });
+                        console.log("First value:", firstValue);
+                        // kode dibawah ini akan mengirim data notifikasi ke tabel pemberitahuan
+                        const newPemberitahuan: IPemberitahuan = {
+                            dateUpload: admin.firestore.Timestamp.now(),
+                            idKamar: data.idKamar,
+                            deskripsi: `Kamar ${data.idKamar.id} telah jatuh tempo`,
+                            tglJatuhTempo: data.tglJatuhTempo,
+                            isView: false,
+                        };
+                        queryPemberitahuan
+                            .add(newPemberitahuan)
+                            .then((docRef) => {
+                                console.log("Pemberitahuan jatuh tempo berhasil ditambahkan dengan ID:", docRef.id);
+                            })
+                            .catch((error) => {
+                                console.error("Error menambahkan pemberitahuan:", error);
+                            });
+                    } else {
+                        console.log("The list is empty.");
+                    }
+                    queryNaiveBayes.doc(docNB.id).update({ statusKamar: false, })
                 }
                 if (data.statusKamar === false) {
                     console.log(`Status kamar ${data.idKamar.id} = false`);
                 }
+                // listPenghuni = [];
+                listPenghuni.splice(0);
             });
         },
         (error) => {
             console.log("Error getting documents: ", error);
         }
     );
-
-    // queryNaiveBayes.onSnapshot(
-    //     (snapshot) => {
-    //         snapshot.docs.forEach((docNB) => {
-    //             const data = docNB.data() as INaiveBayes;
-
-    //             // const batch = firestore.batch();
-    //             const currentTime = admin.firestore.Timestamp.now();
-
-    //             const targetTime = data.tglJatuhTempo;
-    //             const min3Day = targetTime.toDate().setDate(targetTime.toDate().getDate() - 3);
-    //             const min3DayTimestamp = admin.firestore.Timestamp.fromMillis(min3Day);
-
-    //             if (currentTime >= min3DayTimestamp) {
-    //                 console.log('kamar dalam tiga hari ke depan akan jatuh tempo')
-    //                 // const newPemberitahuan: IPemberitahuan = {
-    //                 //     dateUpload: admin.firestore.Timestamp.now(),
-    //                 //     idKamar: data.idKamar, // Ganti dengan path referensi dokumen yang sesuai
-    //                 //     deskripsi: "Deskripsi pemberitahuan",
-    //                 //     tglJatuhTempo: data.tglJatuhTempo,
-    //                 //     isView: false // Ganti dengan tanggal jatuh tempo yang sesuai
-    //                 // };
-    //                 // queryPemberitahuan
-    //                 //     .add(newPemberitahuan)
-    //                 //     .then((docRef) => {
-    //                 //         console.log("Pemberitahuan jatuh tempo berhasil di tambahkan berhasil ditambahkan dengan ID:", docRef.id);
-    //                 //     })
-    //                 //     .catch((error) => {
-    //                 //         console.error("Error menambahkan pemberitahuan:", error);
-    //                 //     });
-    //                 //     
-    //             }
-    //             if (currentTime >= targetTime) {
-    //                 console.log('kamar telah jatuh tempo')
-    //                 // const newPemberitahuan: IPemberitahuan = {
-    //                 //     dateUpload: admin.firestore.Timestamp.now(),
-    //                 //     idKamar: data.idKamar, // Ganti dengan path referensi dokumen yang sesuai
-    //                 //     deskripsi: "Deskripsi pemberitahuan",
-    //                 //     tglJatuhTempo: data.tglJatuhTempo,
-    //                 //     isView: false // Ganti dengan tanggal jatuh tempo yang sesuai
-    //                 // };
-    //                 // queryPemberitahuan
-    //                 //     .add(newPemberitahuan)
-    //                 //     .then((docRef) => {
-    //                 //         console.log("Pemberitahuan jatuh tempo berhasil di tambahkan berhasil ditambahkan dengan ID:", docRef.id);
-    //                 //     })
-    //                 //     .catch((error) => {
-    //                 //         console.error("Error menambahkan pemberitahuan:", error);
-    //                 //     });
-    //                 //     queryNaiveBayes.doc(docNB.id).update({statusKamar: false, })
-    //             }
-    //             if(data.statusKamar === false){
-    //                 console.log('status kamar = false')
-    //                 // const newPemberitahuan: IPemberitahuan = {
-    //                 //     dateUpload: admin.firestore.Timestamp.now(),
-    //                 //     idKamar: data.idKamar, // Ganti dengan path referensi dokumen yang sesuai
-    //                 //     deskripsi: `Kamar dengan nomor ${data.idKamar.id} telah `,
-    //                 //     tglJatuhTempo: data.tglJatuhTempo,
-    //                 //     isView: false // Ganti dengan tanggal jatuh tempo yang sesuai
-    //                 // };
-    //                 // queryPemberitahuan
-    //                 //     .add(newPemberitahuan)
-    //                 //     .then((docRef) => {
-    //                 //         console.log("Pemberitahuan status kamar berhasil ditambahkan dengan ID:", docRef.id);
-    //                 //     })
-    //                 //     .catch((error) => {
-    //                 //         console.error("Error menambahkan pemberitahuan:", error);
-    //                 //     });
-    //             }
-    //             // if (data.idKamar.id === targetId) {
-    //             //     listKamar.push(data.idKamar);
-    //             //     data.riwayatPembayaran.push({
-    //             //         bulan: "",
-    //             //         dateUpload: admin.firestore.Timestamp.now(),
-    //             //         isBermasalah: false,
-    //             //         isTahunan: "",
-    //             //         sewaBulanan: "",
-    //             //         sewaTahunan: "",
-    //             //         tahun: "",
-    //             //     })
-    //             //     queryNaiveBayes.doc(docNB.id).update({ ...data })
-    //             // }
-    //         });
-    //         console.log('List Kamar:', listKamar);
-    //     },
-    //     (error) => {
-    //         console.log('Error getting documents: ', error);
-    //     }
-    // );
-    // queryKamar.where(admin.firestore.FieldPath.documentId(), '==', targetId)
-    //     .get()
-    //     .then((querySnapshot) => {
-    //         querySnapshot.forEach((doc) => {
-    //             // console.log(doc.id, '=>', doc.data());
-    //             const data = doc.data() as IKamar;
-    //             console.log(data.penghuni.forEach((docPenghuni) => {
-    //                 listPenghuni.push(docPenghuni.id);
-    //             }));
-    //         });
-    //         console.log('List Penghuni:', listPenghuni);
-    //     })
-    //     .catch((error) => {
-    //         console.log('Error getting documents: ', error);
-    //     });
-    // queryPenghuni.onSnapshot((snapshot) => {
-    //     snapshot.docs.map((docPenghuni) => {
-    //         idPenghuni = docPenghuni.id
-    //     })
-    // }, (error) => {
-    //     console.log({ error });
-    // })
-    // console.log(idPenghuni)
-    // console.log(penghuniKamar)
-
-
-
-
-
 }
 
 main()
