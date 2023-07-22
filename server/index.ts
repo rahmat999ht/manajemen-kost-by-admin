@@ -51,24 +51,26 @@ function main() {
                 min3Day.setDate(min3Day.getDate() - 3);
                 const min3DayTimestamp = admin.firestore.Timestamp.fromDate(min3Day);
 
+
+                //kode di bawah ini akan mencari nomor kamar berdasarkan variabel data.idKamar.id
+                queryKamar.where(admin.firestore.FieldPath.documentId(), '==', data.idKamar.id)
+                    .get()
+                    .then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            // console.log(doc.id, '=>', doc.data());
+                            const data = doc.data() as IKamar;
+                            // kode dibawah ini akan menambahkan penghuni kamar 
+                            // yang menjadi penanggung jawabk edalam variabel listPenghuni
+                            listPenghuni.push(data.penghuni[0].id);
+                        });
+                        console.log('Penghuni:', listPenghuni);
+                    })
+                    .catch((error) => {
+                        console.log('Error getting documents: ', error);
+                    });
+
                 if (currentTime >= min3DayTimestamp && currentTime < targetTimestamp) {
                     console.log(`Kamar ${data.idKamar.id} dalam tiga hari ke depan akan jatuh tempo`);
-                    //kode di bawah ini akan mencari nomor kamar berdasarkan variabel data.idKamar.id
-                    queryKamar.where(admin.firestore.FieldPath.documentId(), '==', data.idKamar.id)
-                        .get()
-                        .then((querySnapshot) => {
-                            querySnapshot.forEach((doc) => {
-                                // console.log(doc.id, '=>', doc.data());
-                                const data = doc.data() as IKamar;
-                                // kode dibawah ini akan menambahkan penghuni kamar 
-                                // yang menjadi penanggung jawabk edalam variabel listPenghuni
-                                listPenghuni.push(data.penghuni[0].id);
-                            });
-                            console.log('Penghuni:', listPenghuni);
-                        })
-                        .catch((error) => {
-                            console.log('Error getting documents: ', error);
-                        });
 
                     if (listPenghuni.length > 0) {
                         const firstValue = listPenghuni[0];
@@ -104,25 +106,7 @@ function main() {
 
                 } else if (currentTime >= targetTimestamp) {
                     console.log(`Kamar ${data.idKamar.id} telah jatuh tempo`);
-                    //kode di bawah ini akan mencari nomor kamar berdasarkan variabel data.idKamar.id
-                    queryKamar.where(admin.firestore.FieldPath.documentId(), '==', data.idKamar.id)
-                        .get()
-                        .then((querySnapshot) => {
-                            querySnapshot.forEach((doc) => {
-                                // console.log(doc.id, '=>', doc.data());
-                                const data = doc.data() as IKamar;
-                                // kode dibawah ini akan menambahkan penghuni kamar 
-                                // yang menjadi penanggung jawabk edalam variabel listPenghuni
-                                listPenghuni.push(data.penghuni[0].id);
-                            });
-                            console.log('Penghuni:', listPenghuni);
-                        })
-                        .catch((error) => {
-                            console.log('Error getting documents: ', error);
-                        });
-
                     if (listPenghuni.length > 0) {
-
                         const firstValue = listPenghuni[0];
                         const notificationMessage = {
                             notification: {
@@ -159,6 +143,7 @@ function main() {
                     console.log(`Status kamar ${data.idKamar.id} = false`);
                 }
                 // listPenghuni = [];
+                // kode dibawah ini akan mengosongkan kembali variabel listPenghuni
                 listPenghuni.splice(0);
             });
         },
