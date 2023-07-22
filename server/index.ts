@@ -22,7 +22,10 @@ const app = admin.initializeApp({
 
 const firestore = admin.firestore(app);
 
-async function sendNotification({ topic, message }) {
+async function sendNotification({ topic, message }: {
+    topic : string,
+    message : object
+}) {
     try {
         const response = await admin.messaging().sendToTopic(topic, message);
         console.log("Notification sent successfully:", response);

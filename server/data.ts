@@ -1,16 +1,16 @@
-const topic = "tes"
+// const topic = "tes"
 
-export const message = {
+export const message = () => ({
+  notification: {
+    title: "Info",
+    body: "",
+    // sound : "default"
+  },
+  android: {
+    priority: "high",
     notification: {
-      title: "Info",
-      body: "",
-      // sound : "default"
+      imageUrl: "",
     },
-    android: {
-      priority: "high",
-      notification: {
-        imageUrl: "",
-      },
-    },
-    topic: topic,
-  };
+  },
+  topic: topic,
+});
