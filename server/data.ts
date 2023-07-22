@@ -1,16 +1,17 @@
-const topic = "tes"
+import { MessageProps } from "./types";
 
-export const message = {
-    notification: {
-      title: "Info",
-      body: "",
-      // sound : "default"
-    },
-    android: {
-      priority: "high",
-      notification: {
-        imageUrl: "",
-      },
-    },
-    topic: topic,
-  };
+
+export const message = ({ body, title, topic, sound,priority }: MessageProps) => ({
+  notification: {
+    title,
+    body,
+    sound,
+  },
+  android: {
+    priority: priority ?? "high",
+    // notification: {
+    //   imageUrl: "",
+    // },
+  },
+  topic,
+});

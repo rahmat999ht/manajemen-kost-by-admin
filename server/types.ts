@@ -1,5 +1,13 @@
 import { firestore } from "firebase-admin";
 
+export type MessageProps = {
+    topic: string;
+    body: string;
+    title: string;
+    sound?: string;
+    priority?: "high" | "normal";
+  };
+
 export interface IPenghuni {
     image: string | null;
     isAktif: boolean;
