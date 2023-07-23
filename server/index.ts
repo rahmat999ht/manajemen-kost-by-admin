@@ -9,6 +9,7 @@ import {
     MessageProps,
     TimestampNow,
     Timestamp,
+    IRiwayatPembayaran,
 } from "./types";
 
 const params = {
@@ -80,7 +81,6 @@ function main() {
                 })
 
                 // kode dibawah ini akan mengosongkan kembali variabel listPenghuni
-                // listPenghuni.splice(0);
                 listPenghuni = [];
             });
         },
@@ -91,7 +91,13 @@ function main() {
 }
 
 
-const fung = async ({ data, currentTime, targetTimestamp, min3DayTimestamp, docNB }) => {
+const fung = async ({ data, currentTime, targetTimestamp, min3DayTimestamp, docNB }: {
+    data: INaiveBayes,
+    currentTime: admin.firestore.Timestamp,
+    targetTimestamp: admin.firestore.Timestamp,
+    min3DayTimestamp: admin.firestore.Timestamp,
+    docNB: admin.firestore.QueryDocumentSnapshot<admin.firestore.DocumentData>
+}) => {
     try {
         //kode di bawah ini akan mencari nomor kamar berdasarkan variabel data.idKamar.id
         const dataKamars = await queryKamar
@@ -133,15 +139,54 @@ const fung = async ({ data, currentTime, targetTimestamp, min3DayTimestamp, docN
             await jatuhTempo({ data }) : console.log("The list is empty.");
 
         await queryNaiveBayes.doc(docNB.id).update({ statusKamar: false });
+
     }
     if (data.statusKamar === false) {
         console.log(`Status kamar ${data.idKamar.id} = false`);
+
+        const months = [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'Mei',
+            'Jun',
+            'Jul',
+            'Agu',
+            'Sep',
+            'Nov',
+            'Des',
+        ];
+        const jatuhTempo = data.tglJatuhTempo as admin.firestore.Timestamp;
+        const bulan = months[jatuhTempo.toDate().getMonth() - 1];
+        const tahun = jatuhTempo.toDate().getFullYear();
+
+        const dataKamars = await queryKamar
+            .where(admin.firestore.FieldPath.documentId(), "==", data.idKamar.id)
+            .get()
+        const dataKamar = dataKamars[0] as IKamar;
+
+        listPenghuni.length > 0 ?
+            await bermasalah({ data }) : console.log("The list is empty.");
+
+        // kode dibawah ini akan mengirim data ke field RiwayatPemberitahuan 
+        const newBermasalah: IRiwayatPembayaran = {
+            dateUpload: admin.firestore.Timestamp.now(),
+            isBermasalah: true,
+            isTahunan: false,
+            tahun: null,
+            bulan: bulan,
+            sewaBulanan: dataKamar.sewa_bulanan,
+            sewaTahunan: null,
+        };
+        await queryNaiveBayes.doc(docNB.id).update({ ...newBermasalah });
+
     }
 }
 
 
-const jatuhTempoMin3Day = async ({ data }) => {
-    const firstValue = listPenghuni[0];
+const jatuhTempoMin3Day = async ({ data }: { data: INaiveBayes }) => {
+    const firstValue = listPenghuni[listPenghuni.length - 1];
     console.log("First value:", firstValue);
 
     await sendNotification({
@@ -172,9 +217,9 @@ const jatuhTempoMin3Day = async ({ data }) => {
     }
 }
 
-async function jatuhTempo({ data }) {
+async function jatuhTempo({ data }: { data: INaiveBayes }) {
 
-    const firstValue = listPenghuni[0];
+    const firstValue = listPenghuni[listPenghuni.length - 1];
     console.log("First value:", firstValue);
 
     // kode dibawah ini akan mengirim notifikasi
@@ -199,6 +244,43 @@ async function jatuhTempo({ data }) {
 
         console.log(
             "Pemberitahuan jatuh tempo berhasil ditambahkan dengan ID:",
+            pemberitahuan.id
+        );
+    } catch (error) {
+        console.error("Error menambahkan pemberitahuan:", error);
+    }
+
+}
+
+
+async function bermasalah({ data }: { data: INaiveBayes }) {
+
+    const firstValue = listPenghuni[listPenghuni.length - 1];
+    console.log("First value:", firstValue);
+
+    // kode dibawah ini akan mengirim notifikasi
+    const isBermasalah = data.riwayatPembayaran.length;
+    await sendNotification({
+        topic: firstValue,
+        title: "Info",
+        body: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${isBermasalah} kali`,
+    });
+
+    // kode dibawah ini akan mengirim data notifikasi ke tabel pemberitahuan
+    const newPemberitahuan: IPemberitahuan = {
+        dateUpload: admin.firestore.Timestamp.now(),
+        idKamar: data.idKamar,
+        deskripsi: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${isBermasalah} kali`,
+        tglJatuhTempo: data.tglJatuhTempo,
+        isView: false,
+    };
+
+    try {
+        const pemberitahuan = await queryPemberitahuan
+            .add(newPemberitahuan)
+
+        console.log(
+            "Pemberitahuan bermasalah berhasil ditambahkan dengan ID:",
             pemberitahuan.id
         );
     } catch (error) {

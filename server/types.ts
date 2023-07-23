@@ -30,9 +30,9 @@ export interface IRiwayatPembayaran {
     bulan: string | null;
     dateUpload: ITimestamp;
     isBermasalah: boolean;
-    isTahunan: string | null;
-    sewaBulanan: string | null;
-    sewaTahunan: string | null;
+    isTahunan: boolean;
+    sewaBulanan: number | null;
+    sewaTahunan: number | null;
     tahun: string | null;
 }
 
