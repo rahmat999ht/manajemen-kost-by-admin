@@ -27,13 +27,13 @@ export interface INaiveBayes {
 }
 
 export interface IRiwayatPembayaran {
-    bulan: string | null;
     dateUpload: ITimestamp;
     isBermasalah: boolean;
     isTahunan: boolean;
     sewaBulanan: number | null;
     sewaTahunan: number | null;
     tahun: string | null;
+    bulan: string | null;
 }
 
 export interface IKamar {

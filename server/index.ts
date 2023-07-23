@@ -124,62 +124,28 @@ const fung = async ({ data, currentTime, targetTimestamp, min3DayTimestamp, docN
         console.log("Error getting documents: ", error);
     }
 
-    if (currentTime >= min3DayTimestamp && currentTime < targetTimestamp) {
-        console.log(
-            `Kamar ${data.idKamar.id} dalam tiga hari ke depan akan jatuh tempo`
-        );
+    // if (currentTime >= min3DayTimestamp && currentTime < targetTimestamp) {
+    //     console.log(
+    //         `Kamar ${data.idKamar.id} dalam tiga hari ke depan akan jatuh tempo`
+    //     );
 
-        listPenghuni.length > 0 ?
-            await jatuhTempoMin3Day({ data }) : console.log("The list is empty.");
+    //     listPenghuni.length > 0 ?
+    //         await jatuhTempoMin3Day({ data }) : console.log("The list is empty.");
 
-    } else if (currentTime >= targetTimestamp) {
-        console.log(`Kamar ${data.idKamar.id} telah jatuh tempo`);
+    // } else if (currentTime >= targetTimestamp) {
+    //     console.log(`Kamar ${data.idKamar.id} telah jatuh tempo`);
 
-        listPenghuni.length > 0 ?
-            await jatuhTempo({ data }) : console.log("The list is empty.");
+    //     listPenghuni.length > 0 ?
+    //         await jatuhTempo({ data }) : console.log("The list is empty.");
 
-        await queryNaiveBayes.doc(docNB.id).update({ statusKamar: false });
+    //     await queryNaiveBayes.doc(docNB.id).update({ statusKamar: false });
 
-    }
+    // }
     if (data.statusKamar === false) {
         console.log(`Status kamar ${data.idKamar.id} = false`);
 
-        const months = [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'Mei',
-            'Jun',
-            'Jul',
-            'Agu',
-            'Sep',
-            'Nov',
-            'Des',
-        ];
-        const jatuhTempo = data.tglJatuhTempo as admin.firestore.Timestamp;
-        const bulan = months[jatuhTempo.toDate().getMonth() - 1];
-        const tahun = jatuhTempo.toDate().getFullYear();
-
-        const dataKamars = await queryKamar
-            .where(admin.firestore.FieldPath.documentId(), "==", data.idKamar.id)
-            .get()
-        const dataKamar = dataKamars[0] as IKamar;
-
         listPenghuni.length > 0 ?
-            await bermasalah({ data }) : console.log("The list is empty.");
-
-        // kode dibawah ini akan mengirim data ke field RiwayatPemberitahuan 
-        const newBermasalah: IRiwayatPembayaran = {
-            dateUpload: admin.firestore.Timestamp.now(),
-            isBermasalah: true,
-            isTahunan: false,
-            tahun: null,
-            bulan: bulan,
-            sewaBulanan: dataKamar.sewa_bulanan,
-            sewaTahunan: null,
-        };
-        await queryNaiveBayes.doc(docNB.id).update({ ...newBermasalah });
+            await bermasalah({ data, docNB }) : console.log("The list is empty.");
 
     }
 }
@@ -252,39 +218,107 @@ async function jatuhTempo({ data }: { data: INaiveBayes }) {
 
 }
 
-
-async function bermasalah({ data }: { data: INaiveBayes }) {
+async function bermasalah({ data, docNB }: {
+    data: INaiveBayes,
+    docNB: admin.firestore.QueryDocumentSnapshot<admin.firestore.DocumentData>
+}) {
 
     const firstValue = listPenghuni[listPenghuni.length - 1];
     console.log("First value:", firstValue);
 
-    // kode dibawah ini akan mengirim notifikasi
-    const isBermasalah = data.riwayatPembayaran.length;
-    await sendNotification({
-        topic: firstValue,
-        title: "Info",
-        body: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${isBermasalah} kali`,
+    const months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'Mei',
+        'Jun',
+        'Jul',
+        'Agu',
+        'Sep',
+        'Nov',
+        'Des',
+    ];
+    const jatuhTempo = data.tglJatuhTempo as admin.firestore.Timestamp;
+    const bulan = months[jatuhTempo.toDate().getMonth() - 1];
+    const tahun = jatuhTempo.toDate().getFullYear();
+    let sewa_bulanan = 0;
+
+    const dataKamars2 = await queryKamar.get()
+    console.log(`dataKamars ${dataKamars2}`);
+
+    // const dataKamar = dataKamars[0] as IKamar; 
+    // kode di bawah ini akan mencari nomor noHp penghuni pada nomor kamar yang telah di dapatkan
+    dataKamars2.docs.forEach((doc) => {
+        const dataKam = doc.data() as IKamar;
+        if (dataKam.penghuni.length > 0) {
+            const idWithoutPlus = dataKam.penghuni[0].id.replace(/\+/g, '');
+            if (idWithoutPlus == firstValue) {
+                // kode dibawah ini akan mengisi varibel sewa_bulanan sesuai noKamar yg di tempati
+                if (dataKam.sewa_bulanan > 0) {
+                    sewa_bulanan = dataKam.sewa_bulanan;
+                    console.log(`sewa_bulanan ${sewa_bulanan}`);
+                } else {
+                    console.log(`penghuni kosong`);
+                }
+            }
+        }
     });
 
-    // kode dibawah ini akan mengirim data notifikasi ke tabel pemberitahuan
-    const newPemberitahuan: IPemberitahuan = {
+    // kode dibawah ini akan mengirim data ke field RiwayatPemberitahuan 
+    const newBermasalah: IRiwayatPembayaran = {
         dateUpload: admin.firestore.Timestamp.now(),
-        idKamar: data.idKamar,
-        deskripsi: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${isBermasalah} kali`,
-        tglJatuhTempo: data.tglJatuhTempo,
-        isView: false,
+        isBermasalah: true,
+        isTahunan: false,
+        tahun: null,
+        bulan: bulan,
+        sewaBulanan: sewa_bulanan,
+        sewaTahunan: null,
     };
 
     try {
-        const pemberitahuan = await queryPemberitahuan
-            .add(newPemberitahuan)
+        const riwayatPembayaran = await queryNaiveBayes.doc(docNB.id).update({
+            riwayatPembayaran: admin.firestore.FieldValue.arrayUnion(newBermasalah),
+        });
 
         console.log(
-            "Pemberitahuan bermasalah berhasil ditambahkan dengan ID:",
-            pemberitahuan.id
+            "Riwayat Pembayaran bermasalah berhasil ditambahkan dengan Data:",
+            riwayatPembayaran
         );
     } catch (error) {
         console.error("Error menambahkan pemberitahuan:", error);
+    }
+
+    const isBermasalah = data.riwayatPembayaran.length;
+    if (isBermasalah > 0) {
+
+        // kode dibawah ini akan mengirim notifikasi
+        await sendNotification({
+            topic: firstValue,
+            title: "Info",
+            body: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${isBermasalah} kali`,
+        });
+
+        // kode dibawah ini akan mengirim data notifikasi ke tabel pemberitahuan
+        const newPemberitahuan: IPemberitahuan = {
+            dateUpload: admin.firestore.Timestamp.now(),
+            idKamar: data.idKamar,
+            deskripsi: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${isBermasalah} kali`,
+            tglJatuhTempo: data.tglJatuhTempo,
+            isView: false,
+        };
+
+        try {
+            const pemberitahuan = await queryPemberitahuan
+                .add(newPemberitahuan)
+
+            console.log(
+                "Pemberitahuan bermasalah berhasil ditambahkan dengan ID:",
+                pemberitahuan.id
+            );
+        } catch (error) {
+            console.error("Error menambahkan pemberitahuan:", error);
+        }
     }
 
 }
