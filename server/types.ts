@@ -20,20 +20,16 @@ export interface IPenghuni {
 
 export interface INaiveBayes {
     idKamar: DocumentReference;
-    riwayatPembayaran: IRiwayatPembayaran[];
+    riwayatBermasalah: IRiwayatBermasalah[];
     statusKamar: boolean;
     terisi: boolean
     tglJatuhTempo: ITimestamp;
 }
 
-export interface IRiwayatPembayaran {
+export interface IRiwayatBermasalah {
     dateUpload: ITimestamp;
-    isBermasalah: boolean;
-    isTahunan: boolean;
-    sewaBulanan: number | null;
-    sewaTahunan: number | null;
-    tahun: string | null;
-    bulan: string | null;
+    tahun: string;
+    bulan: string;
 }
 
 export interface IKamar {

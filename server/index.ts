@@ -9,7 +9,7 @@ import {
     MessageProps,
     TimestampNow,
     Timestamp,
-    IRiwayatPembayaran,
+    IRiwayatBermasalah,
 } from "./types";
 
 const params = {
@@ -239,71 +239,37 @@ async function bermasalah({ data, docNB }: {
         'Nov',
         'Des',
     ];
+
     const jatuhTempo = data.tglJatuhTempo as admin.firestore.Timestamp;
-    const bulan = months[jatuhTempo.toDate().getMonth() - 1];
-    const tahun = jatuhTempo.toDate().getFullYear();
-    let sewa_bulanan = 0;
+    const bulan = months[jatuhTempo.toDate().getMonth()];
+    const tahun = jatuhTempo.toDate().getFullYear().toString();
 
-    const dataKamars2 = await queryKamar.get()
-    console.log(`dataKamars ${dataKamars2}`);
-
-    // const dataKamar = dataKamars[0] as IKamar; 
-    // kode di bawah ini akan mencari nomor noHp penghuni pada nomor kamar yang telah di dapatkan
-    dataKamars2.docs.forEach((doc) => {
-        const dataKam = doc.data() as IKamar;
-        if (dataKam.penghuni.length > 0) {
-            const idWithoutPlus = dataKam.penghuni[0].id.replace(/\+/g, '');
-            if (idWithoutPlus == firstValue) {
-                // kode dibawah ini akan mengisi varibel sewa_bulanan sesuai noKamar yg di tempati
-                if (dataKam.sewa_bulanan > 0) {
-                    sewa_bulanan = dataKam.sewa_bulanan;
-                    console.log(`sewa_bulanan ${sewa_bulanan}`);
-                } else {
-                    console.log(`penghuni kosong`);
-                }
-            }
-        }
-    });
-
-    // kode dibawah ini akan mengirim data ke field RiwayatPemberitahuan 
-    const newBermasalah: IRiwayatPembayaran = {
+    // kode dibawah ini akan mengirim data ke field RiwayatBermasalah
+    const newBermasalah: IRiwayatBermasalah = {
         dateUpload: admin.firestore.Timestamp.now(),
-        isBermasalah: true,
-        isTahunan: false,
-        tahun: null,
+        tahun: tahun,
         bulan: bulan,
-        sewaBulanan: sewa_bulanan,
-        sewaTahunan: null,
     };
 
-    try {
-        const riwayatPembayaran = await queryNaiveBayes.doc(docNB.id).update({
-            riwayatPembayaran: admin.firestore.FieldValue.arrayUnion(newBermasalah),
-        });
+    await queryNaiveBayes.doc(docNB.id).update({
+        riwayatBermasalah: admin.firestore.FieldValue.arrayUnion(newBermasalah),
+    });
 
-        console.log(
-            "Riwayat Pembayaran bermasalah berhasil ditambahkan dengan Data:",
-            riwayatPembayaran
-        );
-    } catch (error) {
-        console.error("Error menambahkan pemberitahuan:", error);
-    }
-
-    const isBermasalah = data.riwayatPembayaran.length;
-    if (isBermasalah > 0) {
+    const bermasalahLength = data.riwayatBermasalah.length;
+    if (bermasalahLength > 0) {
 
         // kode dibawah ini akan mengirim notifikasi
         await sendNotification({
             topic: firstValue,
             title: "Info",
-            body: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${isBermasalah} kali`,
+            body: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
         });
 
         // kode dibawah ini akan mengirim data notifikasi ke tabel pemberitahuan
         const newPemberitahuan: IPemberitahuan = {
             dateUpload: admin.firestore.Timestamp.now(),
             idKamar: data.idKamar,
-            deskripsi: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${isBermasalah} kali`,
+            deskripsi: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
             tglJatuhTempo: data.tglJatuhTempo,
             isView: false,
         };
