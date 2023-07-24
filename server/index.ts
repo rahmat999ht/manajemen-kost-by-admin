@@ -223,6 +223,7 @@ async function bermasalah({ data, docNB }: {
     docNB: admin.firestore.QueryDocumentSnapshot<admin.firestore.DocumentData>
 }) {
 
+    let bulanTerakhir = '';
     const firstValue = listPenghuni[listPenghuni.length - 1];
     console.log("First value:", firstValue);
 
@@ -251,9 +252,30 @@ async function bermasalah({ data, docNB }: {
         bulan: bulan,
     };
 
-    await queryNaiveBayes.doc(docNB.id).update({
-        riwayatBermasalah: admin.firestore.FieldValue.arrayUnion(newBermasalah),
+
+    const dataNaive = await queryNaiveBayes
+        .where(admin.firestore.FieldPath.documentId(), "==", data.idKamar.id)
+        .get()
+
+    // kode di bawah ini akan mencari nomor 
+    dataNaive.forEach((doc) => {
+        const data = doc.data() as INaiveBayes;
+        const riwayatBermasalah = data.riwayatBermasalah as IRiwayatBermasalah[];
+        // kode dibawah ini akan mencari bulan riwayat bermasalah terakhir
+        if (riwayatBermasalah.length > 0) {
+            bulanTerakhir = riwayatBermasalah[riwayatBermasalah.length - 1].bulan;
+            console.log(`bulanTerakhir ${bulanTerakhir}`);
+        } else {
+            console.log(`bulanTerakhir kosong`);
+        }
+
     });
+
+    if (bulan != bulanTerakhir) {
+        await queryNaiveBayes.doc(docNB.id).update({
+            riwayatBermasalah: admin.firestore.FieldValue.arrayUnion(newBermasalah),
+        });
+    }
 
     const bermasalahLength = data.riwayatBermasalah.length;
     if (bermasalahLength > 0) {
