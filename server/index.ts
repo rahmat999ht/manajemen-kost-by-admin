@@ -124,23 +124,23 @@ const fung = async ({ data, currentTime, targetTimestamp, min3DayTimestamp, docN
         console.log("Error getting documents: ", error);
     }
 
-    // if (currentTime >= min3DayTimestamp && currentTime < targetTimestamp) {
-    //     console.log(
-    //         `Kamar ${data.idKamar.id} dalam tiga hari ke depan akan jatuh tempo`
-    //     );
+    if (currentTime >= min3DayTimestamp && currentTime < targetTimestamp) {
+        console.log(
+            `Kamar ${data.idKamar.id} dalam tiga hari ke depan akan jatuh tempo`
+        );
 
-    //     listPenghuni.length > 0 ?
-    //         await jatuhTempoMin3Day({ data }) : console.log("The list is empty.");
+        listPenghuni.length > 0 ?
+            await jatuhTempoMin3Day({ data }) : console.log("The list is empty.");
 
-    // } else if (currentTime >= targetTimestamp) {
-    //     console.log(`Kamar ${data.idKamar.id} telah jatuh tempo`);
+    } else if (currentTime >= targetTimestamp) {
+        console.log(`Kamar ${data.idKamar.id} telah jatuh tempo`);
 
-    //     listPenghuni.length > 0 ?
-    //         await jatuhTempo({ data }) : console.log("The list is empty.");
+        listPenghuni.length > 0 ?
+            await jatuhTempo({ data }) : console.log("The list is empty.");
 
-    //     await queryNaiveBayes.doc(docNB.id).update({ statusKamar: false });
+        await queryNaiveBayes.doc(docNB.id).update({ statusKamar: false });
 
-    // }
+    }
     if (data.statusKamar === false) {
         console.log(`Status kamar ${data.idKamar.id} = false`);
 
