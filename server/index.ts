@@ -252,62 +252,56 @@ async function bermasalah({ data, docNB }: {
         bulan: bulan,
     };
 
+    const riwayatBermasalah = data.riwayatBermasalah as IRiwayatBermasalah[];
+    // kode dibawah ini akan mencari bulan riwayat bermasalah terakhir
+    if (riwayatBermasalah.length > 0) {
+        bulanTerakhir = riwayatBermasalah[riwayatBermasalah.length - 1].bulan;
+        // console.log(`bulanTerakhir ${bulanTerakhir}`);
+    } else {
+        console.log(`bulanTerakhir kosong`);
+    }
 
-    const dataNaive = await queryNaiveBayes
-        .where(admin.firestore.FieldPath.documentId(), "==", data.idKamar.id)
-        .get()
-
-    // kode di bawah ini akan mencari nomor 
-    dataNaive.forEach((doc) => {
-        const data = doc.data() as INaiveBayes;
-        const riwayatBermasalah = data.riwayatBermasalah as IRiwayatBermasalah[];
-        // kode dibawah ini akan mencari bulan riwayat bermasalah terakhir
-        if (riwayatBermasalah.length > 0) {
-            bulanTerakhir = riwayatBermasalah[riwayatBermasalah.length - 1].bulan;
-            console.log(`bulanTerakhir ${bulanTerakhir}`);
-        } else {
-            console.log(`bulanTerakhir kosong`);
-        }
-
-    });
+    console.log(`bulan ${bulan}`);
+    console.log(`bulanTerakhir ${bulanTerakhir}`);
 
     if (bulan != bulanTerakhir) {
         await queryNaiveBayes.doc(docNB.id).update({
             riwayatBermasalah: admin.firestore.FieldValue.arrayUnion(newBermasalah),
         });
-    }
 
-    const bermasalahLength = data.riwayatBermasalah.length;
-    if (bermasalahLength > 0) {
+        const bermasalahLength = data.riwayatBermasalah.length;
+        if (bermasalahLength > 0 && bermasalahLength <= 3) {
 
-        // kode dibawah ini akan mengirim notifikasi
-        await sendNotification({
-            topic: firstValue,
-            title: "Info",
-            body: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
-        });
+            // kode dibawah ini akan mengirim notifikasi
+            await sendNotification({
+                topic: firstValue,
+                title: "Info",
+                body: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
+            });
 
-        // kode dibawah ini akan mengirim data notifikasi ke tabel pemberitahuan
-        const newPemberitahuan: IPemberitahuan = {
-            dateUpload: admin.firestore.Timestamp.now(),
-            idKamar: data.idKamar,
-            deskripsi: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
-            tglJatuhTempo: data.tglJatuhTempo,
-            isView: false,
-        };
+            // kode dibawah ini akan mengirim data notifikasi ke tabel pemberitahuan
+            const newPemberitahuan: IPemberitahuan = {
+                dateUpload: admin.firestore.Timestamp.now(),
+                idKamar: data.idKamar,
+                deskripsi: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
+                tglJatuhTempo: data.tglJatuhTempo,
+                isView: false,
+            };
 
-        try {
-            const pemberitahuan = await queryPemberitahuan
-                .add(newPemberitahuan)
+            try {
+                const pemberitahuan = await queryPemberitahuan
+                    .add(newPemberitahuan)
 
-            console.log(
-                "Pemberitahuan bermasalah berhasil ditambahkan dengan ID:",
-                pemberitahuan.id
-            );
-        } catch (error) {
-            console.error("Error menambahkan pemberitahuan:", error);
+                console.log(
+                    "Pemberitahuan bermasalah berhasil ditambahkan dengan ID:",
+                    pemberitahuan.id
+                );
+            } catch (error) {
+                console.error("Error menambahkan pemberitahuan:", error);
+            }
         }
     }
+
 
 }
 
