@@ -141,7 +141,7 @@ const fung = async ({ data, currentTime, targetTimestamp, min3DayTimestamp, docN
         await queryNaiveBayes.doc(docNB.id).update({ statusKamar: false });
 
     }
-    if (data.statusKamar === false) {
+    if (data.statusKamar === false && data.terisi === true) {
         console.log(`Status kamar ${data.idKamar.id} = false`);
 
         listPenghuni.length > 0 ?
