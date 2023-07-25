@@ -7,7 +7,7 @@ class NaiveBayesModel {
   final Timestamp? tglJatuhTempo;
   final DocumentReference? idKamar;
   final bool? statusKamar;
-  final List<String>? riwayatPembayaran;
+  final List<String>? riwayatBersamalah;
   final bool? terisi;
 
   NaiveBayesModel({
@@ -15,7 +15,7 @@ class NaiveBayesModel {
     required this.tglJatuhTempo,
     this.idKamar,
     this.statusKamar,
-    this.riwayatPembayaran,
+    this.riwayatBersamalah,
     this.terisi,
   });
 
@@ -24,7 +24,7 @@ class NaiveBayesModel {
   //     'tglJatuhTempo': tglJatuhTempo,
   //     'idKamar': idKamar,
   //     'statusKamar': statusKamar,
-  //     'riwayatPembayaran': riwayatPembayaran,
+  //     'riwayatBersamalah': riwayatBersamalah,
   //   };
   // }
 
@@ -57,7 +57,7 @@ class NaiveBayesModel {
       idKamar: idKamar,
       statusKamar:
           map['statusKamar'] != null ? map['statusKamar'] as bool : null,
-      // riwayatPembayaran: map['riwayatPembayaran'] ?? [],
+      // riwayatBersamalah: map['riwayatBersamalah'] ?? [],
       terisi: map['terisi'] != null ? map['terisi'] as bool : null,
     );
   }
@@ -76,7 +76,7 @@ class NaiveBayesModel {
       idKamar: idKamar,
       statusKamar:
           map['statusKamar'] != null ? map['statusKamar'] as bool : null,
-      // riwayatPembayaran: map['riwayatPembayaran'] ?? [],
+      // riwayatBersamalah: map['riwayatBersamalah'] ?? [],
       terisi: map['terisi'] != null ? map['terisi'] as bool : null,
     );
   }
