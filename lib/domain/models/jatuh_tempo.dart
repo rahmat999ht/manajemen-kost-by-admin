@@ -10,7 +10,7 @@ class JatuhTempoModel extends NaiveBayesModel {
     required super.tglJatuhTempo,
     required super.idKamar,
     super.statusKamar,
-    super.riwayatPembayaran,
+    super.riwayatBersamalah,
     super.terisi,
   });
 
@@ -19,7 +19,7 @@ class JatuhTempoModel extends NaiveBayesModel {
       'tglJatuhTempo': tglJatuhTempo,
       'idKamar': idKamar,
       'statusKamar': statusKamar,
-      'riwayatPembayaran': riwayatPembayaran,
+      'riwayatBersamalah': riwayatBersamalah,
       'terisi': terisi,
     };
   }
@@ -39,7 +39,7 @@ class JatuhTempoModel extends NaiveBayesModel {
       idKamar: idKamar,
       statusKamar:
           map['statusKamar'] != null ? map['statusKamar'] as bool : null,
-      // riwayatPembayaran: map['riwayatPembayaran'] ?? [],
+      // riwayatBersamalah: map['riwayatBersamalah'] ?? [],
       terisi: map['terisi'] != null ? map['terisi'] as bool : null,
     );
   }
@@ -58,7 +58,7 @@ class JatuhTempoModel extends NaiveBayesModel {
       idKamar: idKamar,
       statusKamar:
           map['statusKamar'] != null ? map['statusKamar'] as bool : null,
-      // riwayatPembayaran: map['riwayatPembayaran'] ?? [],
+      // riwayatBersamalah: map['riwayatBersamalah'] ?? [],
       terisi: map['terisi'] != null ? map['terisi'] as bool : null,
     );
   }

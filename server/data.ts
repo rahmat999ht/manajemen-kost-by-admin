@@ -5,7 +5,7 @@ export const message = ({ body, title, topic, sound,priority }: MessageProps) =>
   notification: {
     title,
     body,
-    sound,
+    // sound,
   },
   android: {
     priority: priority ?? "high",

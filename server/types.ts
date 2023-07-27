@@ -19,21 +19,17 @@ export interface IPenghuni {
 }
 
 export interface INaiveBayes {
-    idKamar: firestore.DocumentReference;
-    riwayatPembayaran: IRiwayatPembayaran[];
+    idKamar: DocumentReference;
+    riwayatBermasalah: IRiwayatBermasalah[];
     statusKamar: boolean;
     terisi: boolean
-    tglJatuhTempo: firestore.Timestamp;
+    tglJatuhTempo: ITimestamp;
 }
 
-export interface IRiwayatPembayaran {
-    bulan: string | null;
-    dateUpload: firestore.Timestamp;
-    isBermasalah: boolean;
-    isTahunan: string | null;
-    sewaBulanan: string | null;
-    sewaTahunan: string | null;
-    tahun: string | null;
+export interface IRiwayatBermasalah {
+    dateUpload: ITimestamp;
+    tahun: string;
+    bulan: string;
 }
 
 export interface IKamar {
@@ -41,18 +37,24 @@ export interface IKamar {
     gedung: string
     lantai: string
     noKamar: string
-    penghuni: firestore.DocumentReference[]
+    penghuni: DocumentReference[]
     sewa_bulanan: number
     sewa_tahunan: number
-    tglSewa: firestore.Timestamp
+    tglSewa: ITimestamp
 }
 
 
 export interface IPemberitahuan {
-    dateUpload: firestore.Timestamp
-    idKamar: firestore.DocumentReference
+    dateUpload: ITimestamp
+    idKamar: DocumentReference
     deskripsi: string
-    tglJatuhTempo: firestore.Timestamp
+    tglJatuhTempo: ITimestamp
     isView: boolean
 }
+
+
+export type ITimestamp = firestore.Timestamp
+export const TimestampNow = firestore.Timestamp.now()
+export const Timestamp = firestore.Timestamp
+export type DocumentReference = firestore.DocumentReference
 
