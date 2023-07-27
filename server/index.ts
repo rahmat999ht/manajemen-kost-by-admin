@@ -73,7 +73,7 @@ function main() {
                 min3Day.setDate(min3Day.getDate() - 3);
                 const min3DayTimestamp = Timestamp.fromDate(min3Day);
 
-               // variabel currentTime adalah varibel peluang yg akan terjadi
+               // variabel currentTime adalah varibel peluang yg akan terjadi  prbabilitas C
                // variabel min3DayTimestamp adalah prbabilitas B
                // variabel targetTimestamp adalah prbabilitas A
                 fung({
