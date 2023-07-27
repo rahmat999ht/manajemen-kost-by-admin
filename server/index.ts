@@ -110,7 +110,6 @@ const fung = async ({ data, currentTime, targetTimestamp, min3DayTimestamp, docN
 
         //kode di bawah ini akan mencari nomor noHp penghuni pada nomor kamar yang telah di dapatkan
         dataKamars.forEach((doc) => {
-            // console.log(doc.id, '=>', doc.data());
             const data = doc.data() as IKamar;
             // kode dibawah ini akan menambahkan penghuni kamar
             // yang menjadi penanggung jawabk edalam variabel listPenghuni
@@ -128,6 +127,7 @@ const fung = async ({ data, currentTime, targetTimestamp, min3DayTimestamp, docN
         console.log("Error getting documents: ", error);
     }
 
+    //kondisi 3 hari sebelum jatuh tempo
     if (currentTime >= min3DayTimestamp && currentTime < targetTimestamp) {
         console.log(
             `Kamar ${data.idKamar.id} dalam tiga hari ke depan akan jatuh tempo`
@@ -136,16 +136,18 @@ const fung = async ({ data, currentTime, targetTimestamp, min3DayTimestamp, docN
         listPenghuni.length > 0 ?
             await jatuhTempoMin3Day({ data }) : console.log("The list is empty.");
 
-
     } else if (currentTime >= targetTimestamp) {
         console.log(`Kamar ${data.idKamar.id} telah jatuh tempo`);
 
         listPenghuni.length > 0 ?
             await jatuhTempo({ data }) : console.log("The list is empty.");
 
+        // kode ini akan menonaktifkan status kamar ketika telah sampai tanggal jatuh tempo 
         await queryNaiveBayes.doc(docNB.id).update({ statusKamar: false });
 
     }
+
+    //kondisi bermasalah
     if (data.statusKamar === false && data.terisi === true) {
         console.log(`Status kamar ${data.idKamar.id} = false`);
 
