@@ -14,6 +14,7 @@ class ValueCalender extends GetView<CalenderController> {
         builder: (context, value, _) {
           if (value.isNotEmpty) {
             return ListView.builder(
+              shrinkWrap: true,
               itemCount: value.length,
               itemBuilder: (context, index) {
                 var datacCalender = value[index];

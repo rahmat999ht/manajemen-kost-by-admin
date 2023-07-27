@@ -70,8 +70,12 @@ function main() {
                 const targetTimestamp = data.tglJatuhTempo;
                 const targetTime = data.tglJatuhTempo.toDate();
                 const min3Day = new Date(targetTime);
-                min3Day.setDate(min3Day.getDate() - 7);
+                min3Day.setDate(min3Day.getDate() - 3);
                 const min3DayTimestamp = Timestamp.fromDate(min3Day);
+
+               // variabel currentTime adalah varibel peluang yg akan terjadi
+               // variabel min3DayTimestamp adalah prbabilitas B
+               // variabel targetTimestamp adalah prbabilitas A
                 fung({
                     data,
                     currentTime,
@@ -159,14 +163,14 @@ const jatuhTempoMin3Day = async ({ data }: { data: INaiveBayes }) => {
     await sendNotification({
         topic: firstValue,
         title: "Info",
-        body: `Kamar ${data.idKamar.id} dalam tiga hari ke depan akan jatuh tempo`,
+        body: `Kamar ${data.idKamar.id} dalam 3 hari ke depan akan jatuh tempo`,
     });
 
     // kode dibawah ini akan mengirim data notifikasi ke tabel pemberitahuan
     const newPemberitahuan: IPemberitahuan = {
         dateUpload: admin.firestore.Timestamp.now(),
         idKamar: data.idKamar,
-        deskripsi: `Kamar ${data.idKamar.id} dalam tiga hari ke depan akan jatuh tempo`,
+        deskripsi: `Kamar ${data.idKamar.id} dalam 3 hari ke depan akan jatuh tempo`,
         tglJatuhTempo: data.tglJatuhTempo,
         isView: false,
     };
