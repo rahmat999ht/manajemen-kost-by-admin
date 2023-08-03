@@ -164,6 +164,7 @@ void aktivasiKamar(
       'tglJatuhTempo': tambahSebulanTimestamp,
     },
   );
+  Get.back();
 }
 
 void kosongkanKamar(
@@ -207,4 +208,5 @@ void kosongkanKamar(
       'penghuni': [],
     },
   );
+  Get.back();
 }
