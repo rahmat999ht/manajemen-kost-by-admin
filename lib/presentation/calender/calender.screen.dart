@@ -19,10 +19,10 @@ class CalenderScreen extends GetView<CalenderController> {
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: ConstansApp.firebaseFirestore
             .collection(ConstansApp.naiveBayesCollection)
-            // .where(
-            //   "statusKamar",
-            //   isEqualTo: true,
-            // )
+            .where(
+              "terisi",
+              isEqualTo: true,
+            )
             .snapshots(),
         builder: (ctx, s) {
           if (s.hasData) {

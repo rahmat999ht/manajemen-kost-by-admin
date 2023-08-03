@@ -24,7 +24,6 @@ class DetailKamar extends StatelessWidget {
         builder: (ctx, s) {
           if (s.hasData) {
             final dataNB = s.data!.data()!;
-
             if (dataNB.terisi == false) {
               return const Center(
                 child: Text(
