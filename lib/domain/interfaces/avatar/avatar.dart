@@ -8,12 +8,22 @@ class AvatarWidget extends StatelessWidget {
     this.height = 80,
     this.radius = 70,
     this.heightPlus = 10,
+    this.isRadiusAll = true,
+    this.radiusTL = 0,
+    this.radiusTR = 0,
+    this.radiusBL = 0,
+    this.radiusBR = 0,
   });
   final ImageHash? imageHash;
   final double? height;
   final double? heightPlus;
   final double? width;
+  final bool? isRadiusAll;
   final double? radius;
+  final double? radiusTL;
+  final double? radiusTR;
+  final double? radiusBL;
+  final double? radiusBR;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +31,14 @@ class AvatarWidget extends StatelessWidget {
       height: height,
       width: width,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(radius!),
+        borderRadius: isRadiusAll!
+            ? BorderRadius.circular(radius!)
+            : BorderRadius.only(
+                topLeft: Radius.circular(radiusTL!),
+                topRight: Radius.circular(radiusTR!),
+                bottomLeft: Radius.circular(radiusBL!),
+                bottomRight: Radius.circular(radiusBR!),
+              ),
         child: imageHash != null
             ? OctoImage(
                 image: CachedNetworkImageProvider(

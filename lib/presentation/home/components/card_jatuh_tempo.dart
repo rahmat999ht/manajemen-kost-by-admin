@@ -79,6 +79,9 @@ class CardJatuhTempo extends GetView<HomeController> {
                             imageHash: dataPenghuni.image,
                             width: 107,
                             height: dataPenghuni.image != null ? 189 : 100,
+                            isRadiusAll: false,
+                            radiusTL: 10,
+                            radiusBL: 10,
                           ),
                         ),
                         Padding(
