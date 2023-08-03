@@ -30,7 +30,7 @@ class CardTapKamar extends StatelessWidget {
         color: penghuni!.isEmpty ? ColorApp.red : ColorApp.orange,
         // color: ColorApp.orange,
         child: Center(
-          child: isLoading == true
+          child: isLoading == true && noKamar == noKamar
               ? const SizedBox(
                   height: 20,
                   width: 20,

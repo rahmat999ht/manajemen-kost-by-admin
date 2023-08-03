@@ -10,7 +10,8 @@ class PenghuniController extends GetxController
   final listGedung = ["Gedung A", "Gedung B"];
   PageController pageController = PageController();
   final selectionTab = 0.obs;
-  final loading = false.obs;
+  RxList<bool> isLoadingList = <bool>[].obs;
+  // final loading = false.obs;
 
   void changeSelectionTab(int value) {
     selectionTab.value = value;
@@ -24,10 +25,10 @@ class PenghuniController extends GetxController
 
   Future addKamar(
     String noKamar,
-    // String lantai,
+    int itemIndex,
     // String gedung,
   ) async {
-    loading.value = !loading.value;
+    isLoadingList[itemIndex] = !isLoadingList[itemIndex];
     // final dataKamar = await ConstansApp.firebaseFirestore
     //     .collection(ConstansApp.kamarCollection)
     //     .doc(noKamar)
@@ -51,7 +52,7 @@ class PenghuniController extends GetxController
           Routes.FORM_KAMAR,
           arguments: noKamar,
         );
-        loading.value = !loading.value;
+        isLoadingList[itemIndex] = !isLoadingList[itemIndex];
       },
     );
   }
@@ -73,6 +74,7 @@ class PenghuniController extends GetxController
         // listKamarKosong =
         //     listKamarModel.where((e) => e.penghuni!.isEmpty).toList();
         // log('${listKamarKosong.length}', name: 'kamar');
+        isLoadingList.value = List.filled(listKamarModel.length, false);
         change(listKamarModel, status: RxStatus.success());
       } else {
         log('Kosong', name: 'kamar');

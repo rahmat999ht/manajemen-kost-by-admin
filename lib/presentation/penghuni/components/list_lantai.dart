@@ -31,12 +31,10 @@ class ListLantai extends GetView<PenghuniController> {
       ) =>
           Obx(
         () => CardTapKamar(
-          isLoading: controller.loading.value,
+          isLoading: controller.isLoadingList[itemIndexInOriginalList],
           penghuni: data![itemIndexInOriginalList].penghuni,
           onTap: () {
-            controller.addKamar(
-              '${item.noKamar}',
-            );
+            controller.addKamar('${item.noKamar}', itemIndexInOriginalList);
             log('${item.noKamar}', name: "kamar");
             log(
               '${data![itemIndexInOriginalList].penghuni!.isEmpty}',
