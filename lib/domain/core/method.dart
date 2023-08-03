@@ -85,6 +85,17 @@ class MethodApp {
         );
   }
 
+  DocumentReference<NaiveBayesModel> naiveBayes(String id) {
+    return ConstansApp.firebaseFirestore
+        .collection(ConstansApp.noKamarCollection)
+        .doc(id)
+        .withConverter(
+          fromFirestore: (snapshot, options) =>
+              NaiveBayesModel.fromDocumentSnapshot(snapshot),
+          toFirestore: (value, options) => value.toJson(),
+        );
+  }
+
   DocumentReference<NoKamarModel> noKamar(String id) {
     return ConstansApp.firebaseFirestore
         .collection(ConstansApp.noKamarCollection)

@@ -15,21 +15,44 @@ class DetailKamar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     log(kamarModel.fasilitas.toString());
+    final MethodApp methodApp = MethodApp();
     return Scaffold(
       backgroundColor: ColorApp.white,
       appBar: appBarBack('No. ${kamarModel.id}'),
-      body: Column(
-        children: [
-          _penghuni(),
-          _fasilitas(
-            title: 'Fasilitas',
-          ),
-          _deskripsi(
-            title: 'Deskripsi',
-            kamarModel: kamarModel,
-            jatuhTempo: naiveBayesModel.tglJatuhTempo,
-          )
-        ],
+      body: StreamBuilder(
+        stream: methodApp.naiveBayes(naiveBayesModel.idNaiveBayes!).snapshots(),
+        builder: (ctx, s) {
+          if (s.hasData) {
+            final dataNB = s.data!.data()!;
+
+            if (dataNB.terisi == false) {
+              return const Center(
+                child: Text(
+                  'Kamar Kosong',
+                  style: TextStyle(fontSize: 28),
+                ),
+              );
+            } else {
+              return Column(
+                children: [
+                  _penghuni(),
+                  _fasilitas(
+                    title: 'Fasilitas',
+                  ),
+                  _deskripsi(
+                    title: 'Deskripsi',
+                    kamarModel: kamarModel,
+                    jatuhTempo: dataNB.tglJatuhTempo,
+                  )
+                ],
+              );
+            }
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(

@@ -19,14 +19,14 @@ class NaiveBayesModel {
     this.terisi,
   });
 
-  // Map<String, dynamic> toJson() {
-  //   return <String, dynamic>{
-  //     'tglJatuhTempo': tglJatuhTempo,
-  //     'idKamar': idKamar,
-  //     'statusKamar': statusKamar,
-  //     'riwayatBersamalah': riwayatBersamalah,
-  //   };
-  // }
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'tglJatuhTempo': tglJatuhTempo,
+      'idKamar': idKamar,
+      'statusKamar': statusKamar,
+      'riwayatBersamalah': riwayatBersamalah,
+    };
+  }
 
   // toDocumentSnapshot(id, data) {
   //   return ConstansApp.firebaseFirestore
