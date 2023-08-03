@@ -12,128 +12,134 @@ Future statusKamar(
     context: context,
     title: "Status Kamar",
     content: <Widget>[
-      naiveBayesModel.statusKamar == false
-          ? StreamBuilder<DocumentSnapshot<KamarModel>>(
-              stream: methodApp.kamar(naiveBayesModel.idKamar!.id).snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final dataKamar = snapshot.data!.data()!;
-                  return Column(
-                    children: [
-                      Text(
-                        'Status Kamar Saat ini sudah melewati masa pembayaran yang jatuh tempo pada tanggal ${tgl.day} - $month - ${tgl.year}',
-                      ),
-                      SizeApp.h20,
-                      ButtonPrymary(
-                        text: 'Aktifkan status kamar',
-                        onPressed: () {
-                          alertContent(
-                            title: 'pilih masa perpanjangan',
-                            content: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  ButtonOutline(
-                                    onPressed: () {
-                                      aktivasiKamar(
-                                        methodApp,
-                                        naiveBayesModel,
-                                        true,
-                                      );
-                                    },
-                                    text: '1 Tahun',
-                                  ),
-                                  const SizedBox(height: 8),
-                                  ButtonOutline(
-                                    onPressed: () {
-                                      aktivasiKamar(
-                                        methodApp,
-                                        naiveBayesModel,
-                                        false,
-                                      );
-                                    },
-                                    text: '1 Bulan',
-                                  ),
-                                ],
+      StreamBuilder<DocumentSnapshot<KamarModel>>(
+        stream: methodApp.kamar(naiveBayesModel.idKamar!.id).snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final dataKamar = snapshot.data!.data()!;
+            if (naiveBayesModel.statusKamar == false) {
+              return Column(
+                children: [
+                  Text(
+                    'Status Kamar Saat ini sudah melewati masa pembayaran yang jatuh tempo pada tanggal ${tgl.day} - $month - ${tgl.year}',
+                  ),
+                  SizeApp.h20,
+                  ButtonPrymary(
+                    text: 'Aktifkan status kamar',
+                    onPressed: () {
+                      alertContent(
+                        title: 'pilih masa perpanjangan',
+                        content: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              ButtonOutline(
+                                onPressed: () {
+                                  aktivasiKamar(
+                                    methodApp,
+                                    naiveBayesModel,
+                                    dataKamar,
+                                    true,
+                                  );
+                                },
+                                text: '1 Tahun',
                               ),
-                            ),
-                          );
-                        },
-                      ),
-                      SizeApp.h10,
-                      ButtonPrymary(
-                        text: 'Kosongkan kamar',
-                        bgColor: ColorApp.red,
-                        onPressed: () {
-                          kosongkanKamar(
-                            methodApp,
-                            naiveBayesModel,
-                            dataKamar,
-                          );
-                        },
-                      ),
-                    ],
-                  );
-                } else {
-                  return const Column(
-                    children: [
-                      Row(
-                        children: [
-                          CircularProgressIndicator(),
-                          SizedBox(width: 10),
-                          Text('Proses ....'),
-                        ],
-                      ),
-                      SizeApp.h100,
-                    ],
-                  );
-                }
-              },
-            )
-          : Column(
-              children: [
-                Text(
-                  'Status Kamar Saat ini masih aktif, dan akan jatuh tempo pada tanggal ${tgl.day} - $month - ${tgl.year}',
-                ),
-                SizeApp.h60,
-                ButtonPrymary(
-                  text: 'Perpanjang sewa kamar',
-                  onPressed: () {
-                    alertContent(
-                      title: 'pilih masa perpanjangan',
-                      content: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            ButtonOutline(
-                              onPressed: () {
-                                aktivasiKamar(
-                                  methodApp,
-                                  naiveBayesModel,
-                                  true,
-                                );
-                              },
-                              text: '1 Tahun',
-                            ),
-                            const SizedBox(height: 8),
-                            ButtonOutline(
-                              onPressed: () {
-                                aktivasiKamar(
-                                  methodApp,
-                                  naiveBayesModel,
-                                  false,
-                                );
-                              },
-                              text: '1 Bulan',
-                            ),
-                          ],
+                              const SizedBox(height: 8),
+                              ButtonOutline(
+                                onPressed: () {
+                                  aktivasiKamar(
+                                    methodApp,
+                                    naiveBayesModel,
+                                    dataKamar,
+                                    false,
+                                  );
+                                },
+                                text: '1 Bulan',
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
+                  SizeApp.h10,
+                  ButtonPrymary(
+                    text: 'Kosongkan kamar',
+                    bgColor: ColorApp.red,
+                    onPressed: () {
+                      kosongkanKamar(
+                        methodApp,
+                        naiveBayesModel,
+                        dataKamar,
+                      );
+                    },
+                  ),
+                ],
+              );
+            } else {
+              return Column(
+                children: [
+                  Text(
+                    'Status Kamar Saat ini masih aktif, dan akan jatuh tempo pada tanggal ${tgl.day} - $month - ${tgl.year}',
+                  ),
+                  SizeApp.h60,
+                  ButtonPrymary(
+                    text: 'Perpanjang sewa kamar',
+                    onPressed: () {
+                      alertContent(
+                        title: 'pilih masa perpanjangan',
+                        content: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              ButtonOutline(
+                                onPressed: () {
+                                  aktivasiKamar(
+                                    methodApp,
+                                    naiveBayesModel,
+                                    dataKamar,
+                                    true,
+                                  );
+                                },
+                                text: '1 Tahun',
+                              ),
+                              const SizedBox(height: 8),
+                              ButtonOutline(
+                                onPressed: () {
+                                  aktivasiKamar(
+                                    methodApp,
+                                    naiveBayesModel,
+                                    dataKamar,
+                                    false,
+                                  );
+                                },
+                                text: '1 Bulan',
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              );
+            }
+          } else {
+            return const Column(
+              children: [
+                Row(
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(width: 10),
+                    Text('Proses ....'),
+                  ],
                 ),
+                SizeApp.h100,
               ],
-            ),
+            );
+          }
+        },
+      )
     ],
   );
 }
@@ -141,6 +147,7 @@ Future statusKamar(
 void aktivasiKamar(
   MethodApp methodApp,
   NaiveBayesModel naiveBayesModel,
+  KamarModel dataKamar,
   bool isSetahun,
 ) {
 // tgl jatuh tempo sebelumnya
@@ -149,8 +156,34 @@ void aktivasiKamar(
   var tambahSebulan = jatuhTempo;
   if (isSetahun == true) {
     tambahSebulan = jatuhTempo.add(const Duration(days: 365));
+    DocumentReference<KamarModel> idKamar = methodApp.kamar(dataKamar.id!);
+    DocumentReference<AdminModel> idAdmin =
+        methodApp.admin(ConstansApp.idLogin);
+    methodApp.addPemasukan(
+      data: PemasukanModel(
+        foto: null,
+        jenis: 'Sewa 1 Tahun',
+        idr: dataKamar.sewaTahunan!,
+        idKamar: idKamar,
+        idAdmin: idAdmin,
+        dateUpload: Timestamp.now(),
+      ).toMapNoImage(),
+    );
   } else {
     tambahSebulan = jatuhTempo.add(const Duration(days: 30));
+    DocumentReference<KamarModel> idKamar = methodApp.kamar(dataKamar.id!);
+    DocumentReference<AdminModel> idAdmin =
+        methodApp.admin(ConstansApp.idLogin);
+    methodApp.addPemasukan(
+      data: PemasukanModel(
+        foto: null,
+        jenis: 'Sewa 1 Bulan',
+        idr: dataKamar.sewaBulanan!,
+        idKamar: idKamar,
+        idAdmin: idAdmin,
+        dateUpload: Timestamp.now(),
+      ).toMapNoImage(),
+    );
   }
   // Mengonversi tambahSebulan kembali menjadi Timestamp
   var tambahSebulanTimestamp = Timestamp.fromDate(tambahSebulan);
@@ -164,6 +197,7 @@ void aktivasiKamar(
       'tglJatuhTempo': tambahSebulanTimestamp,
     },
   );
+  Get.back();
   Get.back();
 }
 

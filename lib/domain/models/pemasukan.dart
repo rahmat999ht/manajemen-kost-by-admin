@@ -5,7 +5,7 @@ import 'package:manajemen_kost_by_admin/domain/core/core.dart';
 class PemasukanModel {
   final String? id;
   final Timestamp dateUpload;
-  final ImageHash foto;
+  final ImageHash? foto;
   final String jenis;
   final int idr;
   final DocumentReference idKamar;
@@ -23,7 +23,18 @@ class PemasukanModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'dateUpload': dateUpload,
-      'foto': foto.toJson(),
+      'foto': foto!.toJson(),
+      'jenis': jenis,
+      'idr': idr,
+      'idKamar': idKamar,
+      'idAdmin': idAdmin,
+    };
+  }
+
+  Map<String, dynamic> toMapNoImage() {
+    return <String, dynamic>{
+      'dateUpload': dateUpload,
+      'foto': null,
       'jenis': jenis,
       'idr': idr,
       'idKamar': idKamar,
