@@ -18,21 +18,35 @@ class ValueGrubPemasukan extends GetView<ListPemasukanController> {
     return GestureDetector(
       onTap: onTap,
       child: ListTile(
-        leading: e.jenis == 'Air'
-            ? const CircleAvatar(
+        leading: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (e.jenis == 'Air')
+              const CircleAvatar(
                 backgroundColor: ColorApp.blue,
                 child: Icon(
                   Icons.water_drop,
                   color: ColorApp.white,
                 ),
               )
-            : const CircleAvatar(
+            else if (e.jenis == 'Listrik')
+              const CircleAvatar(
                 backgroundColor: ColorApp.orange,
                 child: Icon(
                   Icons.electric_bolt_sharp,
                   color: ColorApp.white,
                 ),
+              )
+            else
+              const CircleAvatar(
+                backgroundColor: ColorApp.gray,
+                child: Icon(
+                  Icons.home,
+                  color: ColorApp.white,
+                ),
               ),
+          ],
+        ),
         title: Text(e.jenis),
         subtitle: Text(
             '${c.day(e)} $nameMonth ${c.year(e)}, ${c.hour(e)}:${c.minute(e)}'),

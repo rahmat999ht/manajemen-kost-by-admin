@@ -37,9 +37,22 @@ Padding content(
                 height: 16,
                 width: 16,
                 child: CircleAvatar(
-                  backgroundColor: ColorApp.orange,
+                  backgroundColor: ColorApp.gray,
                   child: Icon(
                     Icons.electric_bolt_sharp,
+                    color: ColorApp.white,
+                    size: 12,
+                  ),
+                ),
+              ),
+            if (value == 'Sewa 1 Tahun' || value == 'Sewa 1 Bulan')
+              const SizedBox(
+                height: 16,
+                width: 16,
+                child: CircleAvatar(
+                  backgroundColor: ColorApp.orange,
+                  child: Icon(
+                    Icons.home,
                     color: ColorApp.white,
                     size: 12,
                   ),
