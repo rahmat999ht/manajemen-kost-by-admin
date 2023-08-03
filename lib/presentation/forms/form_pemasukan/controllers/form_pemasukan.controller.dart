@@ -52,15 +52,12 @@ class FormPemasukanController extends GetxController
             "${ConstansApp.idLogin}_${DateTime.now().toIso8601String()}",
           );
           DocumentReference<KamarModel> idKamar = methodApp.kamar(kamarC.text);
-          DocumentReference<AdminModel> idAdmin =
-              methodApp.admin(ConstansApp.idLogin);
           methodApp.addPemasukan(
             data: PemasukanModel(
               foto: foto,
               jenis: jenisC.text,
               idr: int.parse(fixIdr),
               idKamar: idKamar,
-              idAdmin: idAdmin,
               dateUpload: Timestamp.now(),
             ).toMap(),
           );

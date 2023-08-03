@@ -157,30 +157,24 @@ void aktivasiKamar(
   if (isSetahun == true) {
     tambahSebulan = jatuhTempo.add(const Duration(days: 365));
     DocumentReference<KamarModel> idKamar = methodApp.kamar(dataKamar.id!);
-    DocumentReference<AdminModel> idAdmin =
-        methodApp.admin(ConstansApp.idLogin);
     methodApp.addPemasukan(
       data: PemasukanModel(
         foto: null,
         jenis: 'Sewa 1 Tahun',
         idr: dataKamar.sewaTahunan!,
         idKamar: idKamar,
-        idAdmin: idAdmin,
         dateUpload: Timestamp.now(),
       ).toMapNoImage(),
     );
   } else {
     tambahSebulan = jatuhTempo.add(const Duration(days: 30));
     DocumentReference<KamarModel> idKamar = methodApp.kamar(dataKamar.id!);
-    DocumentReference<AdminModel> idAdmin =
-        methodApp.admin(ConstansApp.idLogin);
     methodApp.addPemasukan(
       data: PemasukanModel(
         foto: null,
         jenis: 'Sewa 1 Bulan',
         idr: dataKamar.sewaBulanan!,
         idKamar: idKamar,
-        idAdmin: idAdmin,
         dateUpload: Timestamp.now(),
       ).toMapNoImage(),
     );

@@ -9,7 +9,6 @@ class PemasukanModel {
   final String jenis;
   final int idr;
   final DocumentReference idKamar;
-  final DocumentReference idAdmin;
   PemasukanModel({
     this.id,
     required this.dateUpload,
@@ -17,7 +16,6 @@ class PemasukanModel {
     required this.jenis,
     required this.idr,
     required this.idKamar,
-    required this.idAdmin,
   });
 
   Map<String, dynamic> toMap() {
@@ -27,7 +25,6 @@ class PemasukanModel {
       'jenis': jenis,
       'idr': idr,
       'idKamar': idKamar,
-      'idAdmin': idAdmin,
     };
   }
 
@@ -38,7 +35,6 @@ class PemasukanModel {
       'jenis': jenis,
       'idr': idr,
       'idKamar': idKamar,
-      'idAdmin': idAdmin,
     };
   }
 
@@ -49,20 +45,16 @@ class PemasukanModel {
           KamarModel.fromDocumentSnapshot(snapshot),
       toFirestore: (value, options) => value.toMap(),
     );
-    final dataLogin = map['idAdmin'] as DocumentReference;
-    DocumentReference<AdminModel> idAdmin = dataLogin.withConverter(
-      fromFirestore: (snapshot, options) =>
-          AdminModel.fromDocumentSnapshot(snapshot),
-      toFirestore: (value, options) => value.toMap(),
-    );
+
     return PemasukanModel(
       id: id,
       dateUpload: map['dateUpload'] as Timestamp,
-      foto: ImageHash.fromJson(map['foto'] as Map<String, dynamic>),
+      foto: map['foto'] != null
+          ? ImageHash.fromJson(map['foto'] as Map<String, dynamic>)
+          : null,
       jenis: map['jenis'] as String,
       idr: map['idr'] as int,
       idKamar: idKamar,
-      idAdmin: idAdmin,
     );
   }
 
