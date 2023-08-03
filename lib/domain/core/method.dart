@@ -87,7 +87,7 @@ class MethodApp {
 
   DocumentReference<NaiveBayesModel> naiveBayes(String id) {
     return ConstansApp.firebaseFirestore
-        .collection(ConstansApp.noKamarCollection)
+        .collection(ConstansApp.naiveBayesCollection)
         .doc(id)
         .withConverter(
           fromFirestore: (snapshot, options) =>
