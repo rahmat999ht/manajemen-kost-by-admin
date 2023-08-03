@@ -32,21 +32,12 @@ class PenghuniModel {
     };
   }
 
-  factory PenghuniModel.fromMap(Map<String, dynamic> map) {
-    return PenghuniModel(
-      image: map['image'] != null ? map['image'] as ImageHash : null,
-      nama: map['nama'] as String,
-      noHp: map['noHp'] as String,
-      jkl: map['jkl'] as String,
-      status: map['status'] as String,
-      peran: map['peran'] != null ? map['peran'] as String : "Kosong",
-      isAktif: map['isAktif'] != null ? map['isAktif'] as bool : false,
-    );
-  }
   factory PenghuniModel.fromMapId(Map<String, dynamic> map, String id) {
     return PenghuniModel(
       id: id,
-      image: map['image'] != null ? map['image'] as ImageHash : null,
+      image: map['image'] != null
+          ? ImageHash.fromJson(map['image'] as Map<String, dynamic>)
+          : null,
       nama: map['nama'] as String,
       noHp: map['noHp'] as String,
       jkl: map['jkl'] as String,
