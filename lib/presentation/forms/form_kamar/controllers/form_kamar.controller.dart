@@ -191,7 +191,7 @@ class FormKamarController extends GetxController
                 status: getValue(i, 3),
                 peran: i == 0 ? "PJ" : "TS",
                 isAktif: true,
-              ).toMap(),
+              ).toMapNoImage(),
             );
           }
 //ketika id penghuni sama dengan nomor yg kita input .
@@ -208,7 +208,7 @@ class FormKamarController extends GetxController
                 status: getValue(i, 3),
                 peran: i == 0 ? "PJ" : "TS",
                 isAktif: true,
-              ).toMap(),
+              ).toMapNoImage(),
             );
           }
           DocumentReference<PenghuniModel> user =

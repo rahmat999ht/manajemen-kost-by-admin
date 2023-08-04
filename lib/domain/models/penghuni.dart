@@ -22,7 +22,19 @@ class PenghuniModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'image': image,
+      'image': image!.toJson(),
+      'nama': nama,
+      'noHp': noHp,
+      'jkl': jkl,
+      'status': status,
+      'peran': peran,
+      'isAktif': isAktif,
+    };
+  }
+
+  Map<String, dynamic> toMapNoImage() {
+    return <String, dynamic>{
+      'image': null,
       'nama': nama,
       'noHp': noHp,
       'jkl': jkl,
