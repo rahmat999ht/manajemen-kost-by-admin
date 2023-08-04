@@ -31,9 +31,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   bool? isviewed = prefs.getBool("isStart") ?? false;
-  String? isId = prefs.getString("user_id") ?? 'id';
-  log(prefs.getBool("isStart").toString());
-  log(isId);
+  String? isId = prefs.getString("user_id") ?? '';
+  log(isviewed.toString());
+  log('idLogin = $isId');
   String isLogin = isId == '' ? Routes.LOGIN : Routes.DASHBOARD;
   String initialRoute = isviewed == true ? isLogin : Routes.WELCOME;
 
@@ -58,7 +58,9 @@ void main() async {
   log(fcmToken.toString());
 
   // If subscribe based on topic then use this
-  await messaging.subscribeToTopic(isId);
+  if (isId.isNotEmpty) {
+    await messaging.subscribeToTopic(isId);
+  }
 
   // Set the background messaging handler early on, as a named top-level function
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
