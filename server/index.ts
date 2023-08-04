@@ -59,33 +59,35 @@ const queryPemberitahuan = firestore.collection("pemberitahuan");
 
 function main() {
 
-
-
     queryNaiveBayes.onSnapshot(
         (snapshot) => {
             snapshot.docs.forEach((docNB) => {
+
                 const data = docNB.data() as INaiveBayes;
-                const currentTime = TimestampNow;
 
-                const targetTimestamp = data.tglJatuhTempo;
-                const targetTime = data.tglJatuhTempo.toDate();
-                const min3Day = new Date(targetTime);
-                min3Day.setDate(min3Day.getDate() - 3);
-                const min3DayTimestamp = Timestamp.fromDate(min3Day);
+                if(data.tglJatuhTempo != null ){
+                    const currentTime = TimestampNow;
 
-               // variabel currentTime adalah varibel peluang yg akan terjadi  prbabilitas C
-               // variabel min3DayTimestamp adalah prbabilitas B
-               // variabel targetTimestamp adalah prbabilitas A
-                fung({
-                    data,
-                    currentTime,
-                    targetTimestamp,
-                    min3DayTimestamp,
-                    docNB,
-                })
-
-                // kode dibawah ini akan mengosongkan kembali variabel listPenghuni
-                listPenghuni = [];
+                    const targetTimestamp = data.tglJatuhTempo;
+                    const targetTime = data.tglJatuhTempo.toDate();
+                    const min3Day = new Date(targetTime);
+                    min3Day.setDate(min3Day.getDate() - 3);
+                    const min3DayTimestamp = Timestamp.fromDate(min3Day);
+    
+                   // variabel currentTime adalah varibel peluang yg akan terjadi  prbabilitas C
+                   // variabel min3DayTimestamp adalah prbabilitas B
+                   // variabel targetTimestamp adalah prbabilitas A
+                    fung({
+                        data,
+                        currentTime,
+                        targetTimestamp,
+                        min3DayTimestamp,
+                        docNB,
+                    })
+    
+                    // kode dibawah ini akan mengosongkan kembali variabel listPenghuni
+                    listPenghuni = [];
+                }     
             });
         },
         (error) => {
@@ -167,6 +169,11 @@ const jatuhTempoMin3Day = async ({ data }: { data: INaiveBayes }) => {
         title: "Info",
         body: `Kamar ${data.idKamar.id} dalam 3 hari ke depan akan jatuh tempo`,
     });
+    await sendNotification({
+        topic: "BaEHJHYSl22x8NX6okHa",
+        title: "Info",
+        body: `Kamar ${data.idKamar.id} dalam 3 hari ke depan akan jatuh tempo`,
+    });
 
     // kode dibawah ini akan mengirim data notifikasi ke tabel pemberitahuan
     const newPemberitahuan: IPemberitahuan = {
@@ -198,6 +205,11 @@ async function jatuhTempo({ data }: { data: INaiveBayes }) {
     // kode dibawah ini akan mengirim notifikasi
     await sendNotification({
         topic: firstValue,
+        title: "Info",
+        body: `Kamar ${data.idKamar.id} telah jatuh tempo`,
+    });
+    await sendNotification({
+        topic: "BaEHJHYSl22x8NX6okHa",
         title: "Info",
         body: `Kamar ${data.idKamar.id} telah jatuh tempo`,
     });
@@ -282,6 +294,11 @@ async function bermasalah({ data, docNB }: {
             // kode dibawah ini akan mengirim notifikasi
             await sendNotification({
                 topic: firstValue,
+                title: "Info",
+                body: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
+            });
+            await sendNotification({
+                topic: "BaEHJHYSl22x8NX6okHa",
                 title: "Info",
                 body: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
             });

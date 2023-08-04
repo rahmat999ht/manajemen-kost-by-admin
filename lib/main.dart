@@ -57,8 +57,8 @@ void main() async {
   final fcmToken = await messaging.getToken();
   log(fcmToken.toString());
 
-  //If subscribe based on topic then use this
-  // await messaging.subscribeToTopic(idLogin);
+  // If subscribe based on topic then use this
+  await messaging.subscribeToTopic(isId);
 
   // Set the background messaging handler early on, as a named top-level function
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
