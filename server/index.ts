@@ -272,8 +272,9 @@ async function bermasalah({ data, docNB }: {
     };
 
     const riwayatBermasalah = data.riwayatBermasalah as IRiwayatBermasalah[];
+    const panjangRiwayat = riwayatBermasalah?.length ?? 0;
     // kode dibawah ini akan mencari bulan riwayat bermasalah terakhir
-    if (riwayatBermasalah.length > 0) {
+    if (panjangRiwayat > 0) {
         bulanTerakhir = riwayatBermasalah[riwayatBermasalah.length - 1].bulan;
         // console.log(`bulanTerakhir ${bulanTerakhir}`);
     } else {
@@ -289,7 +290,7 @@ async function bermasalah({ data, docNB }: {
             riwayatBermasalah: admin.firestore.FieldValue.arrayUnion(newBermasalah),
         });
 
-        const bermasalahLength = data.riwayatBermasalah.length;
+        const bermasalahLength = data.riwayatBermasalah?.length ?? 0;
         if (bermasalahLength > 1 && bermasalahLength <= 3) {
 
             // kode dibawah ini akan mengirim notifikasi 
