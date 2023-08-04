@@ -278,6 +278,7 @@ async function bermasalah({ data, docNB }: {
         // console.log(`bulanTerakhir ${bulanTerakhir}`);
     } else {
         console.log(`bulanTerakhir kosong`);
+        bulanTerakhir = '';
     }
 
     console.log(`bulan ${bulan}`);

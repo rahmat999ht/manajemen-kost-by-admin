@@ -73,6 +73,7 @@ void main() async {
       log('Message also contained a notification: ${message.notification?.body ?? "kosong"}');
       String title = message.notification?.title ?? "Notif";
       String body = message.notification?.body ?? "kosong";
+      // menampilkan alert notifiksi ketika aplikasi sedang terbuka
       Get.snackbar(
         title,
         body,
