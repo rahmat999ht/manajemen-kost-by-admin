@@ -31,7 +31,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   bool? isviewed = prefs.getBool("isStart") ?? false;
-  String? isId = prefs.getString("user_id") ?? '';
+  String? isId = prefs.getString("user_id") ?? 'id';
   log(prefs.getBool("isStart").toString());
   log(isId);
   String isLogin = isId == '' ? Routes.LOGIN : Routes.DASHBOARD;

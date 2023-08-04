@@ -58,8 +58,9 @@ class ProfilController extends GetxController {
   Future tapLogOut() async {
     await FirebaseAuth.instance.signOut();
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString("user_id", '');
-    String? isId = prefs.getString("user_id") ?? '';
+    prefs.setString("user_id", 'id');
+    String? isId = prefs.getString("user_id") ?? 'id';
     log(isId);
+    Get.offAllNamed(Routes.LOGIN);
   }
 }
