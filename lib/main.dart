@@ -73,7 +73,14 @@ void main() async {
       log('Message also contained a notification: ${message.notification?.body ?? "kosong"}');
       String title = message.notification?.title ?? "Notif";
       String body = message.notification?.body ?? "kosong";
-      Get.snackbar(title, body);
+      Get.snackbar(
+        title,
+        body,
+        borderWidth: 2,
+        borderRadius: 8,
+        backgroundColor: ColorApp.white,
+        borderColor: ColorApp.orange,
+      );
     }
   });
 
