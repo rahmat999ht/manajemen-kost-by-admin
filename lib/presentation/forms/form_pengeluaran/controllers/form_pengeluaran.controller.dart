@@ -21,7 +21,7 @@ class FormPengeluaranController extends GetxController {
 
   Future alartJenis() async {
     await alertFormJenis(
-      title: "Jenis Pemasukan",
+      title: "Jenis Pengeluaran",
       listValue: listJenis,
       textC: jenisC,
     );

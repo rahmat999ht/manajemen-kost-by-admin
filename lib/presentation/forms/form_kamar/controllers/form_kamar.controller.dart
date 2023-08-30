@@ -266,7 +266,7 @@ class FormKamarController extends GetxController
                 'tglJatuhTempo': timeNowPlusSebulan,
                 'statusKamar': true,
                 'terisi': true,
-                'riwayatPembayaran': <String>[],
+                'riwayatBersamalah': [],
               },
             );
             log('Timestamp setelah ditambah satu bulan: $timeNowPlusSebulan',

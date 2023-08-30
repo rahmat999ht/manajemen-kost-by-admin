@@ -7,7 +7,7 @@ class NaiveBayesModel {
   final Timestamp? tglJatuhTempo;
   final DocumentReference? idKamar;
   final bool? statusKamar;
-  final List<String>? riwayatBersamalah;
+  final List? riwayatBersamalah;
   final bool? terisi;
 
   NaiveBayesModel({
@@ -21,9 +21,10 @@ class NaiveBayesModel {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'tglJatuhTempo': tglJatuhTempo,
       'idKamar': idKamar,
+      'tglJatuhTempo': tglJatuhTempo,
       'statusKamar': statusKamar,
+      'terisi': terisi,
       'riwayatBersamalah': riwayatBersamalah,
     };
   }
@@ -57,7 +58,7 @@ class NaiveBayesModel {
       idKamar: idKamar,
       statusKamar:
           map['statusKamar'] != null ? map['statusKamar'] as bool : null,
-      // riwayatBersamalah: map['riwayatBersamalah'] ?? [],
+      riwayatBersamalah: map['riwayatBersamalah'] ?? [],
       terisi: map['terisi'] != null ? map['terisi'] as bool : null,
     );
   }

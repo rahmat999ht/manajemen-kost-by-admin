@@ -7,6 +7,7 @@ class TerdekatController extends GetxController
   final tglSkrg = Timestamp.now().toDate();
 
   List<TerdekatModel> listTerdekat = [];
+  List<TerdekatModel> listWhereAktif = [];
   List<TerdekatModel>? listWhere = [];
 
   void onChange(String value, RxBool isSearch) {
@@ -41,11 +42,10 @@ class TerdekatController extends GetxController
           log("data kurang dari 3 hari ${data.data()}");
           return TerdekatModel.fromDocumentSnapshot(data);
         });
-        log("naive bayes ${listTerdekat.length}");
-        listWhere = listTerdekat
+        listWhereAktif = listTerdekat.where((e) => e.terisi == true).toList();
+        listWhere = listWhereAktif
             .where(
               (e) =>
-                  e.terisi == true &&
                   tglSkrg.difference(e.tglJatuhTempo!.toDate()).inDays >= -3 &&
                   tglSkrg.difference(e.tglJatuhTempo!.toDate()).inDays < 0,
             )
