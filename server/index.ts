@@ -290,7 +290,7 @@ async function bermasalah({ data, docNB }: {
             riwayatBermasalah: admin.firestore.FieldValue.arrayUnion(newBermasalah),
         });
 
-        const bermasalahLength = data.riwayatBermasalah?.length ?? 0;
+        const bermasalahLength = data.riwayatBermasalah?.length + 1 ?? 0;
         // if (bermasalahLength > 1 && bermasalahLength <= 3) {
 
         // kode dibawah ini akan mengirim notifikasi 
