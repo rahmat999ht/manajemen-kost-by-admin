@@ -65,7 +65,7 @@ function main() {
 
                 const data = docNB.data() as INaiveBayes;
 
-                if(data.tglJatuhTempo != null ){
+                if (data.tglJatuhTempo != null) {
                     const currentTime = TimestampNow;
 
                     const targetTimestamp = data.tglJatuhTempo;
@@ -73,10 +73,10 @@ function main() {
                     const min3Day = new Date(targetTime);
                     min3Day.setDate(min3Day.getDate() - 3);
                     const min3DayTimestamp = Timestamp.fromDate(min3Day);
-    
-                   // variabel currentTime adalah varibel peluang yg akan terjadi  prbabilitas C
-                   // variabel min3DayTimestamp adalah prbabilitas B
-                   // variabel targetTimestamp adalah prbabilitas A
+
+                    // variabel currentTime adalah varibel peluang yg akan terjadi  prbabilitas C
+                    // variabel min3DayTimestamp adalah prbabilitas B
+                    // variabel targetTimestamp adalah prbabilitas A
                     fung({
                         data,
                         currentTime,
@@ -84,10 +84,10 @@ function main() {
                         min3DayTimestamp,
                         docNB,
                     })
-    
+
                     // kode dibawah ini akan mengosongkan kembali variabel listPenghuni
                     listPenghuni = [];
-                }     
+                }
             });
         },
         (error) => {
@@ -276,7 +276,7 @@ async function bermasalah({ data, docNB }: {
     // kode dibawah ini akan mencari bulan riwayat bermasalah terakhir
     if (panjangRiwayat > 0) {
         bulanTerakhir = riwayatBermasalah[riwayatBermasalah.length - 1].bulan;
-        // console.log(`bulanTerakhir ${bulanTerakhir}`);
+        console.log(`bulanTerakhir ${bulanTerakhir}`);
     } else {
         console.log(`bulanTerakhir kosong`);
         bulanTerakhir = '';
@@ -291,41 +291,43 @@ async function bermasalah({ data, docNB }: {
         });
 
         const bermasalahLength = data.riwayatBermasalah?.length ?? 0;
-        if (bermasalahLength > 1 && bermasalahLength <= 3) {
+        // if (bermasalahLength > 1 && bermasalahLength <= 3) {
 
-            // kode dibawah ini akan mengirim notifikasi 
-            await sendNotification({
-                topic: firstValue,
-                title: "Info",
-                body: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
-            });
-            await sendNotification({
-                topic: "BaEHJHYSl22x8NX6okHa",
-                title: "Info",
-                body: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
-            });
+        // kode dibawah ini akan mengirim notifikasi 
+        await sendNotification({
+            topic: firstValue,
+            title: "Info",
+            body: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
+        });
+        console.log(`pemberitahuan ${bulanTerakhir} bermasalah`);
 
-            // kode dibawah ini akan mengirim data notifikasi ke tabel pemberitahuan
-            const newPemberitahuan: IPemberitahuan = {
-                dateUpload: admin.firestore.Timestamp.now(),
-                idKamar: data.idKamar,
-                deskripsi: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
-                tglJatuhTempo: data.tglJatuhTempo,
-                isView: false,
-            };
+        await sendNotification({
+            topic: "BaEHJHYSl22x8NX6okHa",
+            title: "Info",
+            body: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
+        });
 
-            try {
-                const pemberitahuan = await queryPemberitahuan
-                    .add(newPemberitahuan)
+        // kode dibawah ini akan mengirim data notifikasi ke tabel pemberitahuan
+        const newPemberitahuan: IPemberitahuan = {
+            dateUpload: admin.firestore.Timestamp.now(),
+            idKamar: data.idKamar,
+            deskripsi: `Kamar ${data.idKamar.id} telah melakukan penunggakan sebanyak ${bermasalahLength} kali`,
+            tglJatuhTempo: data.tglJatuhTempo,
+            isView: false,
+        };
 
-                console.log(
-                    "Pemberitahuan bermasalah berhasil ditambahkan dengan ID:",
-                    pemberitahuan.id
-                );
-            } catch (error) {
-                console.error("Error menambahkan pemberitahuan:", error);
-            }
+        try {
+            const pemberitahuan = await queryPemberitahuan
+                .add(newPemberitahuan)
+
+            console.log(
+                "Pemberitahuan bermasalah berhasil ditambahkan dengan ID:",
+                pemberitahuan.id
+            );
+        } catch (error) {
+            console.error("Error menambahkan pemberitahuan:", error);
         }
+        // }
     }
 
 
