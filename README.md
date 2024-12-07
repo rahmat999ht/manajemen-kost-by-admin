@@ -5,7 +5,6 @@
 ## Fitur Utama
 - **Manajemen Penghuni Kost**: Kelola informasi penghuni, status pembayaran, dan data penting lainnya.
 - **Pemantauan Keuangan**: Catat pemasukan dan pengeluaran bulanan untuk analisis keuangan yang lebih baik.
-- **Laporan Ringkasan**: Visualisasi data pemasukan dan pengeluaran dalam grafik.
 - **Notifikasi Real-Time**: Gunakan Firebase Cloud Messaging (FCM) untuk menerima pengingat pembayaran atau notifikasi penting.
 - **Antarmuka Modern**: Desain responsif yang mudah digunakan.
 
