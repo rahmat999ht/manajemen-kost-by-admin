@@ -16,21 +16,13 @@
 - **FCM Server Notifications**: Memberikan notifikasi real-time ke perangkat pengguna.
 
 ## Screenshot
-### Dashboard Utama
-Menampilkan ringkasan penghuni kost dan laporan keuangan.  
-![dashboard.png](assets/screenshots/dashboard.png "Dashboard Utama")
-
-### Manajemen Penghuni
-Kelola data penghuni dan status pembayaran.  
-![penghuni.png](assets/screenshots/penghuni.png "Manajemen Penghuni")
-
-### Laporan Keuangan
-Visualisasi pemasukan dan pengeluaran bulanan.  
-![keuangan.png](assets/screenshots/keuangan.png "Laporan Keuangan")
-
-### Notifikasi
-Pengingat pembayaran dan informasi lainnya.  
-![notifikasi.png](assets/screenshots/notifikasi.png "Notifikasi")
+![auth.png](assets/screenshots/auth.png)
+![home.png](assets/screenshots/home.png)
+![detail.png](assets/screenshots/detail.png)
+![calender.png](assets/screenshots/calender.png)
+![form.png](assets/screenshots/form.png)
+![penhuni.png](assets/screenshots/penhuni.png)
+![profil.png](assets/screenshots/profil.png)
 
 <!-- ## Instalasi
 
