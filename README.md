@@ -16,13 +16,13 @@
 - **FCM Server Notifications**: Memberikan notifikasi real-time ke perangkat pengguna.
 
 ## Screenshot
-![auth.png](assets/screenshots/auth.png)
-![home.png](assets/screenshots/home.png)
-![detail.png](assets/screenshots/detail.png)
-![calender.png](assets/screenshots/calender.png)
-![form.png](assets/screenshots/form.png)
-![penhuni.png](assets/screenshots/penhuni.png)
-![profil.png](assets/screenshots/profil.png)
+![auth.png](assets/docs/auth.png)
+![home.png](assets/docs/home.png)
+![detail.png](assets/docs/detail.png)
+![calender.png](assets/docs/calender.png)
+![form.png](assets/docs/form.png)
+![penhuni.png](assets/docs/penhuni.png)
+![profil.png](assets/docs/profil.png)
 
 <!-- ## Instalasi
 
