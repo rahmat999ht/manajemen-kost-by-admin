@@ -1,6 +1,6 @@
 # HomeStay - Aplikasi Manajemen Kost
 
-**HomeStay** adalah aplikasi mobile yang membantu pemilik kost untuk mengelola penghuni, memantau pemasukan dan pengeluaran, serta menerima notifikasi terkait aktivitas kost.
+**HomeStay For Admin** adalah aplikasi mobile yang membantu pemilik kost untuk mengelola penghuni, memantau pemasukan dan pengeluaran, serta menerima notifikasi terkait aktivitas kost.
 
 ## Fitur Utama
 - **Manajemen Penghuni Kost**: Kelola informasi penghuni, status pembayaran, dan data penting lainnya.
