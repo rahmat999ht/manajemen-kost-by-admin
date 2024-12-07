@@ -21,7 +21,7 @@
 ![detail.png](assets/docs/detail.png)
 ![calender.png](assets/docs/calender.png)
 ![form.png](assets/docs/form.png)
-![penhuni.png](assets/docs/penhuni.png)
+![penghuni.png](assets/docs/penghuni.png)
 ![profil.png](assets/docs/profil.png)
 
 <!-- ## Instalasi
